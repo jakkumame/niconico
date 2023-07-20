@@ -75,7 +75,8 @@
   .vision {
     display: none;
     position: relative;
-    margin-bottom: 100px;
+    padding-top: 30px;
+
 
     > h2, h3 {
       text-align: center;
@@ -253,32 +254,35 @@
 
   .place {
     width: 390px;
-    height: 1520px;
+    height: 1450px;
     flex-shrink: 0;
     margin: auto;
+    padding-top: 30px;
     position: relative;
 
     > h2, h3 {
       text-align: center;
-      margin-top: 5px;
-      margin-bottom: 5px;
+      margin-top: 20px;
     }
 
     > img {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 55%;
+      left: 40%;
       transform: translate(-50%, -50%);
       display: block;
+      z-index: -1;
     }
 
     .dining-play-room {
       position: relative;
       width: 80%;
-      height: 499px;
+      height: 500px;
       margin: auto;
-      margin-top: 30px;
+      margin-top: 100px;
+      margin-bottom: 100px;
       flex-shrink: 0;
+      border-radius: 12px;
 
       .mask {
         position: absolute;
