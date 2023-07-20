@@ -1,20 +1,132 @@
-<ion-header [translucent]="true">
+
+
+<ion-header [translucent]="true" class="toolbar">
   <ion-toolbar>
     <ion-title>
       Blank
     </ion-title>
+    <nav>
+      <ul class="global-nav">
+        <li><a href="#about">神原にこにこkitchenとは</a></li>
+        <li><a href="#facilities">施設紹介</a></li>
+        <li><a href="https://example.com/gallery">ギャラリー</a></li>
+        <li><a href="https://example.com/support">ご支援のお願い</a></li>
+        <li><a href="#volunteer">ボランティアの募集</a></li>
+        <li><a href="#greeting">ご挨拶</a></li>
+      </ul>
+    </nav>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">神原にこにこkitchen</ion-title>
     </ion-toolbar>
+
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <section class="top">
+    <div class="bg-vector1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="563" height="528" viewBox="0 0 563 528" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M523.261 177.435C573.724 250.827 577.291 360.842 527.125 434.438C478.264 506.118 377.041 505.933 291.132 517.976C219.149 528.067 140.359 540.697 82.4458 496.773C28.0679 455.53 30.7659 377.727 17.8557 310.71C6.31373 250.796 -11.9107 190.539 12.6968 134.705C40.0092 72.7337 87.0981 5.36602 154.636 0.359601C219.85 -4.4746 247.132 84.642 306.077 112.957C376.841 146.95 478.781 112.746 523.261 177.435Z" fill="#EE9999"/>
+      </svg>
+      <div class="main-text">
+        <h1>神原にこにこkitchen</h1>
+        <div class="main-text-div">
+          <h2>子どもの居場所がここにある</h2>
+        </div>
+      </div>
+    </div>
+    <p>人とはちょっと違うのかも<br>そんな子どもたちの<br>よりどころを目指して</p>
+  </section>
+
+
+  <section class="vision">
+    <h2>目指す場所</h2>
+    <h3>vision</h3>
+    <div class="lamp-anime">
+      <!-- 電球 -->
+      <img class="lamp" src="../../assets/電球/SVG/アセット 2.svg" alt="電球のSVG画像">
+      <!-- チェックマーク -->
+      <img class="check" src="../../assets/電球/SVG/アセット 3.svg" alt="チェックマークのSVG画像">
+
+      <!-- 閃光 -->
+      <img class="flash" src="../../assets/電球/SVG/アセット 1.svg" alt="閃光のSVG画像">
+    </div>
+
+
+    <article class="vision1">
+      <h2>楽しい食事</h2>
+      <img class="eating" src="../../assets/Vector食事.svg" alt="背景用の食事をする画像">
+      <img class="green" src="../../assets/vector(greeen).svg" alt="背景用の画像">
+      <p>これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。</p>
+    </article>
+
+    <article class="vision2">
+      <h2>楽しい遊び</h2>
+      <img class="play" src="../../assets/Vector(play).svg" alt="背景用の食事をする画像">
+      <img class="blue" src="../../assets/Vector(blue).svg" alt="背景用の画像">
+      <p>これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。これはサンプルテキストです。</p>
+    </article>
+    <button>申し込む</button>
+
+  </section>
+
+
+<section class="place" >
+  <h2>施設紹介</h2>
+  <h3>place</h3>
+  <ion-card class="dining-play-room">
+    <img class="mask" src="../../assets/Mask group.svg" alt="">
+    <img src="../../assets/../assets/dining.svg" alt="食堂のサンプル画像">
+    <article>
+      <h2>食堂 -Dining-</h2>
+      <div class="line-place"></div>
+      <p>みんなで食べるご飯は、お子さんにとってとても楽しいはず。メニューも栄養もバランスよく考えたもので、健康面もバッチリです。室内の物も最小限で、けがの心配も少なく、県認可の衛生責任者も在籍しておりますので、衛生面もお任せください。</p>
+
+    </article>
+  </ion-card>
+  <img src="../../assets/VectorsVector(blue2).svg" alt="背景用の画像">
+  <ion-card class="dining-play-room">
+    <img class="mask" src="../../assets/Mask group.svg" alt="">
+    <img src="../../assets/../assets/play-room.svg" alt="食堂のサンプル画像">
+    <article>
+      <h2>遊ぶ  -Play Room-</h2>
+      <div class="line-place"></div>
+      <p>こちらはサンプルテキストです。こちらはサンプルテキストです。こちらはサンプルテキストです。こちらはサンプルテキストです。こちらはサンプルテキストです。こちらはサンプルテキストです。こちらはサンプルテキストです。こちらはサンプル</p>
+
+    </article>
+  </ion-card>
+</section>
+
+  <section>
+    <h2>gallery<br>実際の様子</h2>
+  </section>
+
+  <section>
+    <h2>お知らせ</h2>
+  </section>
+
+  <section>
+    <h2>ご支援のお願い</h2>
+  </section>
+
+  <section>
+    <h2>ボランティアの募集</h2>
+  </section>
+
+  <section>
+    <h2>ご挨拶</h2>
+  </section>
+
+  <aside>
+    ・バナー広告
+    ・新着記事
+    ・カテゴリーリンク
+    ・よく読まれる記事
+    ・月次アーカイブ
+    ・サイト内検索
+    </aside>
 </ion-content>

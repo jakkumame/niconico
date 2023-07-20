@@ -1,27 +1,362 @@
-#container {
-  text-align: center;
+@media screen and (max-width: 576px) {
+  .toolbar {
+    display: none;
+  }
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  .top {
+    display: none;
+    width: 100%;
+    height: 844px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.00);
+    position: relative;
+
+    .bg-vector1 {
+      position: absolute;
+      top: 60%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-text {
+      position: absolute;
+      top: 25%;
+      left: 20%;
+      // transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%;
+
+      h1 {
+        color: #000;
+        width: 100%;
+        font-family: Inter;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 100px;
+      }
+
+      .main-text-div {
+        width: 80%;
+        height: 3rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 25.5px;
+        background: #1440DD;
+      }
+
+      .main-text-div h2 {
+        color: #fff;
+        font-family: Inter;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 550;
+        line-height: normal;
+        margin: auto;
+      }
+    }
+
+    > p {
+      width: 80%;
+      position: absolute;
+      font-weight: 400;
+      font-size: 22px;
+      top:75%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+  }
+
+  .vision {
+    display: none;
+    position: relative;
+    margin-bottom: 100px;
+
+    > h2, h3 {
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding-left: 30px;
+      opacity: 0;
+      animation: slide-up 1s ease-in-out 0.5s forwards;
+
+      @keyframes slide-up {
+        0% {
+          opacity: 0;
+          transform: translateX(0);
+        }
+        50% {
+          opacity: 0;
+          transform: translateX(-15px);
+        }
+        70% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(-30px);
+        }
+      }
+    }
+    .lamp-anime {
+      > img {
+        position: absolute;
+        display: block;
+        scale: 8%;
+      }
+      .lamp {
+        top: -18.5%;
+        opacity: 0;
+        animation-name: lamp-Y, lamp-X;
+        animation-duration: 0.5s, 0.8s;
+        animation-timing-function: ease-in-out;
+        animation-delay: 0s, 0.7s;
+        animation-fill-mode: forwards;
+        @keyframes lamp-Y {
+          0% {
+            transform: translateY(25%);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+        }
+        @keyframes lamp-X {
+          0% {
+            transform: translateX(0%) rotate(0);
+          }
+          50% {
+
+          }
+          100% {
+            transform: translateX(-300%) rotate(-8deg);
+
+          }
+        }
+      }
+      .check {
+        top: -8%;
+        left: -24%;
+        scale: 4.5%;
+        opacity: 0;
+        z-index: 1;
+        animation: scale 0.5s ease-out 1.5s forwards;
+        @keyframes scale {
+          0% {
+            transform: scale(0%);
+            opacity: 0;
+          }
+          70% {
+            transform: scale(170%);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(100%);
+            opacity: 1;
+          }
+        }
+      }
+
+      .flash {
+        top: -9%;
+        left: -25%;
+        rotate: -8deg;
+        scale: 17%;
+        opacity: 0;
+        animation: scale 0.5s ease-out 1.8s forwards;
+        @keyframes scale {
+          0% {
+            transform: scale(0%);
+            opacity: 0;
+          }
+          70% {
+            transform: scale(130%);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(100%);
+            opacity: 1;
+          }
+        }
+
+      }
+
+    }
+
+
+    .vision1{
+      height: 550px;
+      margin-top: 25%;
+      text-align: center;
+      position: relative;
+
+      .eating {
+        margin: auto;
+        padding: 30px;
+      }
+      .green {
+        position: absolute;
+        margin: auto;
+        z-index: -1;
+        top: 35%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+      }
+
+      > p {
+        width: 80%;
+        margin: auto;
+        text-align: left;
+      }
+    }
+
+    .vision2{
+      height: 510px;
+      text-align: center;
+      position: relative;
+
+      .play {
+        margin: auto;
+        padding: 30px;
+      }
+      .blue {
+        position: absolute;
+        margin: auto;
+        z-index: -1;
+        top: 20%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+      }
+
+      > p {
+        width: 80%;
+        margin: auto;
+        text-align: left;
+      }
+    }
+
+    > button {
+      display: block;
+      margin: auto;
+      font-size: 1.2rem;
+      width: 40%;
+      height: 4rem;
+      background-color: #1440DD;
+    }
+  }
+
+  .place {
+    width: 390px;
+    height: 1520px;
+    flex-shrink: 0;
+    margin: auto;
+    position: relative;
+
+    > h2, h3 {
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    > img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+    }
+
+    .dining-play-room {
+      position: relative;
+      width: 80%;
+      height: 499px;
+      margin: auto;
+      margin-top: 30px;
+      flex-shrink: 0;
+
+      .mask {
+        position: absolute;
+        z-index: 1;
+      }
+
+      > article {
+        position: relative;
+        width: 235px;
+        height: 200px;
+        flex-shrink: 0;
+        margin: auto;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        z-index: 2;
+
+        > h2 {
+          margin-top: 0;
+          margin-bottom: 25px;
+        }
+
+        > p {
+          width: 235px;
+          height: 130px;
+          margin-top: 25px;
+          flex-shrink: 0;
+          color: #000;
+          text-align: justify;
+          font-family: Inter;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 169%; /* 20.28px */
+        }
+
+        .line-place {
+          width: 235px;
+          height: 1px;
+          background: #7E7E7E;
+        }
+
+      }
+    }
+  }
+
+
+
+
+
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+
+
+
+
+@media screen and (min-width: 577px) and (max-width: 767px){
+  .global-nav {
+    padding: 0;
+    list-style: none;  /* リストマーカーを削除 */
+    display: flex; /* li要素を横一列に配置 */
+  }
+
+  .global-nav li {
+    margin: 0; /* 外側の余白を削除 */
+    padding: 0; /* 内側の余白を削除 */
+    margin-right: 10px; /* li要素の間隔を調整 */
+  }
+
+  .global-nav li a {
+    /* リンクのスタイルを追加または上書きする */
+    /* 例: */
+    text-decoration: none; /* 下線を削除 */
+    color: #000; /* リンクの色を指定 */
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
 
-  color: #8c8c8c;
+@media screen and (min-width: 768px){
 
-  margin: 0;
 }
 
-#container a {
-  text-decoration: none;
-}
