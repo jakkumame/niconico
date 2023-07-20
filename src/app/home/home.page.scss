@@ -253,9 +253,9 @@
   }
 
   .place {
+    display: none;
     height: 1450px;
     flex-shrink: 0;
-    margin: auto;
     padding-top: 30px;
     position: relative;
 
@@ -349,16 +349,34 @@
   }
 
   .gallery {
-    height: 1450px;
+    height: auto;
     flex-shrink: 0;
-    margin: auto;
     padding-top: 30px;
     position: relative;
+
+    > h2, h3 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .Vector-box {
+      position: relative;
+      width: 100%;
+      height: auto;
+
+      > img {
+        position: absolute;
+        // width: 100%; /* 画面幅に合わせて画像をリサイズ */
+        height: auto; /* アスペクト比を保ったまま高さを自動調整 */
+        // top: 0; /* 画像の上端を中央に配置 */
+        // left: 0; /* 画像の左端を中央に配置 */
+        transform: none; /* transformの設定をリセット */
+      }
+
+
+
+    }
   }
-
-
-
-
 }
 
 
