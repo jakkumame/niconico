@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        fill: #f9d597;
+      }
+
+      .cls-4 {
+        fill: #fbe6c2;
+      }
+
+      .cls-5 {
+        fill: url(#_新規パターンスウォッチ_1);
+      }
+
+      .cls-6 {
+        fill: url(#_新規パターンスウォッチ_1-2);
+      }
+
+      .cls-7 {
+        fill: url(#_新規パターンスウォッチ_1-3);
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="1920" height="1080"/>
+    </clipPath>
+    <pattern id="_新規パターンスウォッチ_1" data-name="新規パターンスウォッチ 1" x="0" y="0" width="21.96" height="858.9" patternTransform="translate(-9222.41 -21950.88) rotate(-147) scale(1.3)" patternUnits="userSpaceOnUse" viewBox="0 0 21.96 858.9">
+      <g>
+        <rect class="cls-1" width="21.96" height="858.9"/>
+        <rect class="cls-4" x="10.98" y="0" width="10.98" height="858.9"/>
+        <rect class="cls-3" x="0" y="0" width="10.98" height="858.9"/>
+      </g>
+    </pattern>
+    <pattern id="_新規パターンスウォッチ_1-2" data-name="新規パターンスウォッチ 1" patternTransform="translate(-8953.06 -22312.97) rotate(-147) scale(1.3)" xlink:href="#_新規パターンスウォッチ_1"/>
+    <pattern id="_新規パターンスウォッチ_1-3" data-name="新規パターンスウォッチ 1" patternTransform="translate(-8683.6 -22675.07) rotate(-147) scale(1.3)" xlink:href="#_新規パターンスウォッチ_1"/>
+  </defs>
+  <g class="cls-2">
+    <rect class="cls-5" x="-40.17" y="1.32" width="796.76" height="1117.68"/>
+    <rect class="cls-6" x="756.47" y="-18.34" width="796.76" height="1117.68" rx="1" ry="1"/>
+    <rect class="cls-7" x="1553.24" y="-38" width="796.76" height="1117.68"/>
+  </g>
+</svg>
