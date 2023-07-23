@@ -352,30 +352,59 @@
     height: auto;
     flex-shrink: 0;
     padding-top: 30px;
-    position: relative;
 
     > h2, h3 {
       text-align: center;
       margin-top: 20px;
     }
 
-    .Vector-box {
+    .gallery-container {
+      margin-top: 80px;
       position: relative;
       width: 100%;
-      height: auto;
+      height: 400px;
 
       > img {
         position: absolute;
-        // width: 100%; /* 画面幅に合わせて画像をリサイズ */
-        height: auto; /* アスペクト比を保ったまま高さを自動調整 */
-        // top: 0; /* 画像の上端を中央に配置 */
-        // left: 0; /* 画像の左端を中央に配置 */
-        transform: none; /* transformの設定をリセット */
+        scale: 50%;
+        width: auto;
+        height: 100vh; /* アスペクト比を保ったまま高さを自動調整 */
+        transform: none;
       }
-
-
-
+      .pink-gallery {
+        top: -20%;
+        left: -20%;
+      }
+      .green-gallery {
+        scale: 35%;
+        top: -20%;
+        left: 25%;
+      }
+      .blue-gallery {
+        top: -50%;
+        left: 15%;
+      }
     }
+
+    button {
+      display: block;
+      margin: auto;
+      width: 40%;
+      height: 35px;
+      background-image: linear-gradient(to right, aqua, #1E90FF); /* 左から右へのグラデーション */
+      border: 2px solid white;
+      border-radius: 25px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.07);
+      background-image: linear-gradient(to right,#3613f9, #1E90FF); /* 左から右へのグラデーション */
+      font-weight: 600;
+      color: #fff;
+    }
+
   }
 }
 
