@@ -1,3 +1,22 @@
+button {
+  display: block;
+  margin: auto;
+  width: 40%;
+  height: 35px;
+  background-image: linear-gradient(to right, aqua, #1E90FF); /* 左から右へのグラデーション */
+  border: 2px solid white;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+  transform: scale(1.07);
+  background-image: linear-gradient(to right,#3613f9, #1E90FF); /* 左から右へのグラデーション */
+  font-weight: 600;
+  color: #fff;
+}
+
 @media screen and (max-width: 576px) {
   .toolbar {
     display: none;
@@ -73,184 +92,9 @@
   }
 
   .vision {
-    display: none;
     position: relative;
     padding-top: 30px;
-
-
-    > h2, h3 {
-      text-align: center;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      padding-left: 30px;
-      opacity: 0;
-      animation: slide-up 1s ease-in-out 0.5s forwards;
-
-      @keyframes slide-up {
-        0% {
-          opacity: 0;
-          transform: translateX(0);
-        }
-        50% {
-          opacity: 0;
-          transform: translateX(-15px);
-        }
-        70% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(-30px);
-        }
-      }
     }
-    .lamp-anime {
-      > img {
-        position: absolute;
-        display: block;
-        scale: 8%;
-      }
-      .lamp {
-        top: -18.5%;
-        opacity: 0;
-        animation-name: lamp-Y, lamp-X;
-        animation-duration: 0.5s, 0.8s;
-        animation-timing-function: ease-in-out;
-        animation-delay: 0s, 0.7s;
-        animation-fill-mode: forwards;
-        @keyframes lamp-Y {
-          0% {
-            transform: translateY(25%);
-            opacity: 0;
-          }
-          100% {
-            transform: translateY(0%);
-            opacity: 1;
-          }
-        }
-        @keyframes lamp-X {
-          0% {
-            transform: translateX(0%) rotate(0);
-          }
-          50% {
-
-          }
-          100% {
-            transform: translateX(-300%) rotate(-8deg);
-
-          }
-        }
-      }
-      .check {
-        top: -8%;
-        left: -24%;
-        scale: 4.5%;
-        opacity: 0;
-        z-index: 1;
-        animation: scale 0.5s ease-out 1.5s forwards;
-        @keyframes scale {
-          0% {
-            transform: scale(0%);
-            opacity: 0;
-          }
-          70% {
-            transform: scale(170%);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(100%);
-            opacity: 1;
-          }
-        }
-      }
-
-      .flash {
-        top: -9%;
-        left: -25%;
-        rotate: -8deg;
-        scale: 17%;
-        opacity: 0;
-        animation: scale 0.5s ease-out 1.8s forwards;
-        @keyframes scale {
-          0% {
-            transform: scale(0%);
-            opacity: 0;
-          }
-          70% {
-            transform: scale(130%);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(100%);
-            opacity: 1;
-          }
-        }
-
-      }
-
-    }
-
-
-    .vision1{
-      height: 550px;
-      margin-top: 25%;
-      text-align: center;
-      position: relative;
-
-      .eating {
-        margin: auto;
-        padding: 30px;
-      }
-      .green {
-        position: absolute;
-        margin: auto;
-        z-index: -1;
-        top: 35%;
-        left: 25%;
-        transform: translate(-50%, -50%);
-      }
-
-      > p {
-        width: 80%;
-        margin: auto;
-        text-align: left;
-      }
-    }
-
-    .vision2{
-      height: 510px;
-      text-align: center;
-      position: relative;
-
-      .play {
-        margin: auto;
-        padding: 30px;
-      }
-      .blue {
-        position: absolute;
-        margin: auto;
-        z-index: -1;
-        top: 20%;
-        left: 70%;
-        transform: translate(-50%, -50%);
-      }
-
-      > p {
-        width: 80%;
-        margin: auto;
-        text-align: left;
-      }
-    }
-
-    > button {
-      display: block;
-      margin: auto;
-      font-size: 1.2rem;
-      width: 40%;
-      height: 4rem;
-      background-color: #1440DD;
-    }
-  }
 
   .place {
     display: none;
@@ -386,24 +230,7 @@
       }
     }
 
-    button {
-      display: block;
-      margin: auto;
-      width: 40%;
-      height: 35px;
-      background-image: linear-gradient(to right, aqua, #1E90FF); /* 左から右へのグラデーション */
-      border: 2px solid white;
-      border-radius: 25px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s, background-color 0.2s;
-    }
 
-    button:hover {
-      transform: scale(1.07);
-      background-image: linear-gradient(to right,#3613f9, #1E90FF); /* 左から右へのグラデーション */
-      font-weight: 600;
-      color: #fff;
-    }
 
   }
 }

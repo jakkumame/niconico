@@ -1,0 +1,56 @@
+// * {
+//   display: none;
+// }
+
+
+.vision1{
+  height: 550px;
+  margin-top: 25%;
+  text-align: center;
+  position: relative;
+
+  .eating {
+    margin: auto;
+    padding: 30px;
+  }
+  .green {
+    position: absolute;
+    margin: auto;
+    z-index: -1;
+    top: 35%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+  }
+
+  > p {
+    width: 80%;
+    margin: auto;
+    text-align: left;
+  }
+}
+
+.vision2{
+  height: 510px;
+  text-align: center;
+  position: relative;
+
+  .play {
+    margin: auto;
+    padding: 30px;
+  }
+  .blue {
+    position: absolute;
+    margin: auto;
+    z-index: -1;
+    top: 20%;
+    left: 70%;
+  }
+
+  > p {
+    width: 80%;
+    margin: auto;
+    text-align: left;
+  }
+}
+
+
