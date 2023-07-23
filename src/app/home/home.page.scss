@@ -17,223 +17,126 @@ button:hover {
   color: #fff;
 }
 
-@media screen and (max-width: 576px) {
-  .toolbar {
-    display: none;
-  }
 
-  .top {
-    display: none;
+.toolbar {
+  display: none;
+}
+
+.top {
+  display: none;
+  width: 100%;
+  height: 844px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.00);
+  position: relative;
+
+  .bg-vector1 {
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: 844px;
-    flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.00);
-    position: relative;
-
-    .bg-vector1 {
-      position: absolute;
-      top: 60%;
-      left: 30%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-    }
-
-    .main-text {
-      position: absolute;
-      top: 25%;
-      left: 20%;
-      // transform: translate(-50%, -50%);
-      text-align: center;
-      width: 100%;
-
-      h1 {
-        color: #000;
-        width: 100%;
-        font-family: Inter;
-        font-size: 28px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        margin-bottom: 100px;
-      }
-
-      .main-text-div {
-        width: 80%;
-        height: 3rem;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        border-radius: 25.5px;
-        background: #1440DD;
-      }
-
-      .main-text-div h2 {
-        color: #fff;
-        font-family: Inter;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 550;
-        line-height: normal;
-        margin: auto;
-      }
-    }
-
-    > p {
-      width: 80%;
-      position: absolute;
-      font-weight: 400;
-      font-size: 22px;
-      top:75%;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-    }
+    height: 100%;
   }
 
-  .vision {
-    position: relative;
-    padding-top: 30px;
-    }
+  .main-text {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    // transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
 
-  .place {
-    display: none;
-    height: 1450px;
-    flex-shrink: 0;
-    padding-top: 30px;
-    position: relative;
-
-    > h2, h3 {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    // 青のVector
-    > img {
-      position: absolute;
-      top: 55%;
-      left: 40%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-    }
-
-    .dining-play-room {
-      position: relative;
-      width: 70%;
-      height: auto;
-      margin: auto;
-      margin-top: 100px;
+    h1 {
+      color: #000;
+      width: 100%;
+      font-family: Inter;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
       margin-bottom: 100px;
-      flex-shrink: 0;
-      border-radius: 12px;
+    }
 
-      .mask {
-        position: absolute;
-        z-index: 1;
-        width: 100%; /* 画面幅に合わせて画像をリサイズ */
-        height: auto; /* アスペクト比を保ったまま高さを自動調整 */
-        top: 0; /* 画像の上端を中央に配置 */
-        left: 0; /* 画像の左端を中央に配置 */
-        transform: none; /* transformの設定をリセット */
-      }
+    .main-text-div {
+      width: 80%;
+      height: 3rem;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      border-radius: 25.5px;
+      background: #1440DD;
+    }
 
-      .place-img {
-        width: 100%; /* 画面幅に合わせて画像をリサイズ */
-        height: auto; /* アスペクト比を保ったまま高さを自動調整 */
-        top: 0; /* 画像の上端を中央に配置 */
-        left: 0; /* 画像の左端を中央に配置 */
-        transform: none; /* transformの設定をリセット */
-      }
-
-
-
-      > article {
-        position: relative;
-        width: 80%;
-        height: auto;
-        margin: auto;
-        text-align: center;
-        flex-shrink: 0;
-        z-index: 2;
-
-        > h2 {
-          text-align: center;
-          margin-top: 0;
-          margin-bottom: 30px;
-        }
-
-        .line-place {
-          width: 90%;
-          height: 1px;
-          margin: auto;
-          background: #7E7E7E;
-        }
-
-
-        > p {
-          width: 90%;
-          height: auto;
-          margin: auto;
-          margin-top: 30px;
-          margin-bottom: 30px;
-          flex-shrink: 0;
-          color: #464646;
-          text-align: left;
-          text-align: justify;
-          font-family: Inter;
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 169%; /* 20.28px */
-        }
-
-
-      }
+    .main-text-div h2 {
+      color: #fff;
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 550;
+      line-height: normal;
+      margin: auto;
     }
   }
 
-  .gallery {
-    height: auto;
-    flex-shrink: 0;
-    padding-top: 30px;
-
-    > h2, h3 {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .gallery-container {
-      margin-top: 80px;
-      position: relative;
-      width: 100%;
-      height: 400px;
-
-      > img {
-        position: absolute;
-        scale: 50%;
-        width: auto;
-        height: 100vh; /* アスペクト比を保ったまま高さを自動調整 */
-        transform: none;
-      }
-      .pink-gallery {
-        top: -20%;
-        left: -20%;
-      }
-      .green-gallery {
-        scale: 35%;
-        top: -20%;
-        left: 25%;
-      }
-      .blue-gallery {
-        top: -50%;
-        left: 15%;
-      }
-    }
-
-
-
+  > p {
+    width: 80%;
+    position: absolute;
+    font-weight: 400;
+    font-size: 22px;
+    top:75%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
   }
 }
+
+.vision {
+  position: relative;
+  padding-top: 30px;
+  }
+
+.place {
+  height: auto;
+  position: relative;
+}
+
+.gallery {
+  height: auto;
+  flex-shrink: 0;
+
+  .gallery-container {
+    margin-top: 80px;
+    position: relative;
+    width: 100%;
+    height: 400px;
+
+    > img {
+      position: absolute;
+      scale: 50%;
+      width: auto;
+      height: 100vh; /* アスペクト比を保ったまま高さを自動調整 */
+      transform: none;
+    }
+    .pink-gallery {
+      top: -20%;
+      left: -20%;
+    }
+    .green-gallery {
+      scale: 35%;
+      top: -20%;
+      left: 25%;
+    }
+    .blue-gallery {
+      top: -50%;
+      left: 15%;
+    }
+  }
+
+
+
+}
+
 
 
 

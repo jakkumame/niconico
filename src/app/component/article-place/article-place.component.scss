@@ -1,0 +1,63 @@
+ion-card {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  margin-bottom: 100px;
+  border-radius: 10px;
+
+
+  .mask {
+    position: absolute;
+    width: 100%; /* 画面幅に合わせて画像をリサイズ */
+    height: auto; /* アスペクト比を保ったまま高さを自動調整 */
+    top: 0; /* 画像の上端を中央に配置 */
+    left: 0; /* 画像の左端を中央に配置 */
+    z-index: 1;
+
+  }
+
+  > article {
+    position: relative;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    text-align: center;
+    flex-shrink: 0;
+    z-index: 2;
+
+    > h2 {
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    .line-place {
+      width: 90%;
+      height: 1.5px;
+      margin: auto;
+
+      background: #7E7E7E;
+    }
+
+    > p {
+      width: 90%;
+      height: auto;
+      margin: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      flex-shrink: 0;
+      color: #464646;
+      text-align: left;
+      text-align: justify;
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+// 青のVector
+.blue-place {
+  position: absolute;
+  top: 40%;
+  z-index: -1;
+}

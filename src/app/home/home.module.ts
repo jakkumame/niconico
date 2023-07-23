@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { register } from 'swiper/element/bundle';
 import { SwiperComponent } from '../swiper/swiper.component';
 import { VisionComponent } from '../component/vision/vision.component';
+import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
 // register Swiper custom elements
 register();
 
@@ -21,6 +22,7 @@ register();
   ],
   declarations: [
     HomePage,
+    ArticlePlaceComponent,
     VisionComponent,
     SwiperComponent
   ],
