@@ -4,14 +4,14 @@
 </mask>
 <g mask="url(#mask0_44_248)">
 <g filter="url(#filter0_f_44_248)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M146.459 204.5C115.923 204.318 64.8336 160.634 41.5 170.5C8.7449 184.349 -53.6838 226.506 -54.1523 247.973C-54.7542 275.553 -39.8944 319.991 8.15976 333.469C58.5471 347.602 117.144 335.643 172.355 327.157C248.047 315.524 360.785 287.622 361.13 247.973C361.494 206.046 380.516 236.516 307.5 216C281.368 208.658 176.421 204.679 146.459 204.5Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M146.459 204.5C115.923 204.318 64.8336 160.634 41.5 170.5C8.7449 184.349 -53.6838 226.506 -54.1523 247.973C-54.7542 275.553 -39.8943 319.991 8.15976 333.469C58.5471 347.602 117.144 335.643 172.355 327.157C248.047 315.524 360.785 287.622 361.13 247.973C361.494 206.046 380.516 236.516 307.5 216C281.368 208.658 176.421 204.679 146.459 204.5Z" fill="white"/>
 </g>
 </g>
 <defs>
-<filter id="filter0_f_44_248" x="-89.1697" y="134.049" width="487.793" height="240.951" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_f_44_248" x="-74.1697" y="149.049" width="457.793" height="210.951" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="17.5" result="effect1_foregroundBlur_44_248"/>
+<feGaussianBlur stdDeviation="10" result="effect1_foregroundBlur_44_248"/>
 </filter>
 </defs>
 </svg>

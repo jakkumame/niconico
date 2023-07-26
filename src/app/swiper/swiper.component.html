@@ -1,5 +1,10 @@
 <div *ngIf="slides.length > 0">
-  <swiper-container [modules]="swiperModules">
+  <swiper-container
+  [modules]="swiperModules"
+  [centeredSlides]="true"
+  [autoplay]="true"
+  [loop]="true"
+  [pagination]="{clickable:true}">
     <swiper-slide *ngFor="let slide of slides">
       <img [src]="slide?.swiper">
     </swiper-slide>
