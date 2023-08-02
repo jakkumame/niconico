@@ -191,27 +191,6 @@ button:hover {
 
 .support {
   position: relative;
-
-  > ion-card {
-    width: 70%;
-    margin: auto;
-    margin-top: 70px;
-    padding: 2rem;
-  }
-
-  > img {
-    position: absolute;
-    transform: rotate(-65deg);
-  }
-
-  .support-top-img {
-    top: -5%;
-    z-index: -1;
-  }
-  .support-bottom-img {
-    top: 100%;
-    left: 50%;
-  }
 }
 
 

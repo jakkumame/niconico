@@ -1,0 +1,25 @@
+ion-card {
+  width: 70%;
+  margin: auto;
+  margin-top: 70px;
+  padding: 2rem;
+}
+
+img {
+  position: absolute;
+  transform: rotate(-65deg);
+  scale: 80%;
+}
+
+.support-top-img {
+  top: 10%;
+  left: 5%;
+  z-index: -1;
+}
+.support-bottom-img {
+  top: 80%;
+  left: 50%;
+}
+.margin {
+  padding: 60px;
+}

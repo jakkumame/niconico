@@ -10,6 +10,7 @@ import { register } from 'swiper/element/bundle';
 import { SwiperComponent } from '../swiper/swiper.component';
 import { VisionComponent } from '../component/vision/vision.component';
 import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
+import { SupportComponent } from '../component/support/support.component';
 // register Swiper custom elements
 register();
 
@@ -24,7 +25,8 @@ register();
     HomePage,
     ArticlePlaceComponent,
     VisionComponent,
-    SwiperComponent
+    SwiperComponent,
+    SupportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
