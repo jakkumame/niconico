@@ -103,6 +103,7 @@ button:hover {
 }
 
 .gallery {
+  display: none;
   height: auto;
   flex-shrink: 0;
 
@@ -137,6 +138,56 @@ button:hover {
 
 
 }
+
+.info {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding-top: 100px;
+  padding-bottom: 150px;
+  z-index: 0;
+
+  > h2, h3 {
+    position: relative;
+    z-index: 2;
+  }
+
+  > img {
+    position: absolute;
+    scale: 80%;
+  }
+
+  .yellow {
+    top: 0%;
+    z-index: 1;
+  }
+
+  .pink-info {
+    top: 55%;
+    left: 50%;
+  }
+
+  > ion-card {
+    display: flex;
+    margin: auto;
+    width: 60%;
+    height: 280px;
+    align-items: flex-start;
+    gap: 10px;
+    flex-shrink: 0;
+    z-index: 3;
+
+    .square {
+      flex: 1 0 0;
+      align-self: stretch;
+      border-radius: 10px;
+      background: #FFF8E1;
+    }
+  }
+
+}
+
 
 
 
