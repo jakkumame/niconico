@@ -11,6 +11,8 @@ import { SwiperComponent } from '../swiper/swiper.component';
 import { VisionComponent } from '../component/vision/vision.component';
 import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
 import { SupportComponent } from '../component/support/support.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapComponent } from '../google-map/google-map.component';
 // register Swiper custom elements
 register();
 
@@ -19,10 +21,12 @@ register();
     CommonModule,
     FormsModule,
     IonicModule,
+    GoogleMapsModule,
     HomePageRoutingModule
   ],
   declarations: [
     HomePage,
+    GoogleMapComponent,
     ArticlePlaceComponent,
     VisionComponent,
     SwiperComponent,
