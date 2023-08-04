@@ -14,6 +14,7 @@ import { SupportComponent } from '../component/support/support.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapComponent } from '../google-map/google-map.component';
 import { AccessInfoComponent } from '../component/access-info/access-info.component';
+import { FooterComponent } from '../component/footer/footer.component';
 // register Swiper custom elements
 register();
 
@@ -32,7 +33,8 @@ register();
     VisionComponent,
     SwiperComponent,
     SupportComponent,
-    AccessInfoComponent
+    AccessInfoComponent,
+    FooterComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
