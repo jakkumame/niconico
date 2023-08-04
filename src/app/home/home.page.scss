@@ -22,8 +22,7 @@ button:hover {
   display: none;
 }
 
-.top {
-  display: none;
+#top {
   width: 100%;
   height: 844px;
   flex-shrink: 0;
@@ -50,9 +49,7 @@ button:hover {
     h1 {
       color: #000;
       width: 100%;
-      font-family: Inter;
       font-size: 28px;
-      font-style: normal;
       font-weight: 600;
       line-height: normal;
       margin-bottom: 100px;
@@ -70,9 +67,7 @@ button:hover {
 
     .main-text-div h2 {
       color: #fff;
-      font-family: Inter;
       font-size: 20px;
-      font-style: normal;
       font-weight: 550;
       line-height: normal;
       margin: auto;
@@ -91,19 +86,17 @@ button:hover {
   }
 }
 
-.vision {
+#vision {
   position: relative;
   padding-top: 30px;
   }
 
-.place {
-  display: none;
+#place {
   height: auto;
   position: relative;
 }
 
-.gallery {
-  display: none;
+#gallery {
   height: auto;
   flex-shrink: 0;
 
@@ -139,8 +132,7 @@ button:hover {
 
 }
 
-.info {
-  display: none;
+#info {
   position: relative;
   width: 100%;
   height: auto;
@@ -189,8 +181,94 @@ button:hover {
 
 }
 
-.support {
+#support {
   position: relative;
+}
+
+#access {
+  .access-info {
+    background-color: #fff;
+    display: flex;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    gap: 10px;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    > ul {
+      > li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 30px 0 30px 10px;
+        gap: 35px;
+
+        h4, p {
+          font-size: 1.3rem;
+          margin: 0;
+        }
+
+        h4 {
+          width: 40px;
+          color: #DC2626;
+        }
+        p {
+          margin-right: auto;
+        }
+      }
+    }
+  }
+
+  .exterior {
+    margin: 40px 0 40px 0;
+  }
+
+  img {
+    width: 100%;
+  }
+
+
+
+
+}
+
+footer {
+  background-color: #ffddb9;
+  .footer-container {
+    .site-map {
+      padding: 20px 15px 15px 15px;
+      h2 {
+        text-align: left;
+        font-size: 1.5rem;
+      }
+      li {
+        width: 90%;
+        margin: auto;
+        font-size: 1.4rem;
+        padding: 10px;
+        border-bottom: 0.4px dashed black;
+      }
+    }
+  }
+  .footer-column {
+    padding-bottom: 40px;
+    text-align: center;
+
+    h6 {
+      font-size: 12px;
+    }
+
+    h2 {
+      color:#bb0000;
+      font-weight: 500;
+      font-family: ab-kotatsu, sans-serif;
+      font-style: normal;
+    }
+
+  }
 }
 
 

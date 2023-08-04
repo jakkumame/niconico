@@ -27,7 +27,7 @@
 
   </ion-header>
 
-  <section class="top">
+  <section id="top">
     <div class="bg-vector1">
       <svg xmlns="http://www.w3.org/2000/svg" width="563" height="528" viewBox="0 0 563 528" fill="none">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M523.261 177.435C573.724 250.827 577.291 360.842 527.125 434.438C478.264 506.118 377.041 505.933 291.132 517.976C219.149 528.067 140.359 540.697 82.4458 496.773C28.0679 455.53 30.7659 377.727 17.8557 310.71C6.31373 250.796 -11.9107 190.539 12.6968 134.705C40.0092 72.7337 87.0981 5.36602 154.636 0.359601C219.85 -4.4746 247.132 84.642 306.077 112.957C376.841 146.95 478.781 112.746 523.261 177.435Z" fill="#EE9999"/>
@@ -43,40 +43,41 @@
   </section>
 
 
-  <section class="vision">
+  <section id="vision">
     <h2>目指す場所</h2>
     <h3>vision</h3>
     <button>申し込む</button>
+    <app-vision></app-vision>
 
   </section>
 
 
-  <section class="place" >
+  <section id="place" >
     <h2>施設紹介</h2>
     <h3>place</h3>
     <app-article-place></app-article-place>
     <button>申し込む</button>
   </section>
 
-  <section class="gallery">
+  <section id="gallery">
     <h2>実際の様子</h2>
     <h3>gallery</h3>
     <div class="gallery-container">
       <app-swiper [slides]="slides"></app-swiper>
-      <img class="blue-gallery" src="../../assets/Vector(bule3).svg" alt="背景用の青オブジェクト画像">
-      <img class="green-gallery" src="../../assets/Vector(green2).svg" alt="背景用の緑オブジェクト画像">
-      <img class="pink-gallery" src="../../assets/Vector(pink).svg" alt="背景用のピンクオブジェクト画像">
+      <img class="blue-gallery" src="../../assets/Vector(bule3).svg" >
+      <img class="green-gallery" src="../../assets/Vector(green2).svg">
+      <img class="pink-gallery" src="../../assets/Vector(pink).svg">
     </div>
     <button>申し込む</button>
   </section>
 
 
-  <section class="info">
+  <section id="info">
     <h2>お知らせ</h2>
     <h3>information</h3>
 
-    <img class="yellow" src="../../assets/Vector(yellow).svg" alt="背景用の黄色のオブジェクト画像">
-    <img class="pink-info" src="../../assets/Vector(pink2).svg" alt="背景用のピンクオブジェクト画像２">
+    <img class="yellow" src="../../assets/Vector(yellow).svg">
+    <img class="pink-info" src="../../assets/Vector(pink2).svg">
     <ion-card>
       <div class="square">
         <div class="line1"></div>
@@ -87,26 +88,65 @@
     </ion-card>
   </section>
 
-  <section class="support">
+  <section id="support">
     <app-support></app-support>
   </section>
 
-  <section>
+  <section id="access">
     <h2>アクセス</h2>
     <h3>access</h3>
     <app-google-map></app-google-map>
+    <div class="access-info">
+      <ul>
+        <li>
+          <h4>名前</h4>
+          <p>神原にこにこkitchen</p>
+        </li>
+        <li>
+          <h4>住所</h4>
+          <p>宇部市松山町1-13-22<br>天理教福部分教会</p>
+        </li>
+        <li>
+          <h4>駐車場</h4>
+          <p>有（神原ふれあいセンター臨時駐車場）</p>
+        </li>
+        <li>
+          <h4>代表</h4>
+          <p>中村 吉元（なかむら よしゆき）</p>
+        </li>
+        <li>
+          <h4>連絡先</h4>
+          <p>080-7498-4229</p>
+        </li>
+      </ul>
+    </div>
+    <button>申し込む</button>
+
+    <h2 class="exterior">外観</h2>
+    <img src="../../assets/外観.svg" alt="神原にこにこkitchenの外観写真">
   </section>
 
-  <section>
-    <h2>ご挨拶</h2>
-  </section>
-
-  <aside>
-    ・バナー広告
-    ・新着記事
-    ・カテゴリーリンク
-    ・よく読まれる記事
-    ・月次アーカイブ
-    ・サイト内検索
-    </aside>
+  <footer>
+    <div class="footer-container">
+      <div class="site-map">
+        <h2>サイトマップ</h2>
+        <nav>
+          <ul>
+            <li><a href="#vision">目指す場所</a></li>
+            <li><a href="#place">施設紹介</a></li>
+            <li><a href="#gallery">実際の様子</a></li>
+            <li><a href="#info">お知らせ</a></li>
+            <li><a href="#support">ご支援のお願い</a></li>
+            <li><a href="#access">アクセス</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-column">
+        <img src="../../assets/logo.svg" alt="神原にこにこkitchenのロゴ">
+        <h6>山口県登録子ども食堂</h6>
+        <h2>神原にこにこkitchen</h2>
+        <address>〒755-0026 山口県宇部市松山町1-13-22</address>
+      </div>
+    </div>
+  </footer>
 </ion-content>

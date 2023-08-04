@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-google-map',
@@ -16,9 +16,9 @@ export class GoogleMapComponent implements OnInit {
 
   initializeMap() {
     const mapOptions: google.maps.MapOptions = {
-      center: { lat: 33.947317911296906, lng: 131.25260123062438 }, // Default center
-      zoom: 15,// Default zoom level
-      gestureHandling: 'cooperative', // 二本指での操作時のみ操作可能
+      center: { lat: 33.947317911296906, lng: 131.25260123062438 }, // デフォルトの中心位置
+      zoom: 17, // デフォルトのズームレベル
+      // gestureHandling: 'cooperative', // 二本指での操作時のみ操作可能
       mapTypeControl: false // 航空写真との入れ替えボタン非表示
     };
     this.map = new google.maps.Map(document.getElementById('map') as HTMLElement, mapOptions);
@@ -35,9 +35,15 @@ export class GoogleMapComponent implements OnInit {
 
     // Create and open InfoWindow
     const infoWindow = new google.maps.InfoWindow({
-      content: title  // Set the title as the content of the InfoWindow
+      content: title // タイトルをInfoWindowの内容に設定
     });
 
     infoWindow.open(this.map, marker);
   }
+
+  // スクロールイベントリスナーを追加する（passive:trueで指定）
+  // @HostListener('window:scroll', ['$event'])
+  // onScroll(event: Event) {
+  //   event.preventDefault();
+  // }
 }
