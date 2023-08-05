@@ -23,67 +23,46 @@ button:hover {
 }
 
 #top {
-  width: 100%;
-  height: 844px;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.00);
-  position: relative;
 
-  .bg-vector1 {
-    position: absolute;
-    top: 60%;
-    left: 30%;
-    transform: translate(-50%, -50%);
+  .top-wrapper {
     width: 100%;
-    height: 100%;
-  }
+    height: 100vh;
 
-  .main-text {
-    position: absolute;
-    top: 25%;
-    left: 20%;
-    // transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
+    .top-container {
+      position: relative;
 
-    h1 {
-      color: #000;
-      width: 100%;
-      font-size: 28px;
-      font-weight: 600;
-      line-height: normal;
-      margin-bottom: 100px;
+      svg {
+        position: absolute;
+        left: -10%;
+        z-index: -1;
+      }
+
+      .main-text-container {
+        height: 530px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h1 {
+          margin-top: 50px;
+          padding-top: 20px;
+          font-size: 3.5rem;
+        }
+        h2 {
+          margin-top: 50px;
+          padding-top: 50px;
+        }
+
+      }
     }
 
-    .main-text-div {
-      width: 80%;
-      height: 3rem;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      border-radius: 25.5px;
-      background: #1440DD;
-    }
-
-    .main-text-div h2 {
-      color: #fff;
-      font-size: 20px;
-      font-weight: 550;
-      line-height: normal;
-      margin: auto;
+    p {
+      text-align: center;
+      font-size: 2.2rem;
     }
   }
 
-  > p {
-    width: 80%;
-    position: absolute;
-    font-weight: 400;
-    font-size: 22px;
-    top:75%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-  }
+
 }
 
 #vision {
@@ -186,7 +165,6 @@ button:hover {
 }
 
 #access {
-
   .exterior {
     margin: 40px 0 40px 0;
   }
