@@ -1,0 +1,53 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input id="name" type="text" formControlName="name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="age">Age:</label>
+    <input id="age" type="number" formControlName="age" required>
+  </div>
+
+  <div class="form-group">
+    <label for="gender">Gender:</label>
+    <select id="gender" formControlName="gender" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Inquiry Type:</label>
+    <div>
+      <input type="radio" id="donation" formControlName="inquiryType" value="donation">
+      <label for="donation">寄付</label>
+    </div>
+    <div>
+      <input type="radio" id="volunteer" formControlName="inquiryType" value="volunteer">
+      <label for="volunteer">ボランティア募集</label>
+    </div>
+    <div>
+      <input type="radio" id="inquiry" formControlName="inquiryType" value="inquiry">
+      <label for="inquiry">問い合わせ</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="tel">Telephone:</label>
+    <input id="tel" type="tel" formControlName="tel" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address:</label>
+    <input id="address" type="text" formControlName="address" required>
+  </div>
+
+  <button type="submit" [disabled]="!contactForm.valid">Submit</button>
+</form>
