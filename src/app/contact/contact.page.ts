@@ -13,11 +13,12 @@ export class ContactPage {
   contactForm = this.fb.group({
     name: ['', Validators.required ],
     age: ['', Validators.required ],
-    gender: ['', Validators.required ],
     inquiryType: ['', Validators.required ],
     tel: ['', Validators.required ],
     email: ['', [Validators.required, Validators.email] ],
-    address: ['', Validators.required ]
+    address: ['', Validators.required ],
+    notice: ['', ],
+    privacyPolicy: [false, Validators.requiredTrue]
   });
 
   constructor(private fb: FormBuilder, private rb: RealtimebaseService) {}

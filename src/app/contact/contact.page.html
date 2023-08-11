@@ -1,53 +1,73 @@
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+<ion-content>
+  <ion-card>
+    <img src="../../assets/Vector(purple).svg">
+    <ion-card-header>
+      <ion-card-subtitle>入力項目</ion-card-subtitle>
+      <ion-card-title>CONTACT</ion-card-title>
+    </ion-card-header>
 
-  <div class="form-group">
-    <label for="name">Name:</label>
-    <input id="name" type="text" formControlName="name" required>
-  </div>
+    <ion-card-content>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
 
-  <div class="form-group">
-    <label for="age">Age:</label>
-    <input id="age" type="number" formControlName="age" required>
-  </div>
+        <div class="form-group">
+          <label class="labels" for="name">お名前</label><br>
+          <input id="name" type="text" placeholder="フルネーム" formControlName="name" required>
+        </div>
 
-  <div class="form-group">
-    <label for="gender">Gender:</label>
-    <select id="gender" formControlName="gender" required>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
-  </div>
+        <div class="form-group">
+          <label class="labels" for="age">ご年齢</label><br>
+          <input id="age" type="number" formControlName="age" required>
+        </div>
 
-  <div class="form-group">
-    <label>Inquiry Type:</label>
-    <div>
-      <input type="radio" id="donation" formControlName="inquiryType" value="donation">
-      <label for="donation">寄付</label>
-    </div>
-    <div>
-      <input type="radio" id="volunteer" formControlName="inquiryType" value="volunteer">
-      <label for="volunteer">ボランティア募集</label>
-    </div>
-    <div>
-      <input type="radio" id="inquiry" formControlName="inquiryType" value="inquiry">
-      <label for="inquiry">問い合わせ</label>
-    </div>
-  </div>
+        <div class="form-group">
+          <label>お問い合わせ種別</label>
+          <div class="inquiry-container">
+            <div>
+              <input class="labels" type="radio" id="donation" formControlName="inquiryType" value="donation">
+              <label for="donation">寄付</label>
+            </div>
+            <div>
+              <input class="labels" type="radio" id="volunteer" formControlName="inquiryType" value="volunteer">
+              <label for="volunteer">ボランティア応募</label>
+            </div>
+            <div>
+              <input class="labels" type="radio" id="inquiry" formControlName="inquiryType" value="inquiry">
+              <label for="inquiry">問い合わせ</label>
+            </div>
+          </div>
+        </div>
 
-  <div class="form-group">
-    <label for="tel">Telephone:</label>
-    <input id="tel" type="tel" formControlName="tel" required>
-  </div>
+        <div class="form-group">
+          <label class="labels" for="tel">電話番号</label><br>
+          <input id="tel" type="tel" placeholder="080-1234-5678" formControlName="tel" required>
+        </div>
 
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email" required>
-  </div>
+        <div class="form-group">
+          <label class="labels" for="email">メールアドレス</label><br>
+          <input id="email" type="email" placeholder="○×△○×△@example.com" formControlName="email" required>
+        </div>
 
-  <div class="form-group">
-    <label for="address">Address:</label>
-    <input id="address" type="text" formControlName="address" required>
-  </div>
+        <div class="form-group">
+          <label class="labels" for="address">ご住所</label><br>
+          <input id="address" type="text" placeholder="番地、建物名までご記入ください" formControlName="address" required>
+        </div>
+        <div class="form-group">
+          <div class="notice-container">
+            <label class="labels" for="address">お問い合わせ内容</label>
+            <input id="notice" type="text" formControlName="notice">
+            <p>寄付内容、ボランティア応募動機、お問い合わせ内容の詳細をご記入ください。</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="privacyPolicy-container">
+            <input type="checkbox" id="privacyPolicy" formControlName="privacyPolicy" required>
+            <label for="privacyPolicy"><a routerLink="/privacy">プライバシーポリシー</a>に同意する</label>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!contactForm.valid">送信する</button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-  <button type="submit" [disabled]="!contactForm.valid">Submit</button>
-</form>
+</ion-content>
+
