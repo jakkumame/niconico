@@ -1,25 +1,48 @@
-ion-card {
-  width: 70%;
+.support-wrapper {
+  height: 800px;
+
+  ion-card {
+    width: 70%;
+    margin: auto;
+    margin-top: 70px;
+    padding: 2rem;
+  }
+
+  img {
+    position: absolute;
+    transform: rotate(-65deg);
+    scale: 80%;
+  }
+
+  .support-top-img {
+    top: 10%;
+    left: 5%;
+    z-index: -1;
+  }
+  .support-bottom-img {
+    top: 70%;
+    left: 50%;
+  }
+  .margin {
+    padding: 60px;
+  }
+}
+
+button {
+  display: block;
   margin: auto;
-  margin-top: 70px;
-  padding: 2rem;
+  width: 40%;
+  height: 35px;
+  background-image: linear-gradient(to right, rgb(89, 225, 141), #0e8327); /* 左から右へのグラデーション */
+  // border: 2px solid white;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, background-color 0.2s;
 }
 
-img {
-  position: absolute;
-  transform: rotate(-65deg);
-  scale: 80%;
+button:hover {
+  transform: scale(1.07);
+  background-image: linear-gradient(to right, #59f17a, #16b338); /* 左から右へのグラデーション */
+  color: #fff;
 }
 
-.support-top-img {
-  top: 10%;
-  left: 5%;
-  z-index: -1;
-}
-.support-bottom-img {
-  top: 80%;
-  left: 50%;
-}
-.margin {
-  padding: 60px;
-}
