@@ -27,12 +27,18 @@ export class ContactPage {
     console.log(this.contactForm.value);
     if (this.contactForm.valid) {
       this.rb.submitInquiry(this.contactForm.value as Inquiry)
-        .then(() => alert('Inquiry submitted!'))
-        .catch((err) => alert('An error occurred while submitting the inquiry: ' + err));
+        .then(() => {
+          alert('Inquiry submitted successfully!');
+        })
+        .catch((error) => {
+          console.error('Error in ContactPage:', error);
+          alert(`Failed to submit inquiry: ${error.message}`);
+        });
     } else {
-      alert('Please fill out all required fields.');
+      alert('Please fill out all required fields correctly.');
     }
   }
+
 
 
 }

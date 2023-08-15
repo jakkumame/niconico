@@ -11,10 +11,10 @@ export class RealtimebaseService {
   constructor(private db: AngularFireDatabase) { }
 
   submitInquiry(inquiry: Inquiry) {
-    return new Promise<any>((resolve, reject) =>{
-      this.db.list('/inquiries')
-        .push(inquiry)
-        .then(res => resolve(res), err => reject(err));
-    });
+    return this.db.list('/inquiries').push(inquiry)
+      .catch((error) => {
+        console.error('Error in RealtimebaseService:', error);
+        throw new Error(`Failed to submit inquiry due to Firebase error: ${error.message}`);
+      });
   }
 }

@@ -20,6 +20,14 @@ const routes: Routes = [
     path: 'privacy',
     component: PrivacyPolicyComponent,
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('./admin/auth/auth.module').then( m => m.AuthPageModule)
+  },
+  {
+    path: 'admin-home',
+    loadChildren: () => import('./admin/admin-home/admin-home.module').then( m => m.AdminHomePageModule)
+  },
 ];
 
 @NgModule({
