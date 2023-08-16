@@ -27,7 +27,7 @@ export class AdminHomePage implements OnInit {
   async presentLoginModal() {
     const modal = await this.modalCtrl.create({
       component: LoginComponent,
-      backdropDismiss: false  // モーダル以外のタップで閉じることを無効化
+      backdropDismiss: false  // モーダル以外で閉じることを無効化
     });
     return await modal.present();
   }
