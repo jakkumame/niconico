@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { LoginComponent } from 'src/app/component/login/login.component';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController,
+    private authService: AuthService,
+    public router: Router
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const isLoggedIn = await this.authService.isLoggedIn();
+    if (!isLoggedIn) {
+      this.presentLoginModal();
+    }
   }
+
+  async presentLoginModal() {
+    const modal = await this.modalCtrl.create({
+      component: LoginComponent,
+      backdropDismiss: false  // モーダル以外のタップで閉じることを無効化
+    });
+    return await modal.present();
+  }
+
+  logOut() {
+    this.authService.signOut();
+    this.router.navigateByUrl('/home');
+  }
+
 
 }

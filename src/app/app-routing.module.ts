@@ -21,11 +21,7 @@ const routes: Routes = [
     component: PrivacyPolicyComponent,
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./admin/auth/auth.module').then( m => m.AuthPageModule)
-  },
-  {
-    path: 'admin-home',
+    path: 'admin',
     loadChildren: () => import('./admin/admin-home/admin-home.module').then( m => m.AdminHomePageModule)
   },
 ];

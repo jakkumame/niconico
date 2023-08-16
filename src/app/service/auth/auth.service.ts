@@ -17,4 +17,18 @@ export class AuthService {
   async signOut() {
     return await this.afAuth.signOut();
   }
+
+  // onAuthStateChangedだと、リアルタイムで検知できる
+  isLoggedIn(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.afAuth.onAuthStateChanged(user => {
+        if (user) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+  
 }
