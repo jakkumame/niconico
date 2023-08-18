@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 
 import { AdminHomePageRoutingModule } from './admin-home-routing.module';
 
@@ -20,6 +20,9 @@ import { LoginComponent } from 'src/app/component/login/login.component';
   declarations: [
     AdminHomePage,
     LoginComponent
+  ],
+  providers: [
+    ModalController
   ]
 })
 export class AdminHomePageModule {}
