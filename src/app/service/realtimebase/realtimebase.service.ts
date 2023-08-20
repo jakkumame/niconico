@@ -28,4 +28,14 @@ export class RealtimebaseService {
 
     await alert.present();
   }
+
+  // 問い合わせ一覧の取得
+  getInquiries() {
+    return this.db.list<Inquiry>('/inquiries').valueChanges();
+  }
+
+  // 特定のIDを持つ問い合わせの詳細を取得
+  getInquiryById(id: string) {
+    return this.db.object<Inquiry>(`/inquiries/${id}`).valueChanges();
+  }
 }

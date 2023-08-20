@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>問い合わせ一覧</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let inquiry of inquiries">
+      <ion-label>{{ getInquiryTypeLabel(inquiry.inquiryType) }}</ion-label>
+      <ion-note slot="end">{{ inquiry.date }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

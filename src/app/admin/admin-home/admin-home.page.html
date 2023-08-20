@@ -1,26 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>管理者ダッシュボード</ion-title>
+    <ion-tab-button (click)="logOut()">
+      <ion-icon name="camera"></ion-icon>
+      <ion-label>ログアウト</ion-label>
+    </ion-tab-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-tabs>
+
     <ion-tab-bar slot="top">
       <ion-tab-button tab="events">
-        <ion-label>イベント一覧</ion-label>
+        <ion-icon name="triangle"></ion-icon>
+        <ion-label>イベント</ion-label>
       </ion-tab-button>
-      <ion-tab-button tab="inquiries">
-        <ion-label>問い合わせ一覧</ion-label>
+
+      <ion-tab-button tab="inquiries" routerLink="inquiry-list">
+        <ion-icon name="ellipse"></ion-icon>
+        <ion-label>問い合わせ</ion-label>
       </ion-tab-button>
-      <ion-tab-button tab="posts">
-        <ion-label>記事投稿一覧</ion-label>
+
+      <ion-tab-button tab="article">
+        <ion-icon name="ellipse"></ion-icon>
+        <ion-label>投稿</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
+
+    <!-- <ion-tab tab="events">
+    </ion-tab>
+    <ion-tab tab="inquiries" routerLink="/inquiry-list">
+    </ion-tab>
+    <ion-tab tab="article">
+    </ion-tab> -->
+
   </ion-tabs>
 
-  <ion-tab-button (click)="logOut()">
-    <ion-icon name="camera"></ion-icon>
-    <ion-label>ログアウト</ion-label>
-  </ion-tab-button>
+
 </ion-content>

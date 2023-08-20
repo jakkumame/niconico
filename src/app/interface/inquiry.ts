@@ -6,4 +6,5 @@ export interface Inquiry {
   email: string;
   address: string;
   notice: string;
+  date?: string;
 }

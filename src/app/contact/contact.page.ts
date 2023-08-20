@@ -34,7 +34,11 @@ export class ContactPage {
     console.log(this.contactForm.value);
     if (this.contactForm.valid) {
       try {
-        await this.rb.submitInquiry(this.contactForm.value as Inquiry);
+        const inquiryData: Inquiry = {
+          ...this.contactForm.value as Inquiry, // Inquiry型にキャスト。明示的にInquiry型だとコンパイラに伝え、型の不一致を回避する
+          date: new Date().toISOString()  // 日付をISO形式の文字列に変換。realtimebaseが対応する形式
+        };
+        await this.rb.submitInquiry(inquiryData);
         this.presentAlert('成功', '問い合わせが正常に送信されました。');
         this.router.navigateByUrl('/home');
       } catch (error) {
@@ -45,6 +49,8 @@ export class ContactPage {
       this.presentAlert('検証エラー', 'すべての必須フィールドを正しく入力してください。');
     }
   }
+
+
 
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
