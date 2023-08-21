@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -24,5 +24,6 @@ import { InquiryListComponent } from 'src/app/component/admin/inquiry/inquiry-li
     InquiryListComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [DatePipe]
 })
 export class AdminHomePageModule {}

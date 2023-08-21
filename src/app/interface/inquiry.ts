@@ -7,4 +7,5 @@ export interface Inquiry {
   address: string;
   notice: string;
   date?: string;
+  
 }

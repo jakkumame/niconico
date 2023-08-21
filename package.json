@@ -52,6 +52,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",
+    "cypress": "latest",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -65,8 +66,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ts-node": "^8.3.0",
-    "typescript": "^4.9.4",
-    "cypress": "latest"
+    "typescript": "^4.9.4"
   },
   "description": "An Ionic project"
 }
