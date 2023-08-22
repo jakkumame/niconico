@@ -1,3 +1,4 @@
+import { RealtimebaseService } from 'src/app/service/realtimebase/realtimebase.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -11,17 +12,29 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 })
 export class AdminHomePage implements OnInit {
 
+  uncompletedCount: number = 0;
+
   constructor(
     private modalCtrl: ModalController,
     private authService: AuthService,
-    public router: Router
+    public router: Router,
+    private realtimebaseService: RealtimebaseService
   ) { }
 
+
+
   async ngOnInit() {
+    // ログイン状態のチェック、未ログインならログインフォームへ
     const isLoggedIn = await this.authService.isLoggedIn();
     if (!isLoggedIn) {
       this.presentLoginModal();
     }
+
+    // 問い合わせの未完了を取得、バッジの表示用
+    this.realtimebaseService.getUncompletedCount().subscribe(count => {
+      this.uncompletedCount = count;
+    });
+
   }
 
   async presentLoginModal() {

@@ -1,4 +1,5 @@
 export interface Inquiry {
+  key?: string;  // Realtime Databaseのキー
   name: string;
   age: string;
   inquiryType: string;
@@ -7,5 +8,5 @@ export interface Inquiry {
   address: string;
   notice: string;
   date?: string;
-  
+  completed?: boolean;
 }

@@ -3,19 +3,18 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Inquiry } from '../../interface/inquiry';
 import { AlertController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class RealtimebaseService {
-
   private inquiriesPath = '/inquiries';
 
   constructor(private db: AngularFireDatabase, private alertController: AlertController) { }
 
-  private async handleError(error: any, message: string) {
-    console.error('Error in RealtimebaseService:', error);
-    this.presentErrorAlert(`${message} Firebaseでのエラー:${error.message}`);
+  private async handleError(error: any, prefix: string) {
+    console.error(`${prefix} Error in RealtimebaseService:`, error);
+    this.presentErrorAlert(`${prefix} Firebaseでのエラー: ${error.message}`);
   }
 
   private async presentErrorAlert(message: string) {
@@ -36,20 +35,41 @@ export class RealtimebaseService {
   }
 
   getInquiries(): Observable<Inquiry[]> {
-    return this.db.list<Inquiry>(this.inquiriesPath).valueChanges().pipe(
+    return this.db.list<Inquiry>(this.inquiriesPath).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key as string, ...c.payload.val() })) as Inquiry[]
+      ),
       catchError(error => {
         this.handleError(error, '問い合わせ一覧の取得に失敗しました。');
-        return of([]);  // 取得できない場合、空の配列を返す
+        return of([]);
       })
     );
   }
 
-  getInquiryById(id: string) {
+  getUncompletedCount(): Observable<number> {
+    return this.getInquiries().pipe(
+      map(inquiries => inquiries.filter(inquiry => !inquiry.completed).length),
+      catchError(error => {
+        this.handleError(error, '未完了の問い合わせの数の取得に失敗しました。');
+        return of(0);
+      })
+    );
+  }
+
+  // getInquiryById(id: string) {
+  //   try {
+  //     return this.db.object<Inquiry>(`${this.inquiriesPath}/${id}`).valueChanges();
+  //   } catch (error) {
+  //     this.handleError(error, `ID:${id}の問い合わせの取得に失敗しました。`);
+  //     return null;
+  //   }
+  // }
+
+  async updateInquiry(key: string, inquiry: Inquiry) {
     try {
-      return this.db.object<Inquiry>(`${this.inquiriesPath}/${id}`).valueChanges();
+      await this.db.object(`${this.inquiriesPath}/${key}`).update(inquiry);
     } catch (error) {
-      this.handleError(error, `ID:${id}の問い合わせの取得に失敗しました。`);
-      return null;
+      this.handleError(error, `ID:${key}の問い合わせの更新に失敗しました。`);
     }
   }
 }

@@ -9,6 +9,7 @@
     <ion-item *ngFor="let inquiry of inquiries">
       <ion-label>{{ getInquiryTypeLabel(inquiry.inquiryType) }}</ion-label>
       <ion-note slot="end">{{ formatInquiryDate(inquiry.date) }}</ion-note>
+      <ion-checkbox slot="start" [checked]="inquiry.completed" (click)="toggleCompletion($event, inquiry)"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>

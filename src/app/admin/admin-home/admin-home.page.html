@@ -20,7 +20,9 @@
       <ion-tab-button tab="inquiries" routerLink="inquiry-list">
         <ion-icon name="ellipse"></ion-icon>
         <ion-label>問い合わせ</ion-label>
+        <ion-badge *ngIf="uncompletedCount > 0">{{ uncompletedCount }}</ion-badge>
       </ion-tab-button>
+
 
       <ion-tab-button tab="article">
         <ion-icon name="ellipse"></ion-icon>
