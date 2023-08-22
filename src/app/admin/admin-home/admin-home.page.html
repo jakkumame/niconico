@@ -12,30 +12,23 @@
   <ion-tabs>
 
     <ion-tab-bar slot="top">
-      <ion-tab-button tab="events">
-        <ion-icon name="triangle"></ion-icon>
+      <ion-tab-button>
+        <ion-icon name="browsers"></ion-icon>
         <ion-label>イベント</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="inquiries" routerLink="inquiry-list">
-        <ion-icon name="ellipse"></ion-icon>
+      <ion-tab-button routerLink="inquiry-list">
+        <ion-icon name="mail"></ion-icon>
         <ion-label>問い合わせ</ion-label>
         <ion-badge *ngIf="uncompletedCount > 0">{{ uncompletedCount }}</ion-badge>
       </ion-tab-button>
 
 
-      <ion-tab-button tab="article">
+      <ion-tab-button>
         <ion-icon name="ellipse"></ion-icon>
         <ion-label>投稿</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
-
-    <!-- <ion-tab tab="events">
-    </ion-tab>
-    <ion-tab tab="inquiries" routerLink="/inquiry-list">
-    </ion-tab>
-    <ion-tab tab="article">
-    </ion-tab> -->
 
   </ion-tabs>
 

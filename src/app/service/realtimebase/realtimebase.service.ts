@@ -1,16 +1,21 @@
+import { AuthService } from 'src/app/service/auth/auth.service';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Inquiry } from '../../interface/inquiry';
 import { AlertController } from '@ionic/angular';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class RealtimebaseService {
   private inquiriesPath = '/inquiries';
 
-  constructor(private db: AngularFireDatabase, private alertController: AlertController) { }
+  constructor(
+    private db: AngularFireDatabase,
+    private alertController: AlertController,
+    private authService: AuthService
+    ) { }
 
   private async handleError(error: any, prefix: string) {
     console.error(`${prefix} Error in RealtimebaseService:`, error);
@@ -27,21 +32,29 @@ export class RealtimebaseService {
   }
 
   async submitInquiry(inquiry: Inquiry) {
-    try {
-      await this.db.list(this.inquiriesPath).push(inquiry);
-    } catch (error) {
-      this.handleError(error, '問い合わせの送信に失敗しました。');
+    const ref = this.db.list(this.inquiriesPath).push(inquiry);
+    if (ref && ref.key) {
+      inquiry.key = ref.key;
+      await ref.update({ key: ref.key });
+    } else {
+      this.handleError(new Error('Key generation failed'), '問い合わせの送信に失敗しました。');
     }
   }
 
   getInquiries(): Observable<Inquiry[]> {
-    return this.db.list<Inquiry>(this.inquiriesPath).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key as string, ...c.payload.val() })) as Inquiry[]
-      ),
-      catchError(error => {
-        this.handleError(error, '問い合わせ一覧の取得に失敗しました。');
-        return of([]);
+    return from(this.authService.isLoggedIn()).pipe(  // PromiseをObservableに変換
+      switchMap(isLoggedIn => {
+        if (isLoggedIn) {
+          return this.db.list<Inquiry>(this.inquiriesPath).valueChanges().pipe(
+            catchError(error => {
+              this.handleError(error, '問い合わせ一覧の取得に失敗しました。');
+              return of([]);
+            })
+          );
+        } else {
+          // ログインしていない場合、空の配列を返す
+          return of([]);
+        }
       })
     );
   }
@@ -55,15 +68,6 @@ export class RealtimebaseService {
       })
     );
   }
-
-  // getInquiryById(id: string) {
-  //   try {
-  //     return this.db.object<Inquiry>(`${this.inquiriesPath}/${id}`).valueChanges();
-  //   } catch (error) {
-  //     this.handleError(error, `ID:${id}の問い合わせの取得に失敗しました。`);
-  //     return null;
-  //   }
-  // }
 
   async updateInquiry(key: string, inquiry: Inquiry) {
     try {
