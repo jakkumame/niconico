@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>管理者ダッシュボード</ion-title>
+    <ion-title>管理者メニュー</ion-title>
     <ion-tab-button (click)="logOut()">
-      <ion-icon name="camera"></ion-icon>
+      <ion-icon name="close"></ion-icon>
       <ion-label>ログアウト</ion-label>
     </ion-tab-button>
   </ion-toolbar>
@@ -12,19 +12,18 @@
   <ion-tabs>
 
     <ion-tab-bar slot="top">
-      <ion-tab-button>
+      <ion-tab-button tab="event-list">
         <ion-icon name="browsers"></ion-icon>
         <ion-label>イベント</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button routerLink="inquiry-list">
+      <ion-tab-button tab="inquiry-list">
         <ion-icon name="mail"></ion-icon>
         <ion-label>問い合わせ</ion-label>
         <ion-badge *ngIf="uncompletedCount > 0">{{ uncompletedCount }}</ion-badge>
       </ion-tab-button>
 
-
-      <ion-tab-button>
+      <ion-tab-button tab="article-list">
         <ion-icon name="ellipse"></ion-icon>
         <ion-label>投稿</ion-label>
       </ion-tab-button>

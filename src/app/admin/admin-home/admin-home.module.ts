@@ -9,6 +9,7 @@ import { AdminHomePageRoutingModule } from './admin-home-routing.module';
 import { AdminHomePage } from './admin-home.page';
 import { LoginComponent } from 'src/app/component/login/login.component';
 import { InquiryListComponent } from 'src/app/component/admin/inquiry/inquiry-list/inquiry-list.component';
+import { InquiryDetailComponent } from 'src/app/component/admin/inquiry/inquiry-detail/inquiry-detail.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { InquiryListComponent } from 'src/app/component/admin/inquiry/inquiry-li
     AdminHomePage,
     LoginComponent,
     InquiryListComponent,
+    InquiryDetailComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]

@@ -11,10 +11,9 @@ import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { InquiryDetailComponent } from './component/admin/inquiry/inquiry-detail/inquiry-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, InquiryDetailComponent ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
