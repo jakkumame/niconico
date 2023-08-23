@@ -5,6 +5,8 @@ import { AdminHomePage } from './admin-home.page';
 import { InquiryListComponent } from 'src/app/component/admin/inquiry/inquiry-list/inquiry-list.component';
 import { InquiryDetailComponent } from 'src/app/component/admin/inquiry/inquiry-detail/inquiry-detail.component';
 import { EventListComponent } from 'src/app/component/admin/event/event-list/event-list.component';
+import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
+import { EventFormComponent } from 'src/app/component/admin/event/event-form/event-form.component';
 
 const routes: Routes = [
   {
@@ -12,8 +14,17 @@ const routes: Routes = [
     component: AdminHomePage,
     children: [
       {
+        path: '',
+        redirectTo: 'event-list',
+        pathMatch: 'full'
+      },
+      {
         path: 'event-list',
         component: EventListComponent,
+      },
+      {
+        path: 'event-form',
+        component: EventFormComponent,
       },
       {
         path: 'inquiry-list',
@@ -22,7 +33,11 @@ const routes: Routes = [
       {
         path: 'inquiry-detail/:key',
         component: InquiryDetailComponent,
-      }
+      },
+      {
+        path: 'article-list',
+        component: ArticleListComponent,
+      },
     ]
   }
 ];

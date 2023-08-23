@@ -10,6 +10,9 @@ import { AdminHomePage } from './admin-home.page';
 import { LoginComponent } from 'src/app/component/login/login.component';
 import { InquiryListComponent } from 'src/app/component/admin/inquiry/inquiry-list/inquiry-list.component';
 import { InquiryDetailComponent } from 'src/app/component/admin/inquiry/inquiry-detail/inquiry-detail.component';
+import { EventListComponent } from 'src/app/component/admin/event/event-list/event-list.component';
+import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
+import { EventFormComponent } from 'src/app/component/admin/event/event-form/event-form.component';
 
 @NgModule({
   imports: [
@@ -24,6 +27,9 @@ import { InquiryDetailComponent } from 'src/app/component/admin/inquiry/inquiry-
     LoginComponent,
     InquiryListComponent,
     InquiryDetailComponent,
+    EventListComponent,
+    ArticleListComponent,
+    EventFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
