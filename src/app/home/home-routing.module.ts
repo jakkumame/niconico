@@ -6,6 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    children: [
+      {
+        path: 'section/:id',
+        component: HomePage,
+      }
+    ]
   }
 ];
 
