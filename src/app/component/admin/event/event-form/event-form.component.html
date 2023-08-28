@@ -15,9 +15,11 @@
   </ion-item>
 
   <ion-item>
-    <ion-label>説明</ion-label>
+    <ion-label>プログラム概要</ion-label>
     <ion-textarea formControlName="description"></ion-textarea>
   </ion-item>
 
   <ion-button expand="full" type="submit" [disabled]="!eventForm.valid">イベントを追加</ion-button>
 </form>
+
+<ion-button (click)="goBack()">戻る</ion-button>
