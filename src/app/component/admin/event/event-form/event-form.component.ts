@@ -37,6 +37,7 @@ export class EventFormComponent implements OnInit {
         await this.eventFormService.addEvent(this.eventForm.value);
         this.showAlert('成功', 'こども食堂の新しい開催詳細が作成されました');
         this.eventForm.reset();
+        this.goBack();
       } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : '予期せぬエラーが発生しました。';
         this.showAlert('エラー', errorMessage);

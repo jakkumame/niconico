@@ -19,12 +19,12 @@
     <ion-card-content>
       <p>{{ event.description }}</p>
     </ion-card-content>
+    <ion-list>
+      <ion-list-header>参加者リスト</ion-list-header>
+      <!-- <ion-item *ngFor="let participant of participants">
+        {{ participant.name }}
+      </ion-item> -->
+    </ion-list>
   </ion-card>
 
-  <ion-list>
-    <ion-list-header>参加者リスト</ion-list-header>
-    <!-- <ion-item *ngFor="let participant of participants">
-      {{ participant.name }}
-    </ion-item> -->
-  </ion-list>
 </ion-content>
