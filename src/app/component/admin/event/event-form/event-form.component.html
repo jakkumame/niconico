@@ -1,1 +1,23 @@
-<p>event-form works!</p>
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label>開催日</ion-label>
+    <ion-input formControlName="date" type="date"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>開始時間</ion-label>
+    <ion-input formControlName="startTime" type="time"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>終了時間</ion-label>
+    <ion-input formControlName="endTime" type="time"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>説明</ion-label>
+    <ion-textarea formControlName="description"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="full" type="submit" [disabled]="!eventForm.valid">イベントを追加</ion-button>
+</form>
