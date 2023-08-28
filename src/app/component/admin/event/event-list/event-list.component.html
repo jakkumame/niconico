@@ -1,5 +1,25 @@
-<ion-fab>
-  <ion-fab-button class="custom-fab" routerLink="/admin/event-form">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="5" *ngFor="let event of events">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>開催日: {{ event.date }}</ion-card-title>
+            <ion-card-subtitle>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{ event.description }}
+            <ion-button expand="full" [routerLink]="['/admin/event-detail', event.date]">参加者を表示</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab>
+    <ion-fab-button class="custom-fab" routerLink="/admin/event-form">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+

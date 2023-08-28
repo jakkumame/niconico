@@ -13,6 +13,7 @@ import { InquiryDetailComponent } from 'src/app/component/admin/inquiry/inquiry-
 import { EventListComponent } from 'src/app/component/admin/event/event-list/event-list.component';
 import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
 import { EventFormComponent } from 'src/app/component/admin/event/event-form/event-form.component';
+import { EventDetailComponent } from 'src/app/component/admin/event/event-detail/event-detail.component';
 
 @NgModule({
   imports: [
@@ -28,8 +29,9 @@ import { EventFormComponent } from 'src/app/component/admin/event/event-form/eve
     InquiryListComponent,
     InquiryDetailComponent,
     EventListComponent,
+    EventFormComponent,
+    EventDetailComponent,
     ArticleListComponent,
-    EventFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]

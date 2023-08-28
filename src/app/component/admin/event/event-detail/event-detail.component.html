@@ -1,0 +1,30 @@
+<!-- event-detail.component.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button>戻る</ion-back-button>
+    </ion-buttons>
+    <ion-title>イベント詳細</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="event">
+    <ion-card-header>
+      <ion-card-title>開催日: {{ event.date }}</ion-card-title>
+      <ion-card-subtitle>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>{{ event.description }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>参加者リスト</ion-list-header>
+    <!-- <ion-item *ngFor="let participant of participants">
+      {{ participant.name }}
+    </ion-item> -->
+  </ion-list>
+</ion-content>
