@@ -1,0 +1,83 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="applicationForm" (ngSubmit)="submitForm()">
+        <div formArrayName="applicants">
+          <div *ngFor="let applicant of applicants.controls; let i = index" [formGroupName]="i">
+            <h3>お申し込み  {{ i + 1 }}人目</h3>
+
+            <ion-item>
+              <ion-input type="text" formControlName="name" label="名前"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" formControlName="furigana" label="ふりがな"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="number" formControlName="age" label="年齢"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>性別</ion-label>
+              <ion-radio-group formControlName="gender">
+                <ion-item>
+                  <ion-radio value="male" aria-label="男性">男性</ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-radio value="female" aria-label="女性">女性</ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-radio value="other" aria-label="その他">その他</ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>食事</ion-label>
+              <ion-radio-group formControlName="mealType">
+                <ion-item>
+                  <ion-radio value="adult" aria-label="大人食">大人食</ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-radio value="child" aria-label="子ども食">こども食</ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-radio value="baby" aria-label="離乳食">離乳食</ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-item>
+
+
+            <ion-item>
+              <ion-label position="fixed">来店時間</ion-label>
+              <ion-select formControlName="arrivalTime" aria-label="来店時間">
+                  <ion-select-option *ngFor="let time of availableTimes" [value]="time">{{ time }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">備考欄</ion-label>
+                <ion-textarea formControlName="remarks" aria-label="備考欄"></ion-textarea>
+            </ion-item>
+            <ion-button type="button" (click)="addApplicant()">申込を追加</ion-button>
+            <ion-button *ngIf="applicants.controls.length > 1" (click)="removeApplicant(i)">申込を削除</ion-button>
+          </div>
+        </div>
+
+
+        <ion-item>
+          <ion-label>来店日選択</ion-label>
+          <ion-radio-group formControlName="selectedEvent">
+            <ion-item *ngFor="let event of availableEvents">
+              <ion-radio [value]="event.eventId" aria-label="{{ event.date }}"></ion-radio>
+              {{ event.date }}
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+        <ion-button type="submit" (click)="confirmAndSubmit()" [disabled]="!applicationForm.valid">送信</ion-button>
+      </form>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
