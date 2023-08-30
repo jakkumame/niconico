@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ApplicationFormService } from 'src/app/service/event/application-form.service';
 import { AlertController, NavController } from '@ionic/angular';
@@ -8,7 +9,8 @@ import { hiraganaValidator } from 'src/app/validators/application.validator';
 @Component({
   selector: 'app-application-form',
   templateUrl: './application-form.component.html',
-  styleUrls: ['./application-form.component.scss']
+  styleUrls: ['./application-form.component.scss'],
+  providers: [ DatePipe ]
 })
 export class ApplicationFormComponent implements OnInit {
 
@@ -62,7 +64,7 @@ export class ApplicationFormComponent implements OnInit {
     this.applicants.removeAt(index);
   }
 
-  async submitForm(): Promise<void> {
+  async sendValue(): Promise<void> {
     if (this.applicationForm.valid) {
       const selectedEvent = this.applicationForm.value.selectedEvent;
       for (const applicant of this.applicationForm.value.applicants) {
@@ -75,7 +77,7 @@ export class ApplicationFormComponent implements OnInit {
 
       if (controls['selectedEvent'].errors) {
         if (controls['selectedEvent'].errors['required']) {
-          errorMessages.push('イベントは必須です。');
+          errorMessages.push('来店日を選択してください。');
         }
         // 他のselectedEventのエラーチェックもここに追加できます。
       }
@@ -102,7 +104,7 @@ export class ApplicationFormComponent implements OnInit {
 
       // エラーメッセージを表示するアラートを作成します。
       const alert = await this.alertCtrl.create({
-        header: 'エラー',
+        header: '入力エラー',
         message: errorMessages.join('<br>'),
         buttons: ['閉じる']
       });
@@ -112,32 +114,38 @@ export class ApplicationFormComponent implements OnInit {
 
 
   async confirmAndSubmit() {
-    const total = this.applicationForm.value.applicants.length;
-    const adultMeals = this.applicationForm.value.applicants.filter((applicant: Applicant) => applicant.mealType === 'adult').length;
-    const childMeals = this.applicationForm.value.applicants.filter((applicant: Applicant) => applicant.mealType === 'child').length;
+    if (this.applicationForm.valid) {
+      const total = this.applicationForm.value.applicants.length;
+      const adultMeals = this.applicationForm.value.applicants.filter((applicant: Applicant) => applicant.mealType === 'adult').length;
+      const childMeals = this.applicationForm.value.applicants.filter((applicant: Applicant) => applicant.mealType === 'child').length;
 
-    const alert = await this.alertCtrl.create({
-      header: '確認',
-      message: `総数: ${total}, 大人食: ${adultMeals}, こども食: ${childMeals}`,
-      buttons: [
-        {
-          text: 'キャンセル',
-          role: 'cancel'
-        }, {
-          text: '送信',
-          handler: () => {
-            this.submitForm();
-            this.goBack();
+      const alert = await this.alertCtrl.create({
+        header: '確認',
+        message: `総数: ${total}\n\n\n大人食: ${adultMeals}\n\n\nこども食: ${childMeals}。以上でお申し込みされますか？`,
+        buttons: [
+          {
+            text: 'キャンセル',
+            role: 'cancel'
+          }, {
+            text: '送信',
+            handler: () => {
+              this.sendValue();
+              this.goBack();
+            }
           }
-        }
-      ]
-    });
+        ],
+        cssClass: 'custom-alert'
+      });
 
-    await alert.present();
+      await alert.present();
+    } else {
+      await this.sendValue(); // エラーチェックとエラーアラートの表示
+    }
   }
 
 
+
   goBack(): void {
-    this.navCtrl.back();
+    this.navCtrl.navigateForward('/home');
   }
 }

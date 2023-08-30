@@ -1,7 +1,7 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <form [formGroup]="applicationForm" (ngSubmit)="submitForm()">
+      <form [formGroup]="applicationForm" (ngSubmit)="confirmAndSubmit()">
         <div formArrayName="applicants">
           <div *ngFor="let applicant of applicants.controls; let i = index" [formGroupName]="i">
             <h3>お申し込み  {{ i + 1 }}人目</h3>
@@ -65,17 +65,17 @@
           </div>
         </div>
 
-
         <ion-item>
           <ion-label>来店日選択</ion-label>
           <ion-radio-group formControlName="selectedEvent">
             <ion-item *ngFor="let event of availableEvents">
-              <ion-radio [value]="event.eventId" aria-label="{{ event.date }}"></ion-radio>
-              {{ event.date }}
+              <ion-radio [value]="event.eventId" aria-label="{{ event.date | date: 'MM月dd日' }}"></ion-radio>
+              {{ event.date | date: 'MM月dd日' }}
             </ion-item>
           </ion-radio-group>
         </ion-item>
-        <ion-button type="submit" (click)="confirmAndSubmit()" [disabled]="!applicationForm.valid">送信</ion-button>
+
+        <ion-button type="submit">送信</ion-button>
       </form>
     </ion-card-content>
 
