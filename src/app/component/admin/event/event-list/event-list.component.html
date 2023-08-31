@@ -4,10 +4,11 @@
       <ion-col size="12" size-md="5" *ngFor="let event of events">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>開催日: {{ event.date }}</ion-card-title>
-            <ion-card-subtitle>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</ion-card-subtitle>
+            <ion-card-subtitle>Opening date</ion-card-subtitle>
+            <ion-card-title>{{ event.date }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
+            <p>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</p>
             {{ event.description }}
             <ion-button expand="full" [routerLink]="['/admin/event-detail', event.date]">参加者を表示</ion-button>
           </ion-card-content>
