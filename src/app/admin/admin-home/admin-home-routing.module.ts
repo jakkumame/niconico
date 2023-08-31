@@ -28,8 +28,9 @@ const routes: Routes = [
         component: EventFormComponent,
       },
       {
-        path: 'event-detail/:date',
-        component: EventDetailComponent
+        path: 'event-detail/:eventId', // ルートパラメータ eventId を指定
+        component: EventDetailComponent,
+
       },
       {
         path: 'inquiry-list',

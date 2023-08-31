@@ -1,9 +1,7 @@
-<!-- event-detail.component.html -->
-
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-back-button>戻る</ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/event-list"></ion-back-button>
     </ion-buttons>
     <ion-title>イベント詳細</ion-title>
   </ion-toolbar>
@@ -17,11 +15,15 @@
     </ion-card-header>
 
     <ion-card-content>
-      <p>{{ event.description }}</p>
+      {{ event.description }}
     </ion-card-content>
-    <ion-list>
-      <ion-list-header>参加者リスト</ion-list-header>
+    <h2>参加者一覧</h2>
+    <ion-list *ngIf="applicants">
+      <ion-item *ngFor="let applicant of applicants">
+        <ion-label>{{ applicant.name }}</ion-label>
+      </ion-item>
     </ion-list>
+
   </ion-card>
 
 </ion-content>

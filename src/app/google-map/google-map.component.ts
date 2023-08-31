@@ -1,4 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MapService } from '../service/google/map/map.service';
+
 
 @Component({
   selector: 'app-google-map',
@@ -6,25 +8,42 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit {
-  map!: google.maps.Map;
-  markers: google.maps.Marker[] = [];
+  private map?: google.maps.Map;
+  private markers: google.maps.Marker[] = [];
+
+  constructor(private mapService: MapService) { }
+
 
   ngOnInit() {
-    this.initializeMap();
-    this.addMarker(33.947317911296906, 131.25260123062438, '神原にこにこkitchen');
+    this.mapService.loadGoogleMapsApi().then(() => {
+      this.initializeMap();
+      this.addMarkerWithInfo(33.947317911296906, 131.25260123062438, '神原にこにこkitchen');
+    });
+
+    this.setCookie();
+
   }
 
-  initializeMap() {
+
+  private initializeMap(): void {
+    const defaultPosition = { lat: 33.947317911296906, lng: 131.25260123062438 };
     const mapOptions: google.maps.MapOptions = {
-      center: { lat: 33.947317911296906, lng: 131.25260123062438 }, // デフォルトの中心位置
-      zoom: 17, // デフォルトのズームレベル
-      // gestureHandling: 'cooperative', // 二本指での操作時のみ操作可能
-      mapTypeControl: false // 航空写真との入れ替えボタン非表示
+      center: defaultPosition,
+      zoom: 17,
+      mapTypeControl: false
     };
     this.map = new google.maps.Map(document.getElementById('map') as HTMLElement, mapOptions);
   }
 
-  addMarker(lat: number, lng: number, title: string) {
+
+
+  private addMarkerWithInfo(lat: number, lng: number, title: string): void {
+    const marker = this.addMarker(lat, lng, title);
+    this.addInfoWindow(marker, title);
+  }
+
+  private addMarker(lat: number, lng: number, title: string): google.maps.Marker {
+
     const markerOptions: google.maps.MarkerOptions = {
       position: { lat, lng },
       map: this.map,
@@ -32,18 +51,18 @@ export class GoogleMapComponent implements OnInit {
     };
     const marker = new google.maps.Marker(markerOptions);
     this.markers.push(marker);
+    return marker;
+  }
 
-    // Create and open InfoWindow
-    const infoWindow = new google.maps.InfoWindow({
-      content: title // タイトルをInfoWindowの内容に設定
+    private addInfoWindow(marker: google.maps.Marker, content: string): void {
+      const infoWindow = new google.maps.InfoWindow({
+        content: content
     });
 
     infoWindow.open(this.map, marker);
   }
 
-  // スクロールイベントリスナーを追加する（passive:trueで指定）
-  // @HostListener('window:scroll', ['$event'])
-  // onScroll(event: Event) {
-  //   event.preventDefault();
-  // }
+  private setCookie(): void {
+    document.cookie = "cookieName=cookieValue; SameSite=Lax;";
+  }
 }

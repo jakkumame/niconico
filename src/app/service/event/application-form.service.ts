@@ -13,6 +13,12 @@ export class ApplicationFormService {
     return this.afs.collection('events').valueChanges({ idField: 'eventId' });
   }
 
+
+  getApplicants(eventId: string) {
+    return this.afs.collection('events').doc(eventId).collection('applicants').valueChanges();
+  }
+  
+
   submitApplication(eventId: string, applicant: Applicant): Promise<void> {
     const id = this.afs.createId();
     applicant.timestamp = new Date().toISOString();
