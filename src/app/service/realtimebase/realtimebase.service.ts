@@ -17,10 +17,13 @@ export class RealtimebaseService {
     private authService: AuthService
     ) { }
 
-  private async handleError(error: any, prefix: string) {
-    console.error(`${prefix} Error in RealtimebaseService:`, error);
-    this.presentErrorAlert(`${prefix} Firebaseでのエラー: ${error.message}`);
-  }
+    private async handleError(error: any, prefix: string, showAlert: boolean = true) {
+      console.error(`${prefix} Error in RealtimebaseService:`, error);
+      if (showAlert) {
+        this.presentErrorAlert(`${prefix} Firebaseでのエラー: ${error.message}`);
+      }
+    }
+
 
   private async presentErrorAlert(message: string) {
     const alert = await this.alertController.create({
@@ -42,22 +45,23 @@ export class RealtimebaseService {
   }
 
   getInquiries(): Observable<Inquiry[]> {
-    return from(this.authService.isLoggedIn()).pipe(  // PromiseをObservableに変換
+    return from(this.authService.isLoggedIn()).pipe(
       switchMap(isLoggedIn => {
         if (isLoggedIn) {
           return this.db.list<Inquiry>(this.inquiriesPath).valueChanges().pipe(
             catchError(error => {
-              this.handleError(error, '問い合わせ一覧の取得に失敗しました。');
+              this.handleError(error, '問い合わせ一覧の取得に失敗しました。', false);
               return of([]);
             })
           );
         } else {
-          // ログインしていない場合、空の配列を返す
+          // ログインしていない場合、アラートを表示せずに空の配列を返す
           return of([]);
         }
       })
     );
   }
+
 
   getUncompletedCount(): Observable<number> {
     return this.getInquiries().pipe(
