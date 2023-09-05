@@ -8,22 +8,38 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="event">
-    <ion-card-header>
-      <ion-card-title>開催日: {{ event.date }}</ion-card-title>
-      <ion-card-subtitle>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</ion-card-subtitle>
-    </ion-card-header>
+  <ion-card *ngIf="applicants$ | async as applicants">
 
-    <ion-card-content>
-      {{ event.description }}
-    </ion-card-content>
-    <h2>参加者一覧</h2>
-    <ion-list *ngIf="applicants">
+    <div *ngIf="applicants.length === 0">
+      <ion-item>
+        <h6>今回の申込はありません</h6>
+      </ion-item>
+    </div>
+
+    <!-- Display applicants -->
+    <ion-list *ngIf="applicants.length > 0">
       <ion-item *ngFor="let applicant of applicants">
-        <ion-label>{{ applicant.name }}</ion-label>
+        <ion-list>
+          <ion-list-header><h4>{{ applicant.name }} ({{ applicant.furigana }})</h4></ion-list-header>
+          <ion-item label="性別">性別: {{ applicant.gender | generalMapping:'gender' }}</ion-item>
+          <ion-item label="食事の種類">希望食:{{ applicant.mealType | generalMapping:'meal' }}</ion-item>
+          <ion-item label="年齢">年齢: {{ applicant.age }}</ion-item>
+          <ion-item *ngIf="applicant.arrivalTime" label="来店予定時間">来店予定時間: {{ applicant.arrivalTime }}</ion-item>
+          <ion-item *ngIf="applicant.remarks" label="備考">備考: {{ applicant.remarks }}</ion-item>
+          <ion-item *ngIf="applicant.timestamp" label="申込日時">申込日時: {{ applicant.timestamp | date:'yyyy年MM月dd日HH:mm' }}</ion-item>
+        </ion-list>
       </ion-item>
     </ion-list>
-
   </ion-card>
-
 </ion-content>
+
+
+
+<!-- <ion-card-header>
+  <ion-card-title>開催日: {{ event.date }}</ion-card-title>
+  <ion-card-subtitle>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</ion-card-subtitle>
+</ion-card-header>
+
+<ion-card-content>
+  {{ event.description }}
+</ion-card-content> -->

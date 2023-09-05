@@ -3,8 +3,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-
 import { AdminHomePageRoutingModule } from './admin-home-routing.module';
+
 
 
 import { AdminHomePage } from './admin-home.page';
@@ -16,6 +16,7 @@ import { EventFormComponent } from 'src/app/component/admin/event/event-form/eve
 import { EventDetailComponent } from 'src/app/component/admin/event/event-detail/event-detail.component';
 import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
 import { ApplicationFormComponent } from 'src/app/component/admin/application/application-form/application-form.component';
+import { GeneralMappingPipe } from 'src/app/pipes/meal-type.pipe';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ApplicationFormComponent } from 'src/app/component/admin/application/ap
     EventDetailComponent,
     ApplicationFormComponent,
     ArticleListComponent,
+    GeneralMappingPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]

@@ -28,7 +28,7 @@ const routes: Routes = [
         component: EventFormComponent,
       },
       {
-        path: 'event-detail/:eventId', // ルートパラメータ eventId を指定
+        path: 'event-detail/:date',
         component: EventDetailComponent,
 
       },
