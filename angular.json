@@ -180,6 +180,16 @@
               "devServerTarget": "app:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "app:build:production",
+            "firebaseProject": "niconico-d960e",
+            "firebaseHostingSite": "niconico-d960e"
+          }
         }
       }
     }

@@ -11,13 +11,15 @@ export class EventListComponent implements OnInit {
 
   constructor(private eventFormService: EventFormService) { }
 
-  ngOnInit(): void {
-    this.fetchEvents();
+  async ngOnInit() {
+    await this.fetchEvents();
   }
 
-  private fetchEvents(): void {
-    this.eventFormService.getEvents().subscribe(events => {
-      this.events = events;
-    });
+  private async fetchEvents(): Promise<void> {
+    try {
+        this.events = await this.eventFormService.getEvents();
+    } catch (error) {
+        console.error('Eventsの取得中にエラーが発生しました:', error);
+    }
   }
 }

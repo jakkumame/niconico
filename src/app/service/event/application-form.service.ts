@@ -1,47 +1,40 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, mergeMap, throwError } from 'rxjs';
+import { Injectable, Inject } from '@angular/core';
+import { Observable, from, throwError } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 import { Applicant } from "src/app/interface/applicant";
+import { Firestore, collection, doc, getDocs, query, where, setDoc, collectionData } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationFormService {
+  constructor(@Inject(Firestore) private firestore: Firestore) {}
 
-  constructor(
-    private afs: AngularFirestore,
-    ) {}
-
-  getEvents() {
-    return this.afs.collection('events').valueChanges({ idField: 'eventId' });
+  getEvents(): Observable<any> {
+    const eventsCollection = collection(this.firestore, 'events');
+    return collectionData(eventsCollection) as Observable<any[]>;
   }
 
-
-  getApplicants(eventId: string) {
-    return this.afs.collection('events').doc(eventId).collection('applicants').valueChanges();
+  getApplicants(eventId: string): Observable<any> {
+    const applicantsCollection = collection(this.firestore, `events/${eventId}/applicants`);
+    return collectionData(applicantsCollection) as Observable<any[]>;
   }
 
   getApplicantsByDate(date: string): Observable<any> {
-    return this.afs.collection('events', ref => ref.where('date', '==', date))
-      .get()
-      .pipe(
-        mergeMap(eventSnapshots => {
-          const eventDocs = eventSnapshots.docs;
-          if (eventDocs.length === 0) {
-            return throwError(() => new Error('No event found with the given date'));
-          }
-          const eventId = eventDocs[0].id;
-          return this.afs.collection(`events/${eventId}/applicants`).valueChanges();
-        })
-      );
+    const eventsCollection = query(collection(this.firestore, 'events'), where('date', '==', date));
+    return from(getDocs(eventsCollection)).pipe(
+      mergeMap(eventSnapshots => {
+        if (eventSnapshots.empty) {
+          return throwError(() => new Error('No event found with the given date'));
+        }
+        const eventId = eventSnapshots.docs[0].id;
+        return this.getApplicants(eventId);
+      })
+    );
   }
 
-
-
-
-  submitApplication(eventId: string, applicant: Applicant): Promise<void> {
-    const id = this.afs.createId();
+  async submitApplication(eventId: string, applicant: Applicant): Promise<void> {
     applicant.timestamp = new Date().toISOString();
-    return this.afs.collection('events').doc(eventId).collection('applicants').doc(id).set(applicant);
+    return setDoc(doc(this.firestore, 'events', eventId, 'applicants'), applicant);
   }
 }

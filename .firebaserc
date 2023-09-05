@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "niconico-d960e"
+  },
+  "targets": {
+    "niconico-d960e": {
+      "hosting": {
+        "app": [
+          "niconico-d960e"
+        ]
+      }
+    }
   }
 }
