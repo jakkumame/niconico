@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router'; // <-- Router, NavigationEndをインポート
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,13 @@ import { Router, NavigationEnd } from '@angular/router'; // <-- Router, Navigati
 })
 export class HomePage implements OnInit {
 
+
   slides: any;
 
-  constructor(private router: Router) {} // <-- Routerをインジェクト
+  constructor(
+    private router: Router,
+    private menuCtrl: MenuController,
+    ) {} // <-- Routerをインジェクト
 
   ngOnInit(): void {
     this.slides = [
@@ -25,6 +30,12 @@ export class HomePage implements OnInit {
         this.scrollToFragment(this.router.url.split('#')[1]);
       }
     });
+  }
+
+
+  // footer componentがメニュー画面でメニューを閉じる
+  async closeMenu() {
+    await this.menuCtrl.close();
   }
 
   // 指定されたセクションにスクロールするためのヘルパー関数
