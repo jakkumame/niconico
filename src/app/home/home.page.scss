@@ -18,9 +18,7 @@ button:hover {
 }
 
 
-.toolbar {
-  display: none;
-}
+
 
 #top {
   position: relative;
@@ -177,6 +175,10 @@ footer {
     /* 例: */
     text-decoration: none; /* 下線を削除 */
     color: #000; /* リンクの色を指定 */
+  }
+
+  .sm-menu, .sm-header {
+    display: none;
   }
 }
 

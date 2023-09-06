@@ -93,3 +93,13 @@ ul {
 li {
   list-style: none;
 }
+
+@media (max-width: 576px) {
+  .toolbar {
+    display: none;
+  }
+
+  footer {
+    display: none;
+  }
+}
