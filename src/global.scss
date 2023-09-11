@@ -29,14 +29,11 @@
 @import '~animate.css/animate.min.css';
 
 
-
-
 html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 62.5%; /*rem算出をしやすくするために*/
 }
-
 
 *,
 *:before,
@@ -68,16 +65,20 @@ button {
   border: none;
 }
 
-/* ion-contentに色の指定をしている */
-ion-content {
-  --background: #FFF8E1; /* 色の指定 */
-
+h1 {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
 }
 
-h1, h2, h3 {
+h2, h3 {
   text-align: center;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+ion-content {
+  --background: #FFF8E1;
 }
 
 ion-title {
@@ -86,9 +87,17 @@ ion-title {
   font-size: 2.2rem;
 }
 
+ion-fab-button {
+  --background-activated: #024389;
+  --background-hover: #0350a3;
+  --border-radius: 15px;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --color: black;
+}
+
 section {
   width: 100%;
-  margin-top: 70px;
+  margin-top: 150px;
   margin-bottom: 70px;
 }
 
@@ -99,15 +108,12 @@ li {
 
 @media (max-width: 576px) {
   h1 {
-    width: 70%;
-    margin: auto;
+    width: 95%;
+    margin: 60px auto 40px auto;
   }
 
-  .toolbar {
+  footer, .toolbar {
     display: none;
   }
 
-  footer {
-    display: none;
-  }
 }

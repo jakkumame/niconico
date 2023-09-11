@@ -27,24 +27,47 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<!-- fabボタン -->
+<ion-fab slot="fixed" horizontal="end" vertical="bottom">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button style="margin: 10px 0 70px 0;">
+      <a (click)="scrollToFragment('top')" >
+        <ion-icon name="chevron-up"></ion-icon>
+      </a>
+    </ion-fab-button>
+    <ion-fab-button>
+      <a href="https://instagram.com/kamihara_kodomo_nikoniko?igshid=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </a>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
 
+
+<ion-content [fullscreen]="true">
   <section id="top">
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 570 570" fill="none">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M523.261 177.435C573.724 250.827 577.291 360.842 527.125 434.438C478.264 506.118 377.041 505.933 291.132 517.976C219.149 528.067 140.359 540.697 82.4458 496.773C28.0679 455.53 30.7659 377.727 17.8557 310.71C6.31373 250.796 -11.9107 190.539 12.6968 134.705C40.0092 72.7337 87.0981 5.36602 154.636 0.359601C219.85 -4.4746 247.132 84.642 306.077 112.957C376.841 146.95 478.781 112.746 523.261 177.435Z" fill="#EE9999"/>
-    </svg> -->
-    <img src="../../assets/BG_SVG/ハンバーガー.svg" style="display: block; width: 25%; margin: 0 10% 0 auto; rotate: 10deg;" class="hamburger animate__animated animate__jackInTheBox animate__delay-1s">
-    <img src="../../assets/CHILD_SVG/アセット 1.svg" style="display: block; width: 20%; margin: 0 auto 0 10%; rotate: -10deg;" class="man1 animate__animated animate__jackInTheBox animate__delay-1s">
+    <img src="../../assets/Vector(main).svg" class="vector-pink animate__animated animate__zoomIn animate__delay-3s">
+    <img src="../../assets/Vector(top-green).svg" class="vector-green animate__animated animate__zoomIn animate__delay-3s">
+    <img src="../../assets/Vector(top-blue).svg" class="vector-blue  animate__animated animate__zoomIn animate__delay-3s">
 
 
     <ion-grid>
       <ion-row>
-        <ion-col size="12"><h1 class="animate__animated animate__fadeInDown">子どもの居場所がここにあるー</h1></ion-col>
-        <ion-col size="6"><p class="animate__animated animate__fadeInLeft animate__delay-1s">家事や育児に<br>追われる人に<br>寄り添いたい</p></ion-col>
-        <ion-col size="7" offset="5"><p class="animate__animated animate__fadeInRight animate__delay-1s">どんな子でも<br>居場所がある<br>そんな食堂</p></ion-col>
+        <ion-col size="12"><img src="../../assets/BG_SVG/ハンバーグ.svg" style="display: block; width: 30%; margin: 0 10% 0 auto; rotate: 10deg;" class="hamburg animate__animated animate__jackInTheBox animate__delay-5s"></ion-col>
+        <ion-col size="12"><img src="../../assets/CHILD_SVG/アセット 7.svg" style="display: block; width: 25%; margin: 0 auto 0 10%;" class="woman1 animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
+        <ion-col size="12"><h1 class="animate__animated animate__fadeInDown animmate__duration-2s animate__delay-1s">ちょっと一息できる場所がここにある</h1></ion-col>
+        <ion-col size="12"><img src="../../assets/CHILD_SVG/アセット 10.svg" style="display: block; width: 30%; margin: 0 25% 40px auto;" class="man1 animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
+        <ion-col size="12"><img src="../../assets/BG_SVG/ハンバーガー.svg" style="display: block; width: 30%; margin: 0 auto 0 10%; rotate: 10deg;" class="hamburger animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
+        <ion-col size="12"><img src="../../assets/BG_SVG/シーザーサラダ.svg" style="display: block; width: 30%; margin: 0 5% 0 auto; rotate: -10deg;" class="salad animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
       </ion-row>
     </ion-grid>
-    <img src="../../assets/BG_SVG/シーザーサラダ.svg" style="scale: 30%; position: absolute;" class="animate__animated animate__jackInTheBox">
+  </section>
+
+  <section id="image">
+    <app-image></app-image>
   </section>
 
 

@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { register } from 'swiper/element/bundle';
 import { SwiperComponent } from '../swiper/swiper.component';
+import { ImageComponent } from '../component/image/image.component';
 import { VisionComponent } from '../component/vision/vision.component';
 import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
 import { SupportComponent } from '../component/support/support.component';
@@ -29,6 +30,7 @@ register();
   declarations: [
     HomePage,
     GoogleMapComponent,
+    ImageComponent,
     ArticlePlaceComponent,
     VisionComponent,
     SwiperComponent,
