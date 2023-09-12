@@ -1,14 +1,25 @@
 <ion-grid>
   <ion-row>
-    <ion-col size="12" size-md="6"><p class="animate__animated animate__fadeInLeft animate__delay-1s">家事、育児に追われるあなたに寄り添う</p></ion-col>
     <ion-col size="12" size-md="6">
-      <div class="animate__animated animate__fadeIn animate__delay-3s">
-        <img src="../../assets/mother_top2.png" >
+      <p appViewportAnimation
+      animationClass="animate__slideInLeft">
+        毎日の家事、育児に<br>ちょっと疲れた人が<br>ひと休みができる場所
+    </p>
+    </ion-col>
+    <ion-col size="12" size-md="6">
+      <div appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s">
+        <img src="../../assets/mother_top2.png" style="margin-bottom: 20%;">
       </div>
     </ion-col>
-    <ion-col size="12" size-md="6" push-md="6"><p class="animate__animated animate__fadeInRight animate__delay-1s">どんな子でも居場所ができるそんな食堂</p></ion-col>
+    <ion-col size="12" size-md="6" push-md="6">
+      <p appViewportAnimation
+      animationClass="animate__slideInRight"
+      style="text-align: right; margin: 10px 5% 10px auto;">
+        子ども1人でも<br>安心して立ち寄れる<br>そんな食堂
+      </p>
+    </ion-col>
     <ion-col size="12" size-md="6" pull-md="6">
-      <div class="animate__animated animate__fadeIn animate__delay-3s">
+      <div appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s">
         <img src="../../assets/eating.png" >
       </div>
     </ion-col>

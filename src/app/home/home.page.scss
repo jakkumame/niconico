@@ -27,19 +27,19 @@ button:hover {
   position: relative;
 
   .hamburger {
-    --animate-delay: 1.8s;
-  }
-
-  .woman1 {
-    --animate-delay: 1.5s;
-  }
-
-  .man1 {
     --animate-delay: 1.6s;
   }
 
-  .salad {
+  .woman1 {
+    --animate-delay: 1.3s;
+  }
+
+  .man1 {
     --animate-delay: 1.5s;
+  }
+
+  .salad {
+    --animate-delay: 1.3s;
   }
 
   .vector-pink {
@@ -71,7 +71,7 @@ button:hover {
 }
 
 #image {
-  height: 100vh;
+  height: auto;
   margin: 0;
 }
 
