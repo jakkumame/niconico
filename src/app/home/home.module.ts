@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { register } from 'swiper/element/bundle';
 import { SwiperComponent } from '../swiper/swiper.component';
 import { ViewportAnimationDirective } from '../directive/viewport-animation.directive';
+import { MainComponent } from '../component/main/main.component';
 import { ImageComponent } from '../component/image/image.component';
 import { VisionComponent } from '../component/vision/vision.component';
 import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
@@ -32,6 +33,7 @@ register();
     HomePage,
     GoogleMapComponent,
     ViewportAnimationDirective,
+    MainComponent,
     ImageComponent,
     ArticlePlaceComponent,
     VisionComponent,

@@ -87,18 +87,24 @@ ion-title {
   font-size: 2.2rem;
 }
 
+.toolbar-md {
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  ion-title {
+  font-size: 3.2rem;
+  }
+}
+
 ion-fab-button {
   --background-activated: #024389;
   --background-hover: #0350a3;
   --border-radius: 15px;
   --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  --color: black;
+  --color: rgb(255, 255, 255);
 }
 
 section {
   width: 100%;
-  margin-top: 150px;
-  margin-bottom: 70px;
 }
 
 
@@ -106,14 +112,15 @@ li {
   list-style: none;
 }
 
-@media (max-width: 576px) {
-  h1 {
-    width: 95%;
-    margin: 60px auto 40px auto;
-  }
+@media screen and (max-width: 576px) {
 
   footer, .toolbar {
     display: none;
   }
+
+}
+
+@media screen and (min-width: 577px) {
+
 
 }

@@ -1,7 +1,7 @@
 
 <!-- sm以上のメニュ -->
 <ion-header [translucent]="true" class="toolbar">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" class="toolbar-md">
     <ion-title size="large">神原にこにこkitchen</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -30,7 +30,7 @@
 <!-- fabボタン -->
 <ion-fab slot="fixed" horizontal="end" vertical="bottom">
   <ion-fab-button>
-    <ion-icon name="add" style="color: #fff;"></ion-icon>
+    <ion-icon name="add"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="top">
     <ion-fab-button style="margin: 10px 0 70px 0;">
@@ -49,27 +49,13 @@
 
 <ion-content [fullscreen]="true">
   <section id="top">
-    <img src="../../assets/Vector(main).svg" class="vector-pink animate__animated animate__zoomIn animate__delay-3s">
-    <img src="../../assets/Vector(top-green).svg" class="vector-green animate__animated animate__zoomIn animate__delay-3s">
-    <img src="../../assets/Vector(top-blue).svg" class="vector-blue  animate__animated animate__zoomIn animate__delay-3s">
-
-
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12"><img src="../../assets/BG_SVG/ハンバーグ.svg" style="display: block; width: 30%; margin: 0 10% 0 auto; rotate: 10deg;" class="hamburg animate__animated animate__jackInTheBox animate__delay-5s"></ion-col>
-        <ion-col size="12"><img src="../../assets/CHILD_SVG/アセット 7.svg" style="display: block; width: 25%; margin: 0 auto 0 10%;" class="woman1 animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
-        <ion-col size="12"><h1 class="animate__animated animate__fadeInDown animmate__duration-2s animate__delay-1s">ちょっと一息できる場所がここにある</h1></ion-col>
-        <ion-col size="12"><img src="../../assets/CHILD_SVG/アセット 10.svg" style="display: block; width: 30%; margin: 0 25% 40px auto;" class="man1 animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
-        <ion-col size="12"><img src="../../assets/BG_SVG/ハンバーガー.svg" style="display: block; width: 30%; margin: 0 auto 0 10%; rotate: 10deg;" class="hamburger animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
-        <ion-col size="12"><img src="../../assets/BG_SVG/シーザーサラダ.svg" style="display: block; width: 30%; margin: 0 5% 0 auto; rotate: -10deg;" class="salad animate__animated animate__jackInTheBox animate__delay-3s"></ion-col>
-      </ion-row>
-    </ion-grid>
+    <app-main></app-main>
   </section>
 
   <section id="image">
     <app-image></app-image>
+    <button [routerLink]="['/app-form']">申し込む</button>
   </section>
-
 
   <section id="vision">
     <h2>目指す場所</h2>
