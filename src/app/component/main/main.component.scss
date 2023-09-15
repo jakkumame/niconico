@@ -1,95 +1,137 @@
-.hamburger {
-  width: 30%;
-  --animate-delay: 1.6s;
-}
-
-.woman1 {
-  width: 25%;
-  --animate-delay: 1.3s;
-}
-
-.man1 {
-  width: 30%;
-  --animate-delay: 1.5s;
-}
-
-.salad {
-  width: 30%;
-  --animate-delay: 1.3s;
-}
-
-.hamburg {
-  width: 30%;
-}
-.vector-pink {
-  position: absolute;
-  left: 20%;
-  top: 20%;
-}
-
-.vector-green {
-  position: absolute;
-  right: 10%;
-  top: 5%;
-  rotate: 20deg;
-
-  --animate-delay: 1.2s;
-}
-
-.vector-blue {
-  position: absolute;
-  left: 10%;
-  top: 62vh;
-  --animate-delay: 1.1s;
-}
-
 h1 {
-  margin: 8%;
+  position: absolute;
+  top: 40%;
+  z-index: 20;
   --animate-delay: 0.6s;
 }
+.vector-green {
+  position: absolute;
+  width: 18%;
+  top: 20%;
+  right: 25%;
+  rotate: -20deg;
+  --animate-delay: 1.3s;
+}
 
-
-@media screen and (min-width: 577px) {
-
-  .hamburger, .man1, .salad, .woman1, .hamburg  {
-    width: 23%;
+ion-grid {
+  .woman1 {
+    width: 65%;
+    --animate-delay: 1.2s;
+  }
+  .hamburg {
+    width: 75%;
+    rotate: 10deg;
+    --animate-delay: 1.6s;
   }
 
-  .vector-pink {
-    width: 72%;
-    top: 15vh;
-  }
-
-  .vector-green {
-    width: 17%;
-    right: 10%;
-    top: 5vh;
-
+  .hamburger {
+    margin-top: 20px;
+    width: 60%;
+    rotate: 10deg;
+    --animate-delay: 1.5s;
   }
 
   .vector-blue {
-    width: 30%;
-    left: 20%;
-    top: 65vh;
+    margin-top: 20px;
+    width: 70%;
+    --animate-delay: 1.1s;
   }
+
+
+  .man1 {
+    margin: auto;
+    width: 55%;
+    --animate-delay: 1.4s;
+  }
+
+  .salad {
+    margin-top: 15%;
+    width: 55%;
+    rotate: -10deg;
+    --animate-delay: 1.3s;
+  }
+
+}
+
+
+
+@media screen and (max-width: 576px) {
+  .vector-purple, .vector-orange, .vector-sky {
+    display: none;;
+  }
+}
+
+
+@media screen and (min-width: 577px) and (max-width: 991px) {
 
   h1 {
-    width: 70%;
-    font-size: 5rem;
-    margin: 8% auto 8% auto;
+    width: 100vw;
   }
 
-  ion-col {
-    position: relative;
-    .hamburger {
-      position: absolute;
-      top: -5%;
-    }
-    .salad {
-      position: absolute;
-      top: 10vh;
-      right: 10%;
-    }
+  .vector-purple, .vector-orange, .vector-sky {
+    display: none;;
   }
+
+  .vector-green {
+    width: 18%;
+    top: 15%;
+    right: 5%;
+    rotate: -30deg;
+  }
+
+  .vector-pink {
+    width: 65%;
+    margin-bottom: 30px;
+  }
+}
+
+
+@media screen and (min-width: 992px) {
+
+  h1 {
+    width: 100vw;
+    font-size: 5rem;
+  }
+
+  .vector-purple {
+    position: absolute;
+    width: 8%;
+    top: 60%;
+    right: 30%;
+  }
+
+  .vector-orange {
+    position: absolute;
+    width: 10%;
+    top: 42%;
+    right: 5%;
+  }
+
+  .vector-sky {
+    position: absolute;
+    width: 7%;
+    top: 40%;
+    left: 2%;
+  }
+
+  .lg-1 {
+    height: 5vh;
+  }
+  .lg-3 {
+    height: 5vh;
+  }
+
+  .vector-green {
+    width: 7%;
+    top: 15%;
+    right: 35%;
+  }
+
+  .vector-pink {
+    width: 20%;
+    left: 40%;
+  }
+
+
 
 }

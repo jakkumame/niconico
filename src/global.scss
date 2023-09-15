@@ -88,10 +88,10 @@ ion-title {
 }
 
 .toolbar-md {
-  --padding-top: 20px;
-  --padding-bottom: 20px;
+  --min-height: 70px;
   ion-title {
-  font-size: 3.2rem;
+    font-size: 3.2rem;
+    margin: auto;
   }
 }
 
@@ -104,6 +104,7 @@ ion-fab-button {
 }
 
 section {
+  margin-bottom: 5vh;
   width: 100%;
 }
 
@@ -118,9 +119,21 @@ li {
     display: none;
   }
 
+
+
 }
 
-@media screen and (min-width: 577px) {
+@media screen and (min-width: 577px) and (max-width: 991px) {
 
+  .toolbar {
+    display: none;
+  }
 
+}
+
+@media screen and (min-width: 992px) {
+
+  .sm-menu, .sm-header {
+    display: none;
+  }
 }
