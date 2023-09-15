@@ -22,7 +22,7 @@ button:hover {
 }
 
 #image {
-  height: 1000px;
+  height: 2000px;
 }
 
 #vision {
@@ -157,7 +157,9 @@ footer {
 }
 
 @media screen and (min-width: 992px) {
-  #top {
-    height: 10f0vh;
+  .toolbar {
+    ion-title {
+      margin: auto;
+    }
   }
 }

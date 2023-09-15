@@ -1,9 +1,54 @@
-p {
-  margin: 10px 0 10px 5%;
-  font-size: 2.5rem;
+h2 {
+  margin-bottom: 100px;
   font-weight: bold;
+  font-size: 3rem;
 }
 
-div {
-  --animate-delay: 0.6s;
+.refresh-text {
+  margin-top: auto;
+  margin-bottom: 7%;
+  h3 {
+    text-align: left;
+    font-size: 3rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+.refresh-content {
+  font-size: 2rem;
+  p {
+    margin: 60px 0 50px 0;
+  }
+}
+
+.yourPlace-container {
+  margin-top: 100px;
+  .yourPlace-text {
+    margin: auto 0 7% 0;
+    h3, p {
+      text-align: right;
+      z-index: 10;
+    }
+    h3 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+  .yourPlace-vector {
+    position: relative;
+    width: 100%;
+    z-index: -15;
+  }
+
+  .yourPlace-content {
+    font-size: 2rem;
+    p {
+      text-align: right;
+      margin: 60px 0 50px 0;
+    }
+  }
 }
