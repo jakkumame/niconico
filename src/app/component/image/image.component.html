@@ -2,37 +2,41 @@
 <ion-grid>
   <ion-row class="ion-align-items-center">
     <ion-col size="12">
-      <h2 appViewportAnimation animationClass="animate__fadeIn">神原にこにこkitchenとは</h2>
+      <h2 appViewportAnimation animationClass="animate__fadeIn">
+        神原にこにこkitchenとは
+      </h2>
+      <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
+
     </ion-col>
 
     <ion-col size="12">
       <ion-grid>
         <ion-row>
-          <ion-col size="12">
+          <ion-col size="12" sizeLg="5">
             <ion-grid>
               <ion-row>
-                <ion-col>
+                <ion-col sizeMd="7" sizeLg="12">
                   <ion-grid>
-                    <ion-row>
-                      <ion-col size="5" push="1">
+                    <ion-row >
+                      <ion-col size="5" push="1" sizeMd="7" sizeLg="7">
                         <img src="../../../assets/refresh.svg">
                       </ion-col>
-                      <ion-col size="7" pull="2" class="refresh-text">
+                      <ion-col size="7" pull="2" sizeMd="5" sizeLg="5" pullLg="3" class="refresh-text">
                         <h3>REFRESH</h3>
-                        <p>体と心の健康を</p>
+                        <p>体と心に健康を</p>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
-                  <ion-col size="12" push="3" class="refresh-content">
-                    <p appViewportAnimation animationClass="animate__slideInLeft">
-                      毎日の家事、育児に<br>ちょっと疲れた人が<br>ひと休みができる場所
-                    </p>
-                  </ion-col>
+                </ion-col>
+                <ion-col size="12" sizeMd="5" pullMd="1" sizeLg="12" pushLg="1" class="refresh-content">
+                  <p appViewportAnimation animationClass="animate__slideInRight">
+                    毎日の家事、育児に<br>ちょっと疲れた人が<br>ひと休みできる場所
+                  </p>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-col>
-          <ion-col size="12">
+          <ion-col size="12" pushMd="1" sizeLg="7" class="refresh-image-container">
             <div appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s" class="refresh-image">
               <img src="../../assets/mother_top2.png">
             </div>
@@ -44,27 +48,36 @@
     <ion-col size="12" class="yourPlace-container">
       <ion-grid>
         <ion-row>
-          <ion-col size="12">
+          <ion-col size="12" sizeLg="6" class="first-column">
             <ion-grid>
               <ion-row>
-                <ion-col size="7" push="2" class="yourPlace-text">
-                  <h3>YOUR PLACE</h3>
-                  <p>誰にでも居場所がある</p>
+                <ion-col sizeMd="8" pushMd="4" sizeLg="12" pushLg="0">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="7" push="2" sizeMd="7" sizeLg="7" class="yourPlace-text">
+                        <h3>YOUR PLACE</h3>
+                        <p>誰にでも居場所がある</p>
+                      </ion-col>
+                      <ion-col size="5" pull="1" sizeMd="5" sizeLg="4">
+                        <img src="../../../assets/yourPlace.svg" class="yourPlace-vector">
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
                 </ion-col>
-                <ion-col size="5" pull="1" >
-                  <img src="../../../assets/yourPlace.svg" class="yourPlace-vector">
-                </ion-col>
-                <ion-col size="12" pull="3" class="yourPlace-content">
-                  <p appViewportAnimation animationClass="animate__slideInRight">
+                <ion-col size="12" pull="3" sizeMd="4" pullMd="7" sizeLg="10" pullLg="1" class="yourPlace-content">
+                  <p appViewportAnimation animationClass="animate__slideInLeft">
                     子ども1人でも<br>安心して立ち寄れる<br>そんな食堂
                   </p>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-col>
-          <ion-col size="12">
-            <div appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s">
-              <img src="../../assets/eating.png" >
+          <ion-col size="12" pushMd="1" sizeLg="6" pushLg="0" class="second-column">
+            <br />
+            <br />
+            <br />
+            <div appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s" class="yourPlace-image-container">
+              <img src="../../assets/eating.png" class="yourPlace-image" >
             </div>
           </ion-col>
         </ion-row>
