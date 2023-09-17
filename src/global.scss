@@ -73,8 +73,12 @@ h1 {
 
 h2, h3 {
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2rem;
 }
 
 ion-content {

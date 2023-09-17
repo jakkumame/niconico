@@ -17,12 +17,20 @@ button:hover {
   color: #fff;
 }
 
+.custom-line {
+  margin: 15px auto 0 auto;
+  height: 1px; /* 直線の高さ */
+  background-color: #333; /* 直線の色 */
+  width: 45%;
+  --animate-delay: 0.3s;
+}
+
 #top {
   height: 850px;
 }
 
 #image {
-  height: 2000px;
+  height: 1800px;
 }
 
 #vision {

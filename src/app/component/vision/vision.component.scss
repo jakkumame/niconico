@@ -1,52 +1,79 @@
-
-.vision1 {
-  height: 550px;
-  margin-top: 25%;
-  text-align: center;
-  position: relative;
-
-  .eating {
-    margin: auto;
-    padding: 30px;
-  }
-  .green {
-    position: absolute;
-    margin: auto;
-    z-index: -1;
-    top: 35%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-  }
-
-  > p {
-    width: 80%;
-    margin: auto;
-    text-align: left;
-  }
+p {
+  line-break: strict;
+  margin: auto;
+  width: 70%;
+  font-size: 1.6rem;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 170%;
 }
 
-.vision2{
-  height: 510px;
-  text-align: center;
-  position: relative;
+.article1-container {
+  margin-top: 50px;
+  .article1-main-container {
+    .article1-image-container {
+      margin: auto;
+    }
+    .article1-title-container {
+      .article1-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+    }
 
-  .play {
-    margin: auto;
-    padding: 30px;
-  }
-  .blue {
-    position: absolute;
-    margin: auto;
-    z-index: -1;
-    top: 20%;
-    left: 70%;
-  }
-
-  > p {
-    width: 80%;
-    margin: auto;
-    text-align: left;
+    .vector1-container {
+      margin: 20px 0 40px 0;
+    }
   }
 }
 
 
+.article2-container {
+  margin: 70px 0 70px 0;
+  .article2-main-container {
+    .article1-image-container{
+      margin: auto;
+    }
+    .article2-title-container {
+      .article2-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+    }
+
+    .vector2-image-container {
+      margin: 20px 0 40px 0;
+      z-index: -10;
+    }
+  }
+}
+
+@media screen and (min-width: 576px){
+}
+
+@media screen and (min-width: 577px) and (max-width: 991px) {
+  .article1-sentence-container {
+    margin: auto;
+    .article1-sentence {
+      width: 80%;
+    }
+  }
+
+  .article2-container {
+    .article2-main-container {
+      order: 2;
+    }
+
+    .article2-sentence-container {
+      order: 1;
+      margin: auto;
+      .article2-sentence {
+        width: 80%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+
+}
