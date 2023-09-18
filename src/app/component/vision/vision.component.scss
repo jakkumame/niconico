@@ -1,79 +1,106 @@
+article {
+  margin-top: 60px;
+}
+
 p {
-  line-break: strict;
+  line-break: loose;
   margin: auto;
   width: 70%;
   font-size: 1.6rem;
   font-family: Inter;
   font-weight: 500;
-  line-height: 170%;
+  line-height: 180%;
 }
 
-.article1-container {
-  margin-top: 50px;
-  .article1-main-container {
-    .article1-image-container {
-      margin: auto;
-    }
-    .article1-title-container {
-      .article1-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-      }
-    }
+.image-container {
+  margin: auto;
+}
 
-    .vector1-container {
-      margin: 20px 0 40px 0;
-    }
+.vector-container {
+  .green {
+    width: 100%;
+  }
+  .blue {
+    position: relative;
+    z-index: -10;
   }
 }
 
-
-.article2-container {
-  margin: 70px 0 70px 0;
-  .article2-main-container {
-    .article1-image-container{
-      margin: auto;
-    }
-    .article2-title-container {
-      .article2-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-      }
-    }
-
-    .vector2-image-container {
-      margin: 20px 0 40px 0;
-      z-index: -10;
-    }
+.sentence-container {
+  .sentence{
+    margin: 50px auto 50px auto;
+    width: 79%;
   }
+}
+
+div {
+  margin-bottom: 120px;
 }
 
 @media screen and (min-width: 576px){
+  .title-container {
+    margin: 20px 0 20px 0;
+  }
 }
 
 @media screen and (min-width: 577px) and (max-width: 991px) {
-  .article1-sentence-container {
-    margin: auto;
-    .article1-sentence {
-      width: 80%;
+  .column1 {
+    order: 2;
+  }
+  .column2 {
+    order: 1;
+  }
+
+  .article-container {
+    margin: 5% 0 5% 0;
+    .sentence-container{
+      .sentence{
+        width: 90%;
+        margin: 60px auto 0 auto;
+
+      }
     }
   }
 
-  .article2-container {
-    .article2-main-container {
-      order: 2;
-    }
-
-    .article2-sentence-container {
-      order: 1;
-      margin: auto;
-      .article2-sentence {
-        width: 80%;
-      }
-    }
+  h3 {
+    font-size: 3rem;
+    font-weight: bold;
   }
 }
 
 @media screen and (min-width: 992px) {
+  .column1 {
+    order: 2;
+  }
+  .column2 {
+    order: 1;
+  }
+  .article-container {
+    margin-top: 10%;
+    .image-container {
+      .eating {
+        width: 90%;
+      }
+      .playing {
+        width: 90%;
+      }
+    }
+    .vector-container {
+      .blue {
+        width: 90%;
+      }
+    }
+    .sentence-container{
+      margin: 80px auto 0 auto;
+      .sentence{
+        font-size: 2rem;
+        width: 70%;
+      }
+    }
+  }
 
+  h3 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
 }
