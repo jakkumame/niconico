@@ -48,22 +48,22 @@
 
 
 <ion-content [fullscreen]="true">
-  <!-- <section id="top">
+  <section id="top">
     <app-main></app-main>
-  </section> -->
+  </section>
 
-  <!-- <section id="image">
+  <section id="image">
     <app-image></app-image>
     <button [routerLink]="['/app-form']">申し込む</button>
-  </section> -->
+  </section>
 
-  <!-- <section id="vision">
+  <section id="vision">
     <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">実施内容</h2>
     <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">PROGRAM</h3>
     <app-vision></app-vision>
     <button [routerLink]="['/app-form']">申し込む</button>
-  </section> -->
+  </section>
 
 
   <section id="place" >
@@ -75,14 +75,10 @@
   </section>
 
   <section id="gallery">
-    <h2>実際の様子</h2>
-    <h3>gallery</h3>
-    <div class="gallery-container">
-      <app-swiper [slides]="slides"></app-swiper>
-      <img class="blue-gallery" src="../../assets/Vector(bule3).svg" >
-      <img class="green-gallery" src="../../assets/Vector(green2).svg">
-      <img class="pink-gallery" src="../../assets/Vector(pink).svg">
-    </div>
+    <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">実際の様子</h2>
+    <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
+    <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">GALLERY</h3>
+    <app-swiper></app-swiper>
     <button [routerLink]="['/app-form']">申し込む</button>
   </section>
 

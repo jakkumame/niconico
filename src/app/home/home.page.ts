@@ -19,12 +19,6 @@ export class HomePage implements OnInit {
     ) {} // <-- Routerをインジェクト
 
   ngOnInit(): void {
-    this.slides = [
-      {swiper: '../../assets/gallery(example).png'},
-      {swiper: '../../assets/dining.svg'},
-      {swiper: '../../assets/play-room.svg'},
-    ];
-
     // ルーティングイベントの変更を監視
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
