@@ -24,7 +24,7 @@ export class EventFormService {
   }
 
   // すべてのイベントを取得
-  getEvents(): Observable<any[]> {
+  getEventsParams(): Observable<any[]> {
     return this.firestore.collection('events').valueChanges();
   }
 

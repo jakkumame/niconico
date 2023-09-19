@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, mergeMap, throwError } from 'rxjs';
+import { Observable, catchError, mergeMap, throwError } from 'rxjs';
 import { Applicant } from "src/app/interface/applicant";
 
 @Injectable({
@@ -12,8 +12,22 @@ export class ApplicationFormService {
     private afs: AngularFirestore,
     ) {}
 
-  getEvents() {
-    return this.afs.collection('events').valueChanges({ idField: 'eventId' });
+  getEvents(): Observable<any[]> {
+    return this.afs.collection('events').valueChanges({ idField: 'eventId' })
+      .pipe(
+        catchError(error => this.handleNotFunctionError(error, 'getEvents'))
+      );
+  }
+
+  private handleNotFunctionError(error: any, operation: string): Observable<any[]> {
+    if (error.message && error.message.includes('not a function')) {
+      console.error(`Error in ${operation}: ${error.message}`);
+      // ここでユーザーに通知したり、何らかのデフォルトの振る舞いを実装できます。
+      return throwError(() => new Error(`Function error in ${operation}: ${error.message}`));
+    } else {
+      // その他のエラータイプに対するハンドリングもここで行うことができます。
+      return throwError(() => error);
+    }
   }
 
 

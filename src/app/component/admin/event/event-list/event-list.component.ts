@@ -16,7 +16,7 @@ export class EventListComponent implements OnInit {
   }
 
   private fetchEvents(): void {
-    this.eventFormService.getEvents().subscribe(events => {
+    this.eventFormService.getEventsParams().subscribe(events => {
       this.events = events;
     });
   }

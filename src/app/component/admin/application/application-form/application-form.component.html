@@ -1,7 +1,7 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <form [formGroup]="applicationForm" (ngSubmit)="confirmAndSubmit()">
+      <form [formGroup]="applicationForm" (ngSubmit)="sendValue()">
         <div formArrayName="applicants">
           <div *ngFor="let applicant of applicants.controls; let i = index" [formGroupName]="i">
             <h3>お申し込み  {{ i + 1 }}人目</h3>
