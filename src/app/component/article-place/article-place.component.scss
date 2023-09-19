@@ -1,5 +1,9 @@
+div {
+  margin-top: 80px;
+}
+
 ion-card {
-  width: 70%;
+  width: 85%;
   margin: auto;
   margin-top: 60px;
   margin-bottom: 60px;
@@ -30,7 +34,7 @@ ion-card {
       margin-bottom: 30px;
     }
 
-    .line-place {
+    .line {
       width: 90%;
       height: 1.5px;
       margin: auto;
@@ -48,7 +52,7 @@ ion-card {
       text-align: left;
       text-align: justify;
       font-family: Inter;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 500;
     }
   }
@@ -59,4 +63,11 @@ ion-card {
   position: absolute;
   top: 40%;
   z-index: -1;
+}
+
+@media screen and (min-width: 577px) and (max-width: 991px) {
+
+  ion-card {
+    width: 55%;
+  }
 }
