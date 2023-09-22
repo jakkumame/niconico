@@ -1,11 +1,3 @@
-// {
-//   "rules": {
-//     ".read": "auth != null",
-//     ".write": true
-//   }
-// }
-
-
 {
   "rules": {
     ".read": "auth != null",
