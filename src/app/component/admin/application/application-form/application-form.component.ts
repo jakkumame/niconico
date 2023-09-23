@@ -5,6 +5,7 @@ import { ApplicationFormService } from 'src/app/service/event/application-form.s
 import { AlertController, NavController } from '@ionic/angular';
 import { Applicant } from "src/app/interface/applicant";
 import { hiraganaValidator } from 'src/app/validators/application.validator';
+import { CookieService } from 'src/app/service/cookie/cookie.service';
 
 @Component({
   selector: 'app-application-form',
@@ -21,6 +22,7 @@ export class ApplicationFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private appFormService: ApplicationFormService,
+    private cookie: CookieService,
     private alertCtrl: AlertController,
     private navCtrl: NavController
   ) {
@@ -38,6 +40,8 @@ export class ApplicationFormComponent implements OnInit {
     this.appFormService.getEvents().subscribe(events => {
       this.availableEvents = events;
     });
+
+    this.cookie.set("cookieName", "cookieValue", "SameSite=Strict");
   }
 
   get applicants(): FormArray {

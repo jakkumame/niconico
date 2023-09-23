@@ -1,5 +1,16 @@
+
 <ion-content>
   <ion-card>
+    <ion-card-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-back-button defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-card-title>申込フォーム</ion-card-title>
+      <ion-card-subtitle>神原にこにこkitchen</ion-card-subtitle>
+    </ion-card-header>
+    <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <ion-card-content>
       <form [formGroup]="applicationForm" (ngSubmit)="sendValue()">
         <div formArrayName="applicants">
@@ -50,18 +61,16 @@
 
 
             <ion-item>
-              <ion-label position="fixed">来店時間</ion-label>
-              <ion-select formControlName="arrivalTime" aria-label="来店時間">
+              <ion-select formControlName="arrivalTime" label="来店時間">
                   <ion-select-option *ngFor="let time of availableTimes" [value]="time">{{ time }}</ion-select-option>
               </ion-select>
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">備考欄</ion-label>
-                <ion-textarea formControlName="remarks" aria-label="備考欄"></ion-textarea>
+                <ion-textarea formControlName="remarks" fill="solid" label="備考欄" labelPlacement="floating"></ion-textarea>
             </ion-item>
-            <ion-button type="button" (click)="addApplicant()">申込を追加</ion-button>
-            <ion-button *ngIf="applicants.controls.length > 1" (click)="removeApplicant(i)">申込を削除</ion-button>
+            <ion-button class="add-form" expand="full" type="button" (click)="addApplicant()">申込を追加</ion-button>
+            <ion-button class="delete-form" expand="full" color="danger" *ngIf="applicants.controls.length > 1" (click)="removeApplicant(i)">申込を削除</ion-button>
           </div>
         </div>
 
@@ -69,15 +78,13 @@
           <ion-label>来店日選択</ion-label>
           <ion-radio-group formControlName="selectedEvent">
             <ion-item *ngFor="let event of availableEvents">
-              <ion-radio [value]="event.eventId" aria-label="{{ event.date | date: 'MM月dd日' }}"></ion-radio>
-              {{ event.date | date: 'MM月dd日' }}
+              <ion-radio [value]="event.eventId" label="開店日" labelPlacement="end">{{ event.date | date: 'MM月dd日' }}</ion-radio>
             </ion-item>
           </ion-radio-group>
         </ion-item>
 
-        <ion-button type="submit">送信</ion-button>
+        <ion-button type="submit" expand="full" color="success" class="send">送信</ion-button>
       </form>
     </ion-card-content>
-
   </ion-card>
 </ion-content>

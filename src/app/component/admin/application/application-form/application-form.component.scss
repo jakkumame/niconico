@@ -1,4 +1,55 @@
+ion-card {
+  width: 90%;
+  margin: 5% auto 5% auto ;
+  ion-card-header {
+    margin: 10% 0 8% 10%;
+  }
+
+  .custom-line {
+    margin: 15px auto 0 auto;
+    height: 0.5px; /* 直線の高さ */
+    background-color: #555555; /* 直線の色 */
+    width: 80%;
+    --animate-delay: 0.3s;
+  }
+
+  .add-form, .delete-form {
+    margin: 5%;
+  }
+
+  .send {
+    margin: 5%;
+  }
+  ion-textarea {
+    --background: #ffffff;
+  }
+}
+
+
 .custom-alert {
   max-width: 40%;
   max-height: 50%;
+}
+
+
+
+@media screen and (min-width: 992px) {
+  ion-card {
+    width: 60%;
+    ion-card-header {
+      width: 80%;
+      margin: 2% 5% 5% 10% ;
+      ion-card-title {
+        font-size: 3rem;
+      }
+    }
+    ion-card-content {
+      width: 85%;
+      margin: auto;
+      h3 {
+        margin: 5% auto 5% auto;
+      }
+    }
+  }
+
 }
