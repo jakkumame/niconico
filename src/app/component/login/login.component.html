@@ -1,16 +1,17 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title><h2>管理者ログイン</h2></ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-      <ion-input id="email" type="email" formControlName="email" label="Email" labelPlacement="floating" helperText="admin-adress@example.com" errorText="アドレスの形式ではありません"></ion-input>
+<h2>管理者ログイン</h2>
 
-      <ion-input id="password" type="password" formControlName="password" label="password" labelPlacement="floating" helperText="英数字・記号で6文字以上です" errorText="条件に合致しません"></ion-input>
+<div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-      <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">ログイン</ion-button>
+    <ion-input id="email" type="email" formControlName="email" label="Email" labelPlacement="floating" helperText="admin-adress@example.com" errorText="アドレスの形式ではありません"></ion-input>
 
-    </form>
-  </ion-card-content>
-</ion-card>
+    <ion-input id="password" type="password" formControlName="password" label="password" labelPlacement="floating" helperText="英数字・記号で6文字以上です" errorText="条件に合致しません"></ion-input>
+
+    <ion-button expand="full" type="submit" color="success" [disabled]="!loginForm.valid">ログイン</ion-button>
+
+  </form>
+</div>
+
+
+

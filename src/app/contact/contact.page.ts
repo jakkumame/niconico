@@ -4,6 +4,7 @@ import { RealtimebaseService } from '../service/realtimebase/realtimebase.servic
 import { Inquiry } from '../interface/inquiry';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { CookieService } from '../service/cookie/cookie.service';
 
 @Component({
   selector: 'app-contact',
@@ -28,6 +29,7 @@ export class ContactPage {
     private rb: RealtimebaseService,
     private alertController: AlertController,
     public router: Router,
+    private cookie: CookieService,
   ) {}
 
   async onSubmit() {
@@ -48,6 +50,8 @@ export class ContactPage {
     } else {
       this.presentAlert('検証エラー', 'すべての必須フィールドを正しく入力してください。');
     }
+
+    this.cookie.set("cookieName", "cookieValue", "SameSite=Strict");
   }
 
 

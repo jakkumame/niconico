@@ -1,10 +1,33 @@
 ion-card {
-  position: relative;
+  width: 80%;
+  margin: 5% auto 5% auto;
+  ion-card-header {
+    width: 85%;
+    margin: 5% auto 5% auto;
+    ion-toolbar {
+      margin: 0;
+      --background: #fff;
+      ion-back-button {
+        --background: #fff;
+      }
+    }
+    ion-card-title {
+      font-size: 2.8rem;
+      margin: 10px 0 10px 0;
+    }
+
+  }
+
+  .custom-line {
+    margin: 8% auto 4% auto;
+    height: 0.5px; /* 直線の高さ */
+    background-color: #555555; /* 直線の色 */
+    width: 85%;
+  }
 
   ion-card-content {
-    padding: 0;
-    margin: 0;
-
+    width: 85%;
+    margin: auto;
     .form-group {
       margin: 20px 30px 20px 20px;
 
@@ -55,22 +78,9 @@ ion-card {
         }
       }
     }
-
-    button {
-      display: block;
-      width: 50%;
-      height: 40px;
-      margin: auto;
-      margin-top: 40px;
-      margin-bottom: 40px;
-      color: #fff;
-      background-color:cadetblue;
-      border-radius: 10px;
+    ion-button {
+      margin: 10%;
     }
-
-    button:hover {
-      scale: 103%;
-    };
   }
 
   img {
@@ -80,8 +90,35 @@ ion-card {
   }
 
   a {
-    color: cadetblue;
+    color: rgb(0, 208, 10);
   }
 }
 
 
+
+
+@media screen and (max-width: 576px){
+  ion-card {
+    ion-card-header {
+      ion-card-title {
+        font-size: 2rem;
+      }
+    }
+
+
+  }
+}
+
+@media screen and (min-width: 992px) {
+  ion-card {
+    ion-card-content {
+      .form-group {
+        margin-top: 5%;
+        input {
+          height: 40px;
+        }
+      }
+    }
+  }
+
+}

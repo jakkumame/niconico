@@ -137,7 +137,7 @@ export class ApplicationFormComponent implements OnInit {
   private async showErrorMessageAlert(messages: string[]): Promise<void> {
     const alert = await this.alertCtrl.create({
       header: '入力エラー',
-      message: messages.join('<br>'),
+      message: messages.join(''),
       buttons: ['閉じる']
     });
     await alert.present();
