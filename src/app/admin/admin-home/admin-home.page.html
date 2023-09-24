@@ -1,10 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>管理者メニュー</ion-title>
-    <ion-tab-button (click)="logOut()">
-      <ion-icon name="close"></ion-icon>
-      <ion-label>ログアウト</ion-label>
-    </ion-tab-button>
   </ion-toolbar>
 </ion-header>
 
@@ -27,9 +23,12 @@
         <ion-icon name="ellipse"></ion-icon>
         <ion-label>投稿</ion-label>
       </ion-tab-button>
+
+      <ion-tab-button (click)="logOut()">
+        <ion-icon name="close"></ion-icon>
+        <ion-label>ログアウト</ion-label>
+      </ion-tab-button>
     </ion-tab-bar>
 
   </ion-tabs>
-
-
 </ion-content>

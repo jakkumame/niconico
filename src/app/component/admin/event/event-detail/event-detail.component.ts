@@ -50,7 +50,7 @@ export class EventDetailComponent implements OnInit {
 
   async presentLoading(): Promise<void> {
     this.loading = await this.loadingCtrl.create({
-      message: '申込情報を取得中...',
+      message: '情報を取得中...',
       translucent: true,
     });
     return await this.loading.present();

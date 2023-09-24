@@ -1,3 +1,42 @@
+.container {
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* ドロップシャドウを追加 */
+  border-radius: 4px; /* 角を少し丸くする */
+  transition: all 0.3s ease-in-out;
+  margin: 5% 5% 0 5%;
+  padding: 15px;
+  .contents {
+    margin: auto;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    text-align: left;
+    font-size: 2.5rem;
+    margin: 1% 0 5% 0;
+  }
+  .open-time {
+    font-size: 1.3rem;
+    margin-top: 10%;
+  }
+  ion-button {
+    padding: 10%;
+    // margin: 10%;
+  }
+
+}
+
+/* オプション: ホバー時のエフェクト */
+.container:hover {
+  transform: translateY(-2px); /* 少し上に浮かせる */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.1); /* シャドウを強調 */
+  background: #f0f0f0;
+}
+
+
+
 .custom-fab {
   --width: 40px;       /* ボタンの横幅を変更 */
   --height: 40px;      /* ボタンの縦幅を変更 */

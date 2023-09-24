@@ -1,18 +1,29 @@
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="5" *ngFor="let event of events">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Opening date</ion-card-subtitle>
-            <ion-card-title>{{ event.date }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>開始時間: {{ event.startTime }} - 終了時間: {{ event.endTime }}</p>
-            {{ event.description }}
-            <ion-button expand="full" [routerLink]="['/admin/event-detail', event.date]">参加者を表示</ion-button>
-          </ion-card-content>
-        </ion-card>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" size-md="5" size-lg="4" *ngFor="let event of events" class="container">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="10" class="contents">
+
+              <p class="title">Opening date</p>
+              <h3>{{ event.date }}</h3>
+              <p class="open-time">開店時間： {{ event.startTime }} ~ {{ event.endTime }}</p>
+
+            </ion-col>
+
+            <ion-col size="2" class="buttons">
+              <ion-button class="detail-button" [routerLink]="['/admin/event-detail', event.date]">
+                <ion-icon name="list-outline"></ion-icon>
+              </ion-button>
+              <ion-button class="delete-button" color="danger" (click)="deleteEvent(event.eventId, event.date)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
       </ion-col>
     </ion-row>
   </ion-grid>
