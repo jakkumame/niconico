@@ -13,6 +13,7 @@ import { MainComponent } from '../component/main/main.component';
 import { ImageComponent } from '../component/image/image.component';
 import { VisionComponent } from '../component/vision/vision.component';
 import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
+import { InfoBoardComponent } from '../component/info-board/info-board.component';
 import { SupportComponent } from '../component/support/support.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapComponent } from '../google-map/google-map.component';
@@ -38,6 +39,7 @@ register();
     ArticlePlaceComponent,
     VisionComponent,
     SwiperComponent,
+    InfoBoardComponent,
     SupportComponent,
     AccessInfoComponent,
     FooterComponent
