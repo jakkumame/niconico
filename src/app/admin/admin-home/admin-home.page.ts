@@ -1,7 +1,7 @@
 import { RealtimebaseService } from 'src/app/service/realtimebase/realtimebase.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { LoginComponent } from 'src/app/component/login/login.component';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
@@ -18,7 +18,8 @@ export class AdminHomePage implements OnInit {
     private modalCtrl: ModalController,
     private authService: AuthService,
     public router: Router,
-    private realtimebaseService: RealtimebaseService
+    private realtimebaseService: RealtimebaseService,
+    private alertCtrl: AlertController
   ) { }
 
 
@@ -45,9 +46,25 @@ export class AdminHomePage implements OnInit {
     return await modal.present();
   }
 
-  logOut() {
-    this.authService.signOut();
-    this.router.navigateByUrl('/home');
+  async logOut() {
+    const alert = await this.alertCtrl.create({
+      header: '入力エラー',
+      message: '本当にログアウトしてもよろしいですか？',
+      buttons: [
+        {
+          text: 'いいえ',
+          role: 'cancel',
+        },
+        {
+          text: 'はい',
+          handler: () => {
+            this.authService.signOut();
+            this.router.navigateByUrl('/home');
+          },
+        },
+      ]
+    });
+    await alert.present();
   }
 
 

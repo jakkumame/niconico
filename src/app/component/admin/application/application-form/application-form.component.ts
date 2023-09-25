@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ApplicationFormService } from 'src/app/service/event/application-form.service';
-import { AlertController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Applicant } from "src/app/interface/applicant";
 import { hiraganaValidator } from 'src/app/validators/application.validator';
 import { CookieService } from 'src/app/service/cookie/cookie.service';
+import { AppFormAlertService } from 'src/app/service/alert/app-form-alert.service'; // 適切なパスに変更してください
 
 @Component({
   selector: 'app-application-form',
@@ -23,7 +24,7 @@ export class ApplicationFormComponent implements OnInit {
     private fb: FormBuilder,
     private appFormService: ApplicationFormService,
     private cookie: CookieService,
-    private alertCtrl: AlertController,
+    private alertService: AppFormAlertService,
     private navCtrl: NavController
   ) {
     this.availableTimes = [
@@ -70,13 +71,17 @@ export class ApplicationFormComponent implements OnInit {
 
   async sendValue(): Promise<void> {
     if (this.applicationForm.valid) {
-      await this.submitApplications();
-      this.resetForm();
+      const shouldSubmit = await this.alertService.confirmAttendanceAlert(this.applicants.controls.length, this.countMeals());
+      if (shouldSubmit) {
+        await this.submitApplications();
+        this.resetForm();
+      }
     } else {
       const errorMessages = this.generateErrorMessages();
-      await this.showErrorMessageAlert(errorMessages);
+      await this.alertService.showErrorMessageAlert(errorMessages);
     }
   }
+
 
   private async submitApplications(): Promise<void> {
     const selectedEvent = this.applicationForm.value.selectedEvent;
@@ -87,7 +92,7 @@ export class ApplicationFormComponent implements OnInit {
       await Promise.all(submissionPromises);
     } catch (error) {
       console.error('Error while submitting application:', error);
-      await this.showErrorSubmissionAlert();
+      await this.alertService.showErrorSubmissionAlert();
     }
   }
 
@@ -100,15 +105,12 @@ export class ApplicationFormComponent implements OnInit {
     const errorMessages: string[] = [];
     const controls = this.applicationForm.controls;
 
-    // selectedEventのエラーチェック
     if (controls['selectedEvent'].errors) {
       if (controls['selectedEvent'].errors['required']) {
         errorMessages.push('来店日を選択してください。');
       }
-      // 他のselectedEventのエラーチェックもここに追加できます。
     }
 
-    // 各申込者のエラーチェック
     const applicantControls = this.applicants.controls;
     applicantControls.forEach((control, index) => {
       if (!control.valid) {
@@ -123,8 +125,6 @@ export class ApplicationFormComponent implements OnInit {
           applicantErrors.push('年齢は必須です。');
         }
 
-        // 他のフィールドエラーチェックもここに追加できます。
-
         if (applicantErrors.length) {
           errorMessages.push(`申込者 #${index + 1}: ${applicantErrors.join(', ')}`);
         }
@@ -134,22 +134,21 @@ export class ApplicationFormComponent implements OnInit {
     return errorMessages;
   }
 
-  private async showErrorMessageAlert(messages: string[]): Promise<void> {
-    const alert = await this.alertCtrl.create({
-      header: '入力エラー',
-      message: messages.join(''),
-      buttons: ['閉じる']
-    });
-    await alert.present();
-  }
+  countMeals(): { child: number, adult: number, baby: number } {
+    const counts = { child: 0, adult: 0, baby: 0 };
 
-  private async showErrorSubmissionAlert(): Promise<void> {
-    const alert = await this.alertCtrl.create({
-      header: '送信エラー',
-      message: '申し込みの送信中にエラーが発生しました。もう一度お試しください。',
-      buttons: ['閉じる']
+    this.applicants.controls.forEach(control => {
+      const mealType = control.get('mealType')?.value;
+      if (mealType === 'child') {
+        counts.child++;
+      } else if (mealType === 'adult') {
+        counts.adult++;
+      } else if (mealType === 'baby') {
+        counts.baby++;
+      }
     });
-    await alert.present();
+
+    return counts;
   }
 
 

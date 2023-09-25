@@ -38,7 +38,7 @@
                 <ion-item>
                   <ion-radio value="female" aria-label="女性">女性</ion-radio>
                 </ion-item>
-                <ion-item>
+                <ion-item class="bottom">
                   <ion-radio value="other" aria-label="その他">その他</ion-radio>
                 </ion-item>
               </ion-radio-group>
@@ -53,7 +53,7 @@
                 <ion-item>
                   <ion-radio value="child" label="子ども食">こども食</ion-radio>
                 </ion-item>
-                <ion-item>
+                <ion-item class="bottom">
                   <ion-radio value="baby" label="離乳食">離乳食</ion-radio>
                 </ion-item>
               </ion-radio-group>
@@ -67,7 +67,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-textarea formControlName="remarks" fill="solid" label="備考欄" labelPlacement="floating"></ion-textarea>
+                <ion-textarea formControlName="remarks" fill="solid" label="備考欄" labelPlacement="floating" class="bottom"></ion-textarea>
             </ion-item>
             <ion-button class="add-form" expand="full" type="button" (click)="addApplicant()">申込を追加</ion-button>
             <ion-button class="delete-form" expand="full" color="danger" *ngIf="applicants.controls.length > 1" (click)="removeApplicant(i)">申込を削除</ion-button>
@@ -77,7 +77,7 @@
         <ion-item>
           <ion-label>来店日選択</ion-label>
           <ion-radio-group formControlName="selectedEvent">
-            <ion-item *ngFor="let event of availableEvents">
+            <ion-item *ngFor="let event of availableEvents"  class="bottom">
               <ion-radio [value]="event.eventId" label="開店日" labelPlacement="end">{{ event.date | date: 'MM月dd日' }}</ion-radio>
             </ion-item>
           </ion-radio-group>
