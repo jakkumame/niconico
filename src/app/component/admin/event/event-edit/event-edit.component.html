@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>イベント編集</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-input type="date" [(ngModel)]="eventData.date" label="開店日"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="time" [(ngModel)]="eventData.startTime" label="開店時間"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="time" [(ngModel)]="eventData.endTime" label="閉店時間"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [autoGrow]="true" [(ngModel)]="eventData.description" label="プログラム概要" labelPlacement="stacked"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" color="success" (click)="confirmSave()">保存</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

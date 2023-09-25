@@ -1,25 +1,43 @@
-<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-  <ion-item>
-    <ion-label>開催日</ion-label>
-    <ion-input formControlName="date" type="date"></ion-input>
-  </ion-item>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>開店日登録</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goBack()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>詳細</ion-card-title>
+      <ion-card-subtitle>DETAIL</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-input label="開店日" formControlName="date" type="date"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label>開始時間</ion-label>
-    <ion-input formControlName="startTime" type="time"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-input label="開始時間" formControlName="startTime" type="time"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label>終了時間</ion-label>
-    <ion-input formControlName="endTime" type="time"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-input label="終了時間" formControlName="endTime" type="time"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label>プログラム概要</ion-label>
-    <ion-textarea formControlName="description"></ion-textarea>
-  </ion-item>
+        <ion-item>
+          <ion-textarea label="プログラム概要" formControlName="description"></ion-textarea>
+        </ion-item>
 
-  <ion-button expand="full" type="submit" [disabled]="!eventForm.valid">イベントを追加</ion-button>
-</form>
+        <ion-button color="success" expand="full" type="submit" [disabled]="!eventForm.valid">イベントを追加</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-<ion-button (click)="goBack()">戻る</ion-button>
+</ion-content>
+
+
+

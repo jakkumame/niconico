@@ -10,7 +10,7 @@
       <ion-col size="10" size-md="5" size-lg="4" *ngFor="let event of events" class="container">
         <ion-grid>
           <ion-row>
-            <ion-col size="10" class="contents">
+            <ion-col size="10" class="contents"  (click)="openEditModal(event)">
 
               <p class="title">Opening date</p>
               <h3>{{ event.date }}</h3>

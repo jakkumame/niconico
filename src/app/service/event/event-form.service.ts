@@ -35,9 +35,13 @@ export class EventFormService {
     return this.firestore.collection('events').doc(docId).valueChanges();
   }
 
-    // ドキュメントを削除するメソッド
-    deleteEvent(docId: string): Promise<void> {
-      return this.firestore.collection('events').doc(docId).delete();
-    }
+  // ドキュメントを削除するメソッド
+  deleteEvent(docId: string): Promise<void> {
+    return this.firestore.collection('events').doc(docId).delete();
+  }
 
+  // イベント情報の更新
+  updateEvent(docId: string, eventData: any): Promise<void> {
+    return this.firestore.collection('events').doc(docId).update(eventData);
+  }
 }

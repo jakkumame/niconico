@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { EventFormService } from 'src/app/service/event/event-form.service';
+import { EventEditComponent } from '../event-edit/event-edit.component';
 
 
 @Component({
@@ -13,7 +14,9 @@ export class EventListComponent implements OnInit {
 
   constructor(
     private eventFormService: EventFormService,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    ) { }
 
   ngOnInit(): void {
     this.fetchEvents();
@@ -53,10 +56,26 @@ export class EventListComponent implements OnInit {
     await alert.present();
   }
 
+  async openEditModal(event: any): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: EventEditComponent,
+      componentProps: {
+        eventData: event
+      }
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data && data.updated) {
+      this.fetchEvents();
+    }
+  }
+
   async showErrorAlert(): Promise<void> {
     const errorAlert = await this.alertCtrl.create({
       header: 'エラー',
-      message: 'イベントの削除中にエラーが発生しました。',
+      message: '実行中にエラーが発生しました。',
       buttons: ['OK']
     });
 
