@@ -48,7 +48,7 @@ export class AdminHomePage implements OnInit {
 
   async logOut() {
     const alert = await this.alertCtrl.create({
-      header: '入力エラー',
+      header: '確認',
       message: '本当にログアウトしてもよろしいですか？',
       buttons: [
         {
