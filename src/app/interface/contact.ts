@@ -1,6 +1,3 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-
 export interface Contact {
   name: string | null;
   age: string;
@@ -10,7 +7,7 @@ export interface Contact {
   address: string;
   notice: string | null;
   privacyPolicy: boolean;
-  timestamp?: firebase.firestore.FieldValue;
+  timestamp?: Date | null;
   contactId?: string;
   completed?: boolean;
 }

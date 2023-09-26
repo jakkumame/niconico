@@ -1,0 +1,23 @@
+
+
+h5 {
+  text-align: right;
+}
+
+ion-item, ion-label {
+  margin: 3px;
+
+}
+
+ion-button {
+  width: 70%;
+  margin: 5% auto 5% auto;
+}
+
+
+@media screen and (min-width: 992px) {
+  ion-button {
+    width: 20%;
+  }
+
+}

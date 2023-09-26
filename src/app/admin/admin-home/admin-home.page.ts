@@ -35,8 +35,6 @@ export class AdminHomePage implements OnInit {
     this.contactService.getUncompletedCount().subscribe( count => {
       this.uncompletedCount = count;
     })
-
-
   }
 
   async presentLoginModal() {

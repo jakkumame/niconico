@@ -6,32 +6,21 @@
 
 <ion-content>
   <ion-card *ngIf="contact">
-    <ion-card-header>
-      <ion-card-subtitle>{{ formatTimestamp(contact.timestamp) }}</ion-card-subtitle>
-      <ion-card-title>{{ getInquiryTypeLabel(contact.inquiryType) }}</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
+      <h5>受信 : {{ formatTimestamp(contact.timestamp) }}</h5>
       <ion-list>
         <ion-label>お名前</ion-label>
         <ion-item>{{ contact.name }}</ion-item>
-      </ion-list>
-      <ion-list>
         <ion-label>ご年齢</ion-label>
         <ion-item>{{ contact.age }}</ion-item>
-      </ion-list>
-      <ion-list>
         <ion-label>内容</ion-label>
         <ion-item>{{ contact.notice }}</ion-item>
-      </ion-list>
-      <ion-list>
         <ion-label>電話番号</ion-label>
         <ion-item>{{ contact.tel }}</ion-item>
-      </ion-list>
-      <ion-list>
         <ion-label>E-mail</ion-label>
         <ion-item>{{ contact.email }}</ion-item>
       </ion-list>
-      <ion-button (click)="goBack()">戻る</ion-button>
+      <ion-button expand="full" (click)="goBack()">戻る</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

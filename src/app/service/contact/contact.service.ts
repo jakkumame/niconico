@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Contact } from 'src/app/interface/contact';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -18,7 +16,7 @@ export class ContactService {
   saveContact(Data: Contact) {
     const docId = this.firestore.createId();
     Data.contactId = docId
-    Data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    Data.timestamp = new Date();
     return this.firestore.collection('contacts').doc(docId).set(Data)
   }
 

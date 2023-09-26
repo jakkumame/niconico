@@ -15,15 +15,17 @@
   width: 80%;
   margin: 10% auto 10% auto;
   ion-card-header {
-    margin: 5% 5% 5% 8%;
+    margin: 8% 5% 5% 7%;
+    ion-card-title {
+      margin-bottom: 5px;
+    }
     ion-card-subtitle {
-      font-weight: bold;
       margin-left: 2%;
     }
   }
   ion-card-content {
     width: 70%;
-    margin: 5% auto 3% auto;
+    margin: auto;
     h6 {
       font-size: large;
       font-weight: 300;
@@ -33,11 +35,13 @@
 
 .detail {
   width: 80%;
-  margin: auto;
+  margin: 10% auto 10% auto;
   ion-card-header {
-    margin: 5% 5% 5% 8%;
+    margin: 8% 5% 5% 7%;
+    ion-card-title {
+      margin-bottom: 5px;
+    }
     ion-card-subtitle {
-      font-weight: bold;
       margin-left: 2%;
     }
   }
