@@ -9,6 +9,7 @@ ion-card {
   margin-bottom: 60px;
   border-radius: 10px;
 
+
   .mask {
     position: absolute;
     width: 100%;
@@ -20,6 +21,7 @@ ion-card {
   .place-img {
     width: 100%;
   }
+
 
   > article {
     position: relative;
@@ -56,6 +58,16 @@ ion-card {
       font-weight: 500;
     }
   }
+}
+
+.card1 {
+  --animate-delay: 0.3s;
+}
+.card2 {
+  --animate-delay: 0.5s;
+}
+.card3 {
+  --animate-delay: 0.7s;
 }
 
 // 青のVector
