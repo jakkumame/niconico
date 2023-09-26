@@ -1,7 +1,7 @@
+import { ContactService } from './../service/contact/contact.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { RealtimebaseService } from '../service/realtimebase/realtimebase.service';
-import { Inquiry } from '../interface/inquiry';
+import { Contact } from '../interface/contact';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CookieService } from '../service/cookie/cookie.service';
@@ -26,32 +26,22 @@ export class ContactPage {
 
   constructor(
     private fb: FormBuilder,
-    private rb: RealtimebaseService,
+    private contactService: ContactService,
     private alertController: AlertController,
     public router: Router,
     private cookie: CookieService,
   ) {}
 
-  async onSubmit() {
-    console.log(this.contactForm.value);
-    if (this.contactForm.valid) {
-      try {
-        const inquiryData: Inquiry = {
-          ...this.contactForm.value as Inquiry, // Inquiry型にキャスト。明示的にInquiry型だとコンパイラに伝え、型の不一致を回避する
-          date: new Date().toISOString()  // 日付をISO形式の文字列に変換。realtimebaseが対応する形式
-        };
-        await this.rb.submitInquiry(inquiryData);
-        this.presentAlert('成功', '問い合わせが正常に送信されました。');
-        this.router.navigateByUrl('/home');
-      } catch (error) {
-        console.error('ContactPageでのエラー:', error);
-        this.presentAlert('エラー', `問い合わせの送信に失敗しました: ${(error as any).message}`);
-      }
-    } else {
-      this.presentAlert('検証エラー', 'すべての必須フィールドを正しく入力してください。');
-    }
-
-    this.cookie.set("cookieName", "cookieValue", "SameSite=Strict");
+async onSubmit() {
+    const formData: Contact = this.contactForm.value as Contact;
+    this.contactService.saveContact(formData)
+      .then(() => {
+        this.presentAlert('成功', 'お問い合わせが正常に送信されました。');
+      })
+      .catch(error => {
+        this.presentAlert('エラー', 'お問い合わせの送信中にエラーが発生しました。');
+        console.error("お問い合わせ内容の保存に失敗: ", `内容(${error})`);
+      });
   }
 
 

@@ -1,4 +1,3 @@
-import { RealtimebaseService } from 'src/app/service/realtimebase/realtimebase.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -18,7 +17,6 @@ export class AdminHomePage implements OnInit {
     private modalCtrl: ModalController,
     private authService: AuthService,
     public router: Router,
-    private realtimebaseService: RealtimebaseService,
     private alertCtrl: AlertController
   ) { }
 
@@ -32,9 +30,9 @@ export class AdminHomePage implements OnInit {
     }
 
     // 問い合わせの未完了を取得、バッジの表示用
-    this.realtimebaseService.getUncompletedCount().subscribe(count => {
-      this.uncompletedCount = count;
-    });
+    // this.realtimebaseService.getUncompletedCount().subscribe(count => {
+    //   this.uncompletedCount = count;
+    // });
 
   }
 

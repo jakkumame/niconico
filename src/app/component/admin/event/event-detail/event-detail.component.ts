@@ -16,6 +16,10 @@ export class EventDetailComponent implements OnInit {
   event: any;
   applicants$!: Observable<Applicant[]>;
   loading: any;
+  totalApplicants: number = 0;
+  adultCount: number = 0;
+  childCount: number = 0;
+  babyCount: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +37,10 @@ export class EventDetailComponent implements OnInit {
 
         this.applicants$.pipe(take(1)).subscribe({
           next: (data) => {
+            this.totalApplicants = data.length;
+            this.adultCount = data.filter(applicant => applicant.mealType === 'adult').length;
+            this.childCount = data.filter(applicant => applicant.mealType === 'child').length;
+            this.babyCount = data.filter(applicant => applicant.mealType === 'baby').length;
             this.loading.dismiss();
           },
           error: (err) => {
@@ -73,5 +81,5 @@ export class EventDetailComponent implements OnInit {
     return null;
   }
 
-  
+
 }

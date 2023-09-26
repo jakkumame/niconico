@@ -8,31 +8,62 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="applicants$ | async as applicants">
 
-    <div *ngIf="applicants.length === 0">
+  <ion-card *ngIf="applicants$ | async as applicants" color="tertiary" class="mealType">
+    <ion-card-header>
+      <ion-card-subtitle>MEAL TYPE</ion-card-subtitle>
+      <ion-card-title>食数内訳</ion-card-title>
+    </ion-card-header>
+    <div class="custom-line1"></div>
+    <ion-card-content>
       <ion-item>
-        <h6>今回の申込はありません</h6>
+        <ion-label>申込総数: {{ totalApplicants }} 人</ion-label>
       </ion-item>
-    </div>
+      <ion-item>
+        <ion-label>大人食: {{ adultCount }} 食</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>子ども食: {{ childCount }} 食</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>離乳食: {{ babyCount }} 食</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-list *ngIf="applicants.length > 0">
-      <ion-accordion-group *ngFor="let applicant of applicants" [multiple]="true">
-        <ion-accordion value="first">
-          <ion-list-header slot="header" color="light">
-            <h4>{{ applicant.name }} ({{ applicant.furigana }})</h4>
-          </ion-list-header>
-          <div class="ion-padding" slot="content">
-            <ion-item label="性別">性別: {{ applicant.gender | generalMapping:'gender' }}</ion-item>
-            <ion-item label="食事の種類">希望食:{{ applicant.mealType | generalMapping:'meal' }}</ion-item>
-            <ion-item label="年齢">年齢: {{ applicant.age }}</ion-item>
-            <ion-item *ngIf="applicant.arrivalTime" label="来店予定時間">来店予定時間: {{ applicant.arrivalTime }}</ion-item>
-            <ion-item *ngIf="applicant.remarks" label="備考">備考: {{ applicant.remarks }}</ion-item>
-            <ion-item *ngIf="applicant.timestamp" label="申込日時">申込日時: {{ applicant.timestamp | date:'yyyy年MM月dd日HH:mm' }}</ion-item>
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
-    </ion-list>
+
+  <ion-card *ngIf="applicants$ | async as applicants" class="detail" color="light">
+    <ion-card-header>
+      <ion-card-subtitle>DETAIL</ion-card-subtitle>
+      <ion-card-title>申込者詳細</ion-card-title>
+    </ion-card-header>
+    <div class="custom-line2"></div>
+    <ion-card-content>
+
+      <div *ngIf="applicants.length === 0">
+        <ion-item>
+          <h6>今回の申込はありません</h6>
+        </ion-item>
+      </div>
+
+      <ion-list *ngIf="applicants.length > 0">
+        <ion-accordion-group *ngFor="let applicant of applicants" [multiple]="true">
+          <ion-accordion value="first">
+            <ion-list-header slot="header" color="light">
+              <h4>◉  {{ applicant.name }} ({{ applicant.furigana }})</h4>
+            </ion-list-header>
+            <div class="ion-padding" slot="content">
+              <ion-item label="性別">性別: {{ applicant.gender | generalMapping:'gender' }}</ion-item>
+              <ion-item label="食事の種類">希望食:{{ applicant.mealType | generalMapping:'meal' }}</ion-item>
+              <ion-item label="年齢">年齢: {{ applicant.age }}</ion-item>
+              <ion-item *ngIf="applicant.arrivalTime" label="来店予定時間">来店予定時間: {{ applicant.arrivalTime }}</ion-item>
+              <ion-item *ngIf="applicant.remarks" label="備考">備考: {{ applicant.remarks }}</ion-item>
+              <ion-item *ngIf="applicant.timestamp" label="申込日時">申込日時: {{ applicant.timestamp | date:'yyyy年MM月dd日HH:mm' }}</ion-item>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-list>
+    </ion-card-content>
 
     <!-- Display applicants -->
     <!-- <ion-list *ngIf="applicants.length > 0">

@@ -37,7 +37,7 @@ const routes: Routes = [
         component: InquiryListComponent,
       },
       {
-        path: 'inquiry-detail/:key',
+        path: 'inquiry-detail/:contactId',
         component: InquiryDetailComponent,
       },
       {

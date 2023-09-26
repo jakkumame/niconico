@@ -1,35 +1,35 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title>問い合わせ詳細</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="inquiry">
+  <ion-card *ngIf="contact">
     <ion-card-header>
-      <ion-card-subtitle>{{ formatInquiryDate(inquiry.date) }}</ion-card-subtitle>
-      <ion-card-title>{{ getInquiryTypeLabel(inquiry.inquiryType) }}</ion-card-title>
+      <ion-card-subtitle>{{ formatTimestamp(contact.timestamp) }}</ion-card-subtitle>
+      <ion-card-title>{{ getInquiryTypeLabel(contact.inquiryType) }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-label>お名前</ion-label>
-        <ion-item>{{ inquiry.name }}</ion-item>
+        <ion-item>{{ contact.name }}</ion-item>
       </ion-list>
       <ion-list>
         <ion-label>ご年齢</ion-label>
-        <ion-item>{{ inquiry.age }}</ion-item>
+        <ion-item>{{ contact.age }}</ion-item>
       </ion-list>
       <ion-list>
         <ion-label>内容</ion-label>
-        <ion-item>{{ inquiry.notice }}</ion-item>
+        <ion-item>{{ contact.notice }}</ion-item>
       </ion-list>
       <ion-list>
         <ion-label>電話番号</ion-label>
-        <ion-item>{{ inquiry.tel }}</ion-item>
+        <ion-item>{{ contact.tel }}</ion-item>
       </ion-list>
       <ion-list>
         <ion-label>E-mail</ion-label>
-        <ion-item>{{ inquiry.email }}</ion-item>
+        <ion-item>{{ contact.email }}</ion-item>
       </ion-list>
       <ion-button (click)="goBack()">戻る</ion-button>
     </ion-card-content>

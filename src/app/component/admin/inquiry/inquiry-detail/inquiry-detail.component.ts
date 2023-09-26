@@ -1,7 +1,7 @@
+import { ContactService } from './../../../../service/contact/contact.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RealtimebaseService } from 'src/app/service/realtimebase/realtimebase.service';
-import { Inquiry } from 'src/app/interface/inquiry';
+import { Contact } from 'src/app/interface/contact';
 import { DatePipe } from '@angular/common';
 import { NavController } from '@ionic/angular';
 
@@ -12,28 +12,28 @@ import { NavController } from '@ionic/angular';
 })
 export class InquiryDetailComponent implements OnInit {
 
-  inquiry: Inquiry | null = null;
-  inquiryKey: string | null = null;
+  contact!: Contact;
+  contactID!: string;
 
 
   constructor(
+    private contactService: ContactService,
     private route: ActivatedRoute,
-    private realtimebaseService: RealtimebaseService,
     private datePipe: DatePipe,
     private navCtrl: NavController
     ) { }
 
   ngOnInit() {
-    this.inquiryKey = this.route.snapshot.paramMap.get('key');
-    this.getInquiryDetail();
+    this.contactID = this.route.snapshot.paramMap.get('contactId')!;
+    this.getContactDetail();
   }
 
-  getInquiryDetail() {
-    this.realtimebaseService.getInquiries().subscribe(inquiries => {
-      const foundInquiry = inquiries.find(inquiry => inquiry.key === this.inquiryKey);
-      this.inquiry = foundInquiry ? foundInquiry : null;
+  getContactDetail() {
+    this.contactService.getContactById(this.contactID).subscribe(contactData => {
+      this.contact = contactData!;
     });
   }
+
 
   goBack() {
     this.navCtrl.back();
@@ -48,7 +48,9 @@ export class InquiryDetailComponent implements OnInit {
     }
   }
 
-  formatInquiryDate(date: string | undefined): string | null {
+  // timestampをtoDate()でDateに整形
+  formatTimestamp(timestamp: any): string | null {
+    const date = timestamp ? timestamp.toDate() : null;
     return date ? this.datePipe.transform(date, 'M月d日 HH:mm') || '日付なし' : '日付なし';
   }
 

@@ -13,7 +13,7 @@ export class ApplicationFormService {
     ) {}
 
   getEvents(): Observable<any[]> {
-    return this.afs.collection('events').valueChanges({ idField: 'eventId' })
+    return this.afs.collection('events').valueChanges({ idField: 'docId' })
       .pipe(
         catchError(error => this.handleNotFunctionError(error, 'getEvents'))
       );
@@ -31,8 +31,8 @@ export class ApplicationFormService {
   }
 
 
-  getApplicants(eventId: string) {
-    return this.afs.collection('events').doc(eventId).collection('applicants').valueChanges();
+  getApplicants(docId: string) {
+    return this.afs.collection('events').doc(docId).collection('applicants').valueChanges();
   }
 
   getApplicantsByDate(date: string): Observable<any> {
@@ -44,8 +44,8 @@ export class ApplicationFormService {
           if (eventDocs.length === 0) {
             return throwError(() => new Error('No event found with the given date'));
           }
-          const eventId = eventDocs[0].id;
-          return this.afs.collection(`events/${eventId}/applicants`).valueChanges();
+          const docId = eventDocs[0].id;
+          return this.afs.collection(`events/${docId}/applicants`).valueChanges();
         })
       );
   }
@@ -53,9 +53,9 @@ export class ApplicationFormService {
 
 
 
-  submitApplication(eventId: string, applicant: Applicant): Promise<void> {
+  submitApplication(docId: string, applicant: Applicant): Promise<void> {
     const id = this.afs.createId();
     applicant.timestamp = new Date().toISOString();
-    return this.afs.collection('events').doc(eventId).collection('applicants').doc(id).set(applicant);
+    return this.afs.collection('events').doc(docId).collection('applicants').doc(id).set(applicant);
   }
 }

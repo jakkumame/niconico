@@ -6,11 +6,11 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let inquiry of inquiries">
-      <ion-label>{{ getInquiryTypeLabel(inquiry.inquiryType) }}</ion-label>
-      <ion-note>{{ formatInquiryDate(inquiry.date) }}</ion-note>
-      <ion-checkbox slot="start" [checked]="inquiry.completed" (click)="toggleCompletion($event, inquiry)" aria-label="完了"></ion-checkbox>
-      <ion-button slot="end" [routerLink]="['/admin/inquiry-detail', inquiry.key]">
+    <ion-item *ngFor="let contact of contacts ">
+      <ion-label>{{ getInquiryTypeLabel(contact.inquiryType) }}</ion-label>
+      <ion-note>{{ formatTimestamp(contact.timestamp) }}</ion-note>
+      <ion-checkbox slot="start" [checked]="contact.completed" (click)="toggleCompletion($event, contact)" aria-label="完了"></ion-checkbox>
+      <ion-button slot="end" [routerLink]="['/admin/inquiry-detail', contact.contactId]">
         <ion-icon name="list-outline"></ion-icon>
       </ion-button>
     </ion-item>
