@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LoginComponent } from 'src/app/component/login/login.component';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import { ContactService } from 'src/app/service/contact/contact.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -16,6 +17,7 @@ export class AdminHomePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private authService: AuthService,
+    private contactService: ContactService,
     public router: Router,
     private alertCtrl: AlertController
   ) { }
@@ -29,10 +31,11 @@ export class AdminHomePage implements OnInit {
       this.presentLoginModal();
     }
 
-    // 問い合わせの未完了を取得、バッジの表示用
-    // this.realtimebaseService.getUncompletedCount().subscribe(count => {
-    //   this.uncompletedCount = count;
-    // });
+    // 問い合わせの未完了（completed=false）数を取得、
+    this.contactService.getUncompletedCount().subscribe( count => {
+      this.uncompletedCount = count;
+    })
+
 
   }
 

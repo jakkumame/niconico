@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Contact } from 'src/app/interface/contact';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +34,11 @@ export class ContactService {
     await this.firestore.collection('contacts').doc(contactId).update(contact);
   }
 
+  getUncompletedCount(): Observable<number> {
+    return this.firestore.collection<Contact>('contacts', ref => ref.where('completed', '==', false))
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.length)
+      );
+  }
 }
