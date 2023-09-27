@@ -8,6 +8,7 @@ import { EventListComponent } from 'src/app/component/admin/event/event-list/eve
 import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
 import { EventFormComponent } from 'src/app/component/admin/event/event-form/event-form.component';
 import { EventDetailComponent } from 'src/app/component/admin/event/event-detail/event-detail.component';
+import { ArticleFormComponent } from 'src/app/component/admin/article/article-form/article-form.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'article-list',
         component: ArticleListComponent,
+      },
+      {
+        path: 'article-form',
+        component: ArticleFormComponent,
       },
     ]
   }

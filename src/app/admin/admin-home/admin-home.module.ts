@@ -18,6 +18,7 @@ import { EventEditComponent } from 'src/app/component/admin/event/event-edit/eve
 import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
 import { ApplicationFormComponent } from 'src/app/component/admin/application/application-form/application-form.component';
 import { GeneralMappingPipe } from 'src/app/pipes/meal-type.pipe';
+import { ArticleFormComponent } from 'src/app/component/admin/article/article-form/article-form.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { GeneralMappingPipe } from 'src/app/pipes/meal-type.pipe';
     EventEditComponent,
     ApplicationFormComponent,
     ArticleListComponent,
+    ArticleFormComponent,
     GeneralMappingPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
