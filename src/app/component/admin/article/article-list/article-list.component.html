@@ -5,6 +5,13 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let article of articles">
+    <ion-card-title>{{ article.title }}</ion-card-title>
+    <ion-card-subtitle>{{ article.subtitle }}</ion-card-subtitle>
+    <ion-card-content>
+      {{ article.content }}
+    </ion-card-content>
+  </ion-card>
 
   <ion-fab>
     <ion-fab-button class="custom-fab" routerLink="/admin/article-form">

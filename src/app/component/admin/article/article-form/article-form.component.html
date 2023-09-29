@@ -1,6 +1,6 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="dark">
-    <ion-title>記事作成</ion-title>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>記事の投稿</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,10 +14,13 @@
       <ion-label position="floating">サブタイトル</ion-label>
       <ion-input formControlName="subtitle"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label position="floating">内容</ion-label>
       <ion-textarea formControlName="content"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">写真を選択</ion-label>
+      <ion-input type="file" (change)="onImageSelected($event)"></ion-input>
     </ion-item>
     <ion-button expand="full" type="submit" [disabled]="!articleForm.valid">投稿</ion-button>
   </form>

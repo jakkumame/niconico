@@ -1,20 +1,18 @@
-import { ArticleService } from './../../../../service/article/article.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ArticleService } from 'src/app/service/article/article.service';
 
 @Component({
   selector: 'app-article-form',
   templateUrl: './article-form.component.html',
   styleUrls: ['./article-form.component.scss'],
 })
-export class ArticleFormComponent implements OnInit {
+export class ArticleFormComponent  {
 
   articleForm: FormGroup;
+  image: File | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private articleService: ArticleService,
-    ) {
+  constructor(private fb: FormBuilder, private articleService: ArticleService) {
     this.articleForm = this.fb.group({
       title: ['', Validators.required],
       subtitle: ['', Validators.required],
@@ -22,12 +20,24 @@ export class ArticleFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  
+
+  onImageSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.image = file;
+    }
+  }
 
   onSubmit() {
-    if (this.articleForm.valid) {
-      console.log('Form Data:', this.articleForm.value);
-      this.articleService.addArticle(this.articleForm);
+    if (this.articleForm.valid && this.image) {
+      this.articleService.uploadImage(this.image).subscribe(imageUrl => {
+        const formData = {
+          ...this.articleForm.value,
+          imageUrl: imageUrl
+        };
+        this.articleService.addArticle(formData);
+      });
     }
   }
 
