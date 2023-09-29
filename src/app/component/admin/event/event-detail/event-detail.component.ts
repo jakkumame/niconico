@@ -74,12 +74,5 @@ export class EventDetailComponent implements OnInit {
     await toast.present();
   }
 
-  transformDate(timestamp: any): string | null {
-    if (timestamp) {
-      return this.datePipe.transform(timestamp, 'yyyy年MM月dd日HH:mm');
-    }
-    return null;
-  }
-
 
 }

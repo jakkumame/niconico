@@ -10,6 +10,7 @@ import { ArticleService } from 'src/app/service/article/article.service';
 export class ArticleFormComponent  {
 
   articleForm: FormGroup;
+  imageUrl: string | null = null;
   image: File | null = null;
 
   constructor(private fb: FormBuilder, private articleService: ArticleService) {
@@ -20,12 +21,17 @@ export class ArticleFormComponent  {
     });
   }
 
-  
+
 
   onImageSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
       this.image = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result; // 画像のデータをセット
+      };
+      reader.readAsDataURL(file);
     }
   }
 

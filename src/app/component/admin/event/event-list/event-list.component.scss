@@ -38,14 +38,14 @@
 
 
 .custom-fab {
-  --width: 40px;       /* ボタンの横幅を変更 */
-  --height: 40px;      /* ボタンの縦幅を変更 */
-  --border-radius: 10px; /* ボーダーレディウスを設定 */
+  --width: 40px;
+  --height: 40px;
+  --border-radius: 10px;
 }
 
 /* 右端に配置 */
 ion-fab {
   position: fixed;
-  bottom: 16px; /* この値も調整できます */
-  right: 32px;  /* ここで右側の余白を調整 */
+  bottom: 16px;
+  right: 32px;
 }
