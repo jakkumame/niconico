@@ -12,7 +12,7 @@ import { NavController } from '@ionic/angular';
 })
 export class InquiryDetailComponent implements OnInit {
 
-  contact!: Contact;
+  contact: Contact | undefined;
   contactID!: string;
 
 
@@ -23,15 +23,13 @@ export class InquiryDetailComponent implements OnInit {
     private navCtrl: NavController
     ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.contactID = this.route.snapshot.paramMap.get('contactId')!;
-    this.getContactDetail();
+    await this.getContactDetail();
   }
 
-  getContactDetail() {
-    this.contactService.getContactById(this.contactID).subscribe(contactData => {
-      this.contact = contactData!;
-    });
+  async getContactDetail() {
+    this.contact = await this.contactService.getContactById(this.contactID);
   }
 
 

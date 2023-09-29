@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Observable, take } from 'rxjs';
-import { Applicant } from 'src/app/interface/applicant';
 import { ApplicationFormService } from 'src/app/service/event/application-form.service';
 import { DatePipe } from '@angular/common';
+import { Applicant } from 'src/app/interface/applicant';
 
 @Component({
   selector: 'app-event-detail',
@@ -14,8 +13,8 @@ import { DatePipe } from '@angular/common';
 })
 export class EventDetailComponent implements OnInit {
   event: any;
-  applicants$!: Observable<Applicant[]>;
   loading: any;
+  applicantsData: Applicant[] = [];
   totalApplicants: number = 0;
   adultCount: number = 0;
   childCount: number = 0;
@@ -29,30 +28,25 @@ export class EventDetailComponent implements OnInit {
     private datePipe: DatePipe,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const date = this.route.snapshot.paramMap.get('date');
     if (date) {
-      this.presentLoading().then(() => {
-        this.applicants$ = this.appFormService.getApplicantsByDate(date);
+      try {
+        await this.presentLoading();
 
-        this.applicants$.pipe(take(1)).subscribe({
-          next: (data) => {
-            this.totalApplicants = data.length;
-            this.adultCount = data.filter(applicant => applicant.mealType === 'adult').length;
-            this.childCount = data.filter(applicant => applicant.mealType === 'child').length;
-            this.babyCount = data.filter(applicant => applicant.mealType === 'baby').length;
-            this.loading.dismiss();
-          },
-          error: (err) => {
-            this.loading.dismiss();
-            this.presentErrorToast('申込情報の取得に失敗しました。');
-            console.error('Error fetching applicants:', err);
-          }
-        });
-      }).catch((err) => {
-        this.presentErrorToast('読み込みの表示中にエラーが発生しました。');
-        console.error('Error presenting loading:', err);
-      });
+        const applicantsData = await this.appFormService.getApplicantsByDate(date);
+        this.totalApplicants = applicantsData.length;
+        this.adultCount = applicantsData.filter(applicant => applicant.mealType === 'adult').length;
+        this.childCount = applicantsData.filter(applicant => applicant.mealType === 'child').length;
+        this.babyCount = applicantsData.filter(applicant => applicant.mealType === 'baby').length;
+
+        this.loading.dismiss();
+
+      } catch(err) {
+        this.loading.dismiss();
+        this.presentErrorToast('申込情報の取得に失敗しました。');
+        console.error('Error fetching MealTypeCount:', err);
+      }
     }
   }
 

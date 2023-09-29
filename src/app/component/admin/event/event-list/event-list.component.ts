@@ -18,14 +18,12 @@ export class EventListComponent implements OnInit {
     private modalCtrl: ModalController,
     ) { }
 
-  ngOnInit(): void {
-    this.fetchEvents();
+  async ngOnInit(): Promise<void> {
+    await this.fetchEvents();
   }
 
-  private fetchEvents(): void {
-    this.eventFormService.getEventsParams().subscribe(events => {
-      this.events = events;
-    });
+  async fetchEvents(): Promise<void> {
+    this.events = await this.eventFormService.getEventsParams();
   }
 
   async deleteEvent(eventId: string, date: string): Promise<void> {

@@ -37,10 +37,8 @@ export class ApplicationFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.appFormService.getEvents().subscribe(events => {
-      this.availableEvents = events;
-    });
+  async ngOnInit() {
+    this.availableEvents = await this.appFormService.getEvents();;
 
     this.cookie.set("cookieName", "cookieValue", "SameSite=Strict");
   }

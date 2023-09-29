@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" sizeLg="5">
-        <ion-card *ngIf="applicants$ | async as applicants" color="tertiary" class="mealType">
+        <ion-card *ngIf="applicantsData.length> 0" color="tertiary" class="mealType">
           <ion-card-header>
             <ion-card-subtitle>MEAL TYPE</ion-card-subtitle>
             <ion-card-title>食数内訳</ion-card-title>
@@ -34,7 +34,7 @@
         </ion-card>
       </ion-col>
       <ion-col size="12" sizeLg="5">
-        <ion-card *ngIf="applicants$ | async as applicants" class="detail" color="light">
+        <ion-card *ngIf="applicantsData.length > 0" class="detail" color="light">
           <ion-card-header>
             <ion-card-subtitle>DETAIL</ion-card-subtitle>
             <ion-card-title>申込者詳細</ion-card-title>
@@ -42,14 +42,14 @@
           <div class="custom-line2"></div>
           <ion-card-content>
 
-            <div *ngIf="applicants.length === 0">
+            <div *ngIf="applicantsData.length === 0">
               <ion-item>
                 <h6>今回の申込はありません</h6>
               </ion-item>
             </div>
 
-            <ion-list *ngIf="applicants.length > 0">
-              <ion-accordion-group *ngFor="let applicant of applicants" [multiple]="true">
+            <ion-list *ngIf="applicantsData.length > 0">
+              <ion-accordion-group *ngFor="let applicant of applicantsData" [multiple]="true">
                 <ion-accordion value="first">
                   <ion-list-header slot="header" color="light">
                     <h4>◉  {{ applicant.name }} ({{ applicant.furigana }})</h4>

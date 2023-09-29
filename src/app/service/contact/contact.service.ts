@@ -1,5 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  updateDoc,
+  DocumentReference
+} from '@angular/fire/firestore';
+import { getFirestore } from '@angular/fire/firestore';
+import { getDoc } from '@angular/fire/firestore';
 import { Contact } from 'src/app/interface/contact';
 import { Observable, map } from 'rxjs';
 
@@ -8,35 +20,52 @@ import { Observable, map } from 'rxjs';
 })
 export class ContactService {
 
-  constructor(
-    private firestore: AngularFirestore,
+  private db = getFirestore();
 
-  ) { }
+  constructor() {}
 
+  // 連絡先を保存するメソッド
   saveContact(Data: Contact) {
-    const docId = this.firestore.createId();
-    Data.contactId = docId
+    // ドキュメントIDを生成
+    const docId = doc(this.db, 'contacts').id;
+    Data.contactId = docId;
+    // 現在の日時をタイムスタンプとして設定
     Data.timestamp = new Date();
-    return this.firestore.collection('contacts').doc(docId).set(Data)
+    // 生成したIDを持つドキュメントにデータをセット
+    return setDoc(doc(this.db, 'contacts', docId), Data);
   }
 
-  getAllContacts(): Observable<Contact[]> {
-    return this.firestore.collection<Contact>('contacts', ref => ref.orderBy('timestamp', 'desc')).valueChanges();
+  // すべての連絡先を取得するメソッド
+  async getAllContacts(): Promise<Contact[]> {
+    // タイムスタンプの降順で連絡先を取得
+    const q = query(collection(this.db, 'contacts'), orderBy('timestamp', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => doc.data() as Contact);
   }
 
-  getContactById(contactId: string) {
-    return this.firestore.collection('contacts').doc<Contact>(contactId).valueChanges();
+  // IDによって連絡先を取得するメソッド
+  async getContactById(contactId: string): Promise<Contact | undefined> {
+    // 指定されたIDのドキュメントのデータを取得
+    const docSnap = await getDoc(doc(this.db, 'contacts', contactId));
+    if (docSnap.exists()) {
+      return docSnap.data() as Contact;
+    } else {
+      return undefined;
+    }
   }
 
+  // 連絡先を更新するメソッド
   async updateContact(contactId: string, contact: Contact) {
-    await this.firestore.collection('contacts').doc(contactId).update(contact);
+    // 指定されたIDのドキュメントを更新
+    const contactRef: DocumentReference<Contact> = doc(this.db, 'contacts', contactId) as DocumentReference<Contact>;
+    await updateDoc(contactRef, contact);
   }
 
-  getUncompletedCount(): Observable<number> {
-    return this.firestore.collection<Contact>('contacts', ref => ref.where('completed', '==', false))
-      .snapshotChanges()
-      .pipe(
-        map(actions => actions.length)
-      );
+  // 未完了の連絡先の数を取得するメソッド
+  async getUncompletedCount(): Promise<number> {
+    // completedフィールドがfalseのドキュメントの数を取得
+    const q = query(collection(this.db, 'contacts'), where('completed', '==', false));
+    const snapshot = await getDocs(q);
+    return snapshot.size;
   }
 }

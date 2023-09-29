@@ -32,9 +32,7 @@ export class AdminHomePage implements OnInit {
     }
 
     // 問い合わせの未完了（completed=false）数を取得、
-    this.contactService.getUncompletedCount().subscribe( count => {
-      this.uncompletedCount = count;
-    })
+    this.uncompletedCount = await this.contactService.getUncompletedCount();
   }
 
   async presentLoginModal() {

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, collection, query, getDocs } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventFormService {
+  private db = getFirestore();
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor() { }
 
   // 日付の数字を末尾に追加してドキュメントIDを生成するユーティリティ関数
   public generateDocumentId(date: string): string {
@@ -17,31 +17,35 @@ export class EventFormService {
   }
 
   // イベントを追加
-  addEvent(eventData: any): Promise<any> {
+  async addEvent(eventData: any): Promise<any> {
     const eventDate = eventData.date;
     const docId = this.generateDocumentId(eventDate);
     eventData.eventId = docId; // 生成されたドキュメントIDをイベントデータに追加
-    return this.firestore.collection('events').doc(docId).set(eventData);
+    await setDoc(doc(this.db, 'events', docId), eventData);
+    return eventData;
   }
 
   // すべてのイベントを取得
-  getEventsParams(): Observable<any[]> {
-    return this.firestore.collection('events').valueChanges();
+  async getEventsParams(): Promise<any[]> {
+    const q = query(collection(this.db, 'events'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => doc.data());
   }
 
   // 特定の日付のイベントを取得
-  getEventByDate(date: string): Observable<any> {
+  async getEventByDate(date: string): Promise<any> {
     const docId = this.generateDocumentId(date); // ドキュメントIDを生成
-    return this.firestore.collection('events').doc(docId).valueChanges();
+    const docSnap = await getDoc(doc(this.db, 'events', docId));
+    return docSnap.data();
   }
 
   // ドキュメントを削除するメソッド
-  deleteEvent(docId: string): Promise<void> {
-    return this.firestore.collection('events').doc(docId).delete();
+  async deleteEvent(docId: string): Promise<void> {
+    await deleteDoc(doc(this.db, 'events', docId));
   }
 
   // イベント情報の更新
-  updateEvent(docId: string, eventData: any): Promise<void> {
-    return this.firestore.collection('events').doc(docId).update(eventData);
+  async updateEvent(docId: string, eventData: any): Promise<void> {
+    await updateDoc(doc(this.db, 'events', docId), eventData);
   }
 }

@@ -1,36 +1,49 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { collection,
+  doc,
+  setDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc
+} from '@angular/fire/firestore';
+import { getFirestore } from '@angular/fire/firestore';
+import { getStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
 
-  constructor(
-    private firestore: AngularFirestore,
-    ) { }
+  private db = getFirestore();
+  private storage = getStorage();
+
+  constructor() { }
 
   // 記事を追加するメソッド
-  addArticle(data: any) {
-    const ID = this.firestore.createId();
+  async addArticle(data: any) {
+    const ID = doc(this.db, 'articles').id;
     data.articleId = ID;
-    return this.firestore.collection('articles').doc(ID).set(data);
+    await setDoc(doc(this.db, 'articles', ID), data);
   }
 
   // 全ての記事を取得するメソッド
-  getArticles() {
-    return this.firestore.collection('articles').snapshotChanges();
+  async getArticles() {
+    const querySnapshot = await getDocs(collection(this.db, 'articles'));
+    return querySnapshot.docs.map(doc => {
+      return {
+        id: doc.id,
+        ...doc.data()
+      };
+    });
   }
 
   // 記事を更新するメソッド
-  updateArticle(id: string, data: any) {
-    return this.firestore.collection('articles').doc(id).update(data);
+  async updateArticle(id: string, data: any) {
+    await updateDoc(doc(this.db, 'articles', id), data);
   }
 
   // 記事を削除するメソッド
-  deleteArticle(id: string) {
-    return this.firestore.collection('articles').doc(id).delete();
+  async deleteArticle(id: string) {
+    await deleteDoc(doc(this.db, 'articles', id));
   }
-
-
 }

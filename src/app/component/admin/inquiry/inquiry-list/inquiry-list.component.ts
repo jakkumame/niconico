@@ -21,11 +21,9 @@ export class InquiryListComponent implements OnInit {
     private alertController: AlertController
   ) { }
 
-  ngOnInit() {
-    this.contactService.getAllContacts().subscribe(data => {
-      this.contacts = data;
-    })
-  }
+async ngOnInit() {
+  this.contacts = await this.contactService.getAllContacts();
+}
 
   getInquiryTypeLabel(inquiryType: string): string {
     switch (inquiryType) {
