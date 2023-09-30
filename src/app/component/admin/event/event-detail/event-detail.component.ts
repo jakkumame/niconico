@@ -26,7 +26,6 @@ export class EventDetailComponent implements OnInit {
     private appFormService: ApplicationFormService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private datePipe: DatePipe,
   ) {}
 
   ngOnInit(): void {

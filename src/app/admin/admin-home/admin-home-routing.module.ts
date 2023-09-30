@@ -9,6 +9,7 @@ import { ArticleListComponent } from 'src/app/component/admin/article/article-li
 import { EventFormComponent } from 'src/app/component/admin/event/event-form/event-form.component';
 import { EventDetailComponent } from 'src/app/component/admin/event/event-detail/event-detail.component';
 import { ArticleFormComponent } from 'src/app/component/admin/article/article-form/article-form.component';
+import { ArticleDetailComponent } from 'src/app/component/admin/article/article-detail/article-detail.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,6 @@ const routes: Routes = [
       {
         path: 'event-detail/:date',
         component: EventDetailComponent,
-
       },
       {
         path: 'inquiry-list',
@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: 'article-form',
         component: ArticleFormComponent,
+      },
+      {
+        path: 'article-detail/:articleId',
+        component: ArticleDetailComponent,
       },
     ]
   }
