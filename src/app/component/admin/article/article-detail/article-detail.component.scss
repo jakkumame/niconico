@@ -1,6 +1,5 @@
 ion-segment {
   width: 50%;
-  height: auto;
   margin: 5% auto 5% auto ;
   --background: #ffffff9c;
 }
@@ -53,7 +52,7 @@ ion-card {
 
 ion-button {
   width: 50%;
-  margin: 10% auto 10% auto;
+  margin: 10% auto 5% auto;
 }
 
 @media screen and (min-width: 576px){
@@ -67,31 +66,18 @@ ion-button {
 
   ion-item {
     ion-input {
-      font-size: 2.3rem;
+      font-size: 1.5rem;
     }
     ion-textarea {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
   ion-segment {
     width: 50%;
-    height: auto;
-    margin: auto 0 auto auto;
-    --background: #ffffff9c;
+    margin: 5% auto auto auto;
+    --background: #ffffff;
   }
-  .buttons {
-    .delete {
-      margin: auto 5% auto auto;
-      width: 50%;
-      font-weight: bold;
-    }
-    .change {
-      margin: auto auto auto 0;
-      width: 50%;
-      font-weight: bold;
 
-    }
-  }
 
   .false {
     ion-card-header {
@@ -103,5 +89,21 @@ ion-button {
       }
     }
   }
+
+  .true {
+    width: 60%;
+  }
+
+  .delete {
+    width: 30%;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  .change {
+    width: 30%;
+    font-weight: bold;
+    margin-top: 2%;
+  }
+
 
 }
