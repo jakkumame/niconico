@@ -1,5 +1,72 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/event-list"></ion-back-button>
+    </ion-buttons>
     <ion-title>記事の詳細</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="toggleEditMode($event)" value="default" [value]=" isEditing ? 'true' : 'false'">
+    <ion-segment-button value="false">
+      <ion-label>view</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="true">
+      <ion-label>edit</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- isEditing=falseの場合-->
+  <ion-card *ngIf="!isEditing" class="false">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" sizeLg="6" class="">
+          <ion-card-header>
+            <ion-card-subtitle>{{ article.subtitle }}</ion-card-subtitle>
+            <ion-card-title>{{ article.title }}</ion-card-title>
+            <h6>{{ article.timestamp | date:'yyyy年MM月dd日HH:mm' }}</h6>
+          </ion-card-header>
+          <div class="custom-line"></div>
+          <ion-card-content>
+            <p>{{ article.content }}</p>
+          </ion-card-content>
+        </ion-col>
+        <ion-col size="12" sizeLg="6">
+          <img src="{{ article?.imageUrl }}" alt="article main image">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- isEditing=true（編集モード）の場合-->
+  <ion-card *ngIf="isEditing">
+    <ion-card-header>
+      <ion-card-title>
+        <h2>EDIT MODE</h2>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input [(ngModel)]="article.title" label="タイトル" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="article.subtitle" label="サブタイトル" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea [(ngModel)]="article.content" rows="6" label="内容" labelPlacement="floating"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="article.imageUrl">
+        <img [src]="article.imageUrl" alt="掲載中の写真" style="width:80%; margin:auto;">
+      </ion-item>
+      <ion-item>
+        <ion-input type="file" (change)="onFileSelected($event)" label="写真の変更"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color="danger" (click)="deleteArticle()" expand="full" class="delete">投稿を削除</ion-button>
+  <ion-button color="success" *ngIf="isEditing" (click)="saveChanges()" expand="full" class="change">変更を保存</ion-button>
+
+
+</ion-content>

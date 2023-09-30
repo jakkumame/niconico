@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Article } from 'src/app/interface/article';
 import { ArticleService } from 'src/app/service/article/article.service';
 
 @Component({
@@ -21,7 +22,17 @@ export class ArticleFormComponent  {
     });
   }
 
-
+  onSubmit() {
+    if (this.articleForm.valid && this.image) {
+      this.articleService.uploadImage(this.image).subscribe(imageUrl => {
+        const formData: Article = {
+          ...this.articleForm.value,
+          imageUrl: imageUrl
+        };
+        this.articleService.addArticle(formData);
+      });
+    }
+  }
 
   onImageSelected(event: any) {
     const file: File = event.target.files[0];
@@ -32,18 +43,6 @@ export class ArticleFormComponent  {
         this.imageUrl = e.target.result; // 画像のデータをセット
       };
       reader.readAsDataURL(file);
-    }
-  }
-
-  onSubmit() {
-    if (this.articleForm.valid && this.image) {
-      this.articleService.uploadImage(this.image).subscribe(imageUrl => {
-        const formData = {
-          ...this.articleForm.value,
-          imageUrl: imageUrl
-        };
-        this.articleService.addArticle(formData);
-      });
     }
   }
 

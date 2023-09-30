@@ -15,8 +15,7 @@
             <ion-card-title style="margin-top: 5%; margin-bottom: 5%">{{ article.title }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>{{ article.subtitle }}</p>
-            <ion-button class="detail-button" [routerLink]="['/admin/article-detail', article.articleId]">詳細</ion-button>
+            <ion-button expand="full" class="detail-button" [routerLink]="['/admin/article-detail', article.articleId]">詳細</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

@@ -22,6 +22,10 @@ export class ArticleService {
     });
   }
 
+  getArticleById(articleId: string):Observable<any>{
+    return this.firestore.collection('articles').doc(articleId).valueChanges();
+  };
+
   // 全ての記事を取得するメソッド (Observableを返す)
   getArticles(): Observable<any[]> {
     return this.firestore.collection('articles').snapshotChanges();
@@ -45,15 +49,31 @@ export class ArticleService {
     });
   }
 
-  uploadImage(image: File) {
+  uploadImage(image: File): Observable<string> {
     const filePath = `articleImages/${new Date().getTime()}_${image.name}`;
+
+    // Firebase Storageの参照を作成
     const fileRef = this.storage.ref(filePath);
+
+    // 画像をFirebase Storageにアップロードするタスクを開始
     const task = this.storage.upload(filePath, image);
 
-    // アップロード完了後のURLを取得
-    return task.snapshotChanges().pipe(
-      finalize(() => fileRef.getDownloadURL())
-    );
+    // 新しいObservableを返す
+    return new Observable(observer => {
+      // アップロードタスクの変更を監視
+      task.snapshotChanges().pipe(
+        // アップロードタスクが完了したときに実行
+        finalize(() => {
+          // アップロードが完了したら、画像のダウンロードURLを取得
+          fileRef.getDownloadURL().subscribe(url => {
+            // 取得したダウンロードURLをObservableに発行
+            observer.next(url);
+            // Observableの完了を通知
+            observer.complete();
+          });
+        })
+      ).subscribe();
+    });
   }
 
 
