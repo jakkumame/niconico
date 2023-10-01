@@ -1,5 +1,14 @@
-<img class="yellow" src="../../assets/Vector(yellow).svg">
-<img class="pink-info" src="../../assets/Vector(pink2).svg">
+<!-- <img class="yellow" src="../../assets/Vector(yellow).svg">
+<img class="pink-info" src="../../assets/Vector(pink2).svg"> -->
+
+
 <ion-card>
-  <ion-card-title>ここに投稿が入ります</ion-card-title>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let article of articles">
+        <div style="width: 45px; display: inline-block;"><img  *ngIf="isNew(article.timestamp!)" src="../../../assets/new.png" alt="newのバッジ" style="width: 40px; margin-right:5px;"></div>
+        <h3>{{ article.title }}</h3>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
 </ion-card>

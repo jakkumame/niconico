@@ -18,7 +18,6 @@ import { EventEditComponent } from 'src/app/component/admin/event/event-edit/eve
 import { ApplicationFormComponent } from 'src/app/component/admin/application/application-form/application-form.component';
 import { ArticleListComponent } from 'src/app/component/admin/article/article-list/article-list.component';
 import { ArticleFormComponent } from 'src/app/component/admin/article/article-form/article-form.component';
-import { ArticleEditComponent } from 'src/app/component/admin/article/article-edit/article-edit.component';
 import { ArticleDetailComponent } from 'src/app/component/admin/article/article-detail/article-detail.component';
 import { GeneralMappingPipe } from 'src/app/pipes/meal-type.pipe';
 
@@ -42,7 +41,6 @@ import { GeneralMappingPipe } from 'src/app/pipes/meal-type.pipe';
     ApplicationFormComponent,
     ArticleListComponent,
     ArticleFormComponent,
-    ArticleEditComponent,
     ArticleDetailComponent,
     GeneralMappingPipe,
   ],

@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private menuCtrl: MenuController,
-    ) {} // <-- Routerをインジェクト
+    ) {}
 
   ngOnInit(): void {
     // ルーティングイベントの変更を監視

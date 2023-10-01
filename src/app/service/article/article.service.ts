@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, finalize } from 'rxjs';
+import { Observable, finalize, map } from 'rxjs';
+import { Article } from 'src/app/interface/article';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +23,20 @@ export class ArticleService {
     });
   }
 
+  // articleIdからそのオブジェクトを取得するメソッド（Observableを返す）
   getArticleById(articleId: string):Observable<any>{
     return this.firestore.collection('articles').doc(articleId).valueChanges();
   };
 
   // 全ての記事を取得するメソッド (Observableを返す)
-  getArticles(): Observable<any[]> {
-    return this.firestore.collection('articles').snapshotChanges();
+  getArticles(): Observable<Article[]> {
+    return this.firestore.collection('articles').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Article;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 
   // 記事を更新するメソッド (Promiseを返す)
