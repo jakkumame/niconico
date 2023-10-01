@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Article } from './../../interface/article';
 import { ArticleService } from './../../service/article/article.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-info-board',
   templateUrl: './info-board.component.html',
-  styleUrls: ['./info-board.component.scss']
+  styleUrls: ['./info-board.component.scss'],
+  providers: [ DatePipe ]
 })
 export class InfoBoardComponent implements OnInit {
   articles: any;

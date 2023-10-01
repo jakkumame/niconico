@@ -14,6 +14,7 @@ import { ImageComponent } from '../component/image/image.component';
 import { VisionComponent } from '../component/vision/vision.component';
 import { ArticlePlaceComponent } from '../component/article-place/article-place.component';
 import { InfoBoardComponent } from '../component/info-board/info-board.component';
+import { ArticleContentComponent } from '../component/article-content/article-content.component';
 import { SupportComponent } from '../component/support/support.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapComponent } from '../google-map/google-map.component';
@@ -40,6 +41,7 @@ register();
     VisionComponent,
     SwiperComponent,
     InfoBoardComponent,
+    ArticleContentComponent,
     SupportComponent,
     AccessInfoComponent,
     FooterComponent

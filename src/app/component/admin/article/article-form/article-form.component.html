@@ -10,20 +10,16 @@
 <ion-content>
   <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
     <ion-item>
-      <ion-label position="floating">タイトル</ion-label>
-      <ion-input formControlName="title"></ion-input>
+      <ion-input formControlName="title" [counter]="true" maxlength="13" label="タイトル" labelPlacement="floating" style="--border-color: none;" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">サブタイトル</ion-label>
-      <ion-input formControlName="subtitle"></ion-input>
+      <ion-input formControlName="subtitle" label="サブタイトル" labelPlacement="floating" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">内容</ion-label>
-      <ion-textarea formControlName="content"></ion-textarea>
+      <ion-textarea formControlName="content" row="6" label="内容" labelPlacement="floating" required></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">写真を選択</ion-label>
-      <ion-input type="file" (change)="onImageSelected($event)"></ion-input>
+      <ion-input type="file" (change)="onImageSelected($event)" label="掲載写真" labelPlacement="start"></ion-input>
     </ion-item>
     <ion-img *ngIf="imageUrl" [src]="imageUrl" style="width: 100px; height: 100px;"></ion-img>
     <ion-button expand="full" type="submit" [disabled]="!articleForm.valid">投稿</ion-button>

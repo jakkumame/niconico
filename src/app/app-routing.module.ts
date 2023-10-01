@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
 import { ApplicationFormComponent } from './component/admin/application/application-form/application-form.component';
+import { ArticleContentComponent } from './component/article-content/article-content.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'app-form',
     component: ApplicationFormComponent,
+  },
+  {
+    path: 'article/:id',
+    component: ArticleContentComponent
   },
   {
     path: 'admin',
