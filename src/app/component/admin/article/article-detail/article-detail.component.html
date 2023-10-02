@@ -25,15 +25,26 @@
           <ion-card-header>
             <ion-card-subtitle>{{ article.subtitle }}</ion-card-subtitle>
             <ion-card-title>{{ article.title }}</ion-card-title>
-            <h6>{{ article.timestamp | date:'yyyy年MM月dd日HH:mm' }}</h6>
+            <h6>{{ article.timestamp | date:'yyyy年MM月dd日' }}</h6>
           </ion-card-header>
           <div class="custom-line"></div>
           <ion-card-content>
+            <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
+            <div>
+              <ion-icon name="calendar-number-outline" size="large" color="primary"></ion-icon>
+              <h4>{{ article.date | date: 'yyyy年MM月dd日' }}</h4>
+            </div>
+            <div>
+              <ion-icon name="location-outline" size="large" color="danger"></ion-icon>
+              <h4>{{ article.place }}</h4>
+            </div>
             <p>{{ article.content }}</p>
           </ion-card-content>
         </ion-col>
         <ion-col size="12" sizeLg="6">
-          <img src="{{ article?.imageUrl }}" alt="article main image">
+          <div class="image-container">
+            <img src="{{ article?.imageUrl }}" alt="article main image">
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

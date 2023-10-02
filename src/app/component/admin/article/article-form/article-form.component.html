@@ -16,14 +16,17 @@
       <ion-item>
         <ion-input formControlName="subtitle" label="サブタイトル" labelPlacement="floating" required></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-input formControlName="date" type="date" label="日時" helperText="記事を書く日ではなくて、記事のことがあった日を記入" labelPlacement="floating" style="--border-color: none;" required></ion-input>
+      </ion-item>
       <div formArrayName="types" class="checkbox-container">
         <h6>ジャンル</h6>
-        <ion-item *ngFor="let type of articleTypes; let i = index" class="checkbox-item">
-          <ion-checkbox slot="end" [formControlName]="i">{{ type.label }}</ion-checkbox>
+        <ion-item *ngFor="let type of articleTypes; let i = index" class="checkbox-item" >
+          <ion-checkbox slot="end" [formControlName]="i" style="--border-color: none;">{{ type.label }}</ion-checkbox>
         </ion-item>
       </div>
       <ion-item>
-        <ion-input formControlName="place" label="開催場所" labelPlacement="floating" required></ion-input>
+        <ion-input formControlName="place" label="開催場所" helperText="開催場所がない場合は、このまま「神原にこにこkitchen」" labelPlacement="floating" style="--border-color: none;" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-textarea formControlName="content" row="6" label="内容" labelPlacement="floating" required></ion-textarea>

@@ -15,6 +15,15 @@ export class ArticleDetailComponent implements OnInit {
   isEditing: boolean = false;
   selectedImage: File | null = null;
 
+  typesData = [
+    { value: 'report', label: '開催報告' },
+    { value: 'PR', label: 'PR' },
+    { value: 'volunteer', label: 'ボランティア' },
+    { value: 'support', label: 'ご支援' },
+    { value: 'topic', label: 'トピック' },
+    { value: 'other', label: 'その他' }
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
@@ -95,6 +104,24 @@ export class ArticleDetailComponent implements OnInit {
     });
     await alert.present();
   }
+
+  getBackgroundColor(type: string): string {
+    switch(type) {
+      case 'report': return '#ff9c6a';
+      case 'PR': return '#002feb';
+      case 'volunteer': return '#00a900';
+      case 'support': return '#ec1800';
+      case 'topic': return '#8a008a';
+      case 'other': return '#009dff';
+      default: return 'black';
+    }
+  }
+
+  getLabel(type: string): string {
+    const typeData = this.typesData.find(t => t.value === type);
+    return typeData ? typeData.label : type;
+  }
+
 
   goBack(): void {
     this.navCtrl.navigateRoot('/admin/article-list');

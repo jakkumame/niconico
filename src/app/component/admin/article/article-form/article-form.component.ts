@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Article } from 'src/app/interface/article';
 import { ArticleService } from 'src/app/service/article/article.service';
 
@@ -21,19 +22,23 @@ export class ArticleFormComponent  {
     { value: 'PR', label: 'PR' },
     { value: 'volunteer', label: 'ボランティア' },
     { value: 'support', label: '寄付や支援' },
-    { value: 'information', label: '情報発信' },
     { value: 'topic', label: 'トピック' },
     { value: 'other', label: 'その他' }
   ];
 
 
 
-  constructor(private fb: FormBuilder, private articleService: ArticleService, private router: Router,) {
+  constructor(private fb: FormBuilder,
+    private articleService: ArticleService,
+    private router: Router,
+    private alertCtrl: AlertController,
+    ) {
     this.articleForm = this.fb.group({
       title: ['', Validators.required],
       subtitle: ['', Validators.required],
+      date: ['', Validators.required],
       types: this.fb.array(this.articleTypes.map(() => false)), // 複数選択のための配列
-      place: ['', Validators.required],
+      place: ['神原にこにこkitchen', Validators.required],
       content: ['', Validators.required]
     });
   }
@@ -44,22 +49,46 @@ export class ArticleFormComponent  {
 
   onSubmit() {
     if (this.articleForm.valid && this.image) {
-      this.articleService.uploadImage(this.image).subscribe(imageUrl => {
-        const selectedTypes = this.articleTypes
-          .filter((_, i) => this.typesFormArray.value[i])
-          .map(type => type.value);
-        const formData: Article = {
-          ...this.articleForm.value,
-          types: selectedTypes,
-          imageUrl: imageUrl,
-          timestamp: new Date(),
-        };
-        this.articleService.addArticle(formData);
-        this.articleForm.reset();
-        this.image = null;
-        this.router.navigate(['/admin/article-list']);
-      });
+      this.confirmAlert();
     }
+  }
+
+  async confirmAlert() {
+    const alert = await this.alertCtrl.create({
+      header: '確認',
+      message: '投稿内容に間違いはありませんか？',
+      buttons: [
+        {
+          text: 'キャンセル',
+          role: 'cancel',
+        },
+        {
+          text: '投稿する',
+          handler:  () => {
+            this.submitArticle();
+          }
+        },
+      ]
+    });
+    await alert.present();
+  }
+
+  submitArticle() {
+    this.articleService.uploadImage(this.image!).subscribe(imageUrl => {
+      const selectedTypes = this.articleTypes
+        .filter((_, i) => this.typesFormArray.value[i])
+        .map(type => type.value);
+      const formData: Article = {
+        ...this.articleForm.value,
+        types: selectedTypes,
+        imageUrl: imageUrl,
+        timestamp: new Date().toISOString(),
+      };
+      this.articleService.addArticle(formData);
+      this.articleForm.reset();
+      this.image = null;
+      this.router.navigate(['/admin/article-list']);
+    });
   }
 
   onImageSelected(event: any) {

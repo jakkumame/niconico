@@ -16,7 +16,7 @@ ion-card {
   ion-item {
     margin: 3%;
     ion-input {
-      margin: 3% auto 3% auto;
+      margin: 1% auto 3% auto;
     }
   }
 }
@@ -39,11 +39,32 @@ ion-card {
     width: 85%;
   }
   ion-card-content {
-    width: 80%;
+    width: 85%;
+    padding: 0;
     margin: 5% auto auto auto;
+    ion-chip {
+      margin: 5% 1% 5% 1%;
+      padding: 2px 10px 2px 10px;
+      color: #ffffff;
+      font-family: source-han-sans-japanese, sans-serif;
+      font-weight: 900;
+      font-style: normal;
+      border-radius: 5px;
+      height: 98%;
+    }
+
+    div {
+      display: flex;
+      margin-bottom: 5%;
+      h4 {
+        margin: auto auto auto 3%;
+      }
+    }
+    p {
+      margin-bottom: 8%;
+    }
   }
-  img {
-    display: block;
+  .image-container {
     width: 80%;
     margin: 5% auto 5% auto;
   }
@@ -87,6 +108,9 @@ ion-button {
       ion-card-subtitle {
         order: 2;
       }
+    }
+    .image-container {
+      margin-top: 20%;
     }
   }
 

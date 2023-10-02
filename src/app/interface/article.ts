@@ -1,10 +1,11 @@
 export interface Article {
   title: string;
   subtitle: string;
+  date: string;
   content: string;
-  type: string;
+  types: string[];
   place: string;
-  imageURL: string;
+  imageUrl: string;
   timestamp?: Date;
   articleId?: string;
 }
