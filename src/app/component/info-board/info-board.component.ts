@@ -18,11 +18,12 @@ export class InfoBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe( data => {
-      this.articles = data.sort((a, b) => {
+      const sortedArticles = data.sort((a, b) => {
         const dateA = new Date(a.timestamp!);
         const dateB = new Date(b.timestamp!);
         return dateB.getTime() - dateA.getTime(); // 新しい日付順にソート
       });
+      this.articles = sortedArticles.slice(0, 7);
     });
   }
 

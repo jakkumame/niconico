@@ -3,25 +3,36 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/admin/article-list"></ion-back-button>
     </ion-buttons>
-    <ion-title>記事の投稿</ion-title>
+    <ion-title>新規作成</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-input formControlName="title" [counter]="true" maxlength="13" label="タイトル" labelPlacement="floating" style="--border-color: none;" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input formControlName="subtitle" label="サブタイトル" labelPlacement="floating" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-textarea formControlName="content" row="6" label="内容" labelPlacement="floating" required></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-input type="file" (change)="onImageSelected($event)" label="掲載写真" labelPlacement="start"></ion-input>
-    </ion-item>
-    <ion-img *ngIf="imageUrl" [src]="imageUrl" style="width: 100px; height: 100px;"></ion-img>
-    <ion-button expand="full" type="submit" [disabled]="!articleForm.valid">投稿</ion-button>
+    <ion-list>
+      <ion-item>
+        <ion-input formControlName="title" [counter]="true" maxlength="13" label="タイトル" labelPlacement="floating" style="--border-color: none;" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="subtitle" label="サブタイトル" labelPlacement="floating" required></ion-input>
+      </ion-item>
+      <div formArrayName="types" class="checkbox-container">
+        <h6>ジャンル</h6>
+        <ion-item *ngFor="let type of articleTypes; let i = index" class="checkbox-item">
+          <ion-checkbox slot="end" [formControlName]="i">{{ type.label }}</ion-checkbox>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-input formControlName="place" label="開催場所" labelPlacement="floating" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea formControlName="content" row="6" label="内容" labelPlacement="floating" required></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-input type="file" (change)="onImageSelected($event)" label="掲載写真" labelPlacement="start" required></ion-input>
+      </ion-item>
+      <ion-img *ngIf="imageUrl" [src]="imageUrl" style="width: 100px; height: 100px;"></ion-img>
+      <ion-button expand="full" type="submit" [disabled]="!articleForm.valid" color="success">投稿</ion-button>
+    </ion-list>
   </form>
 </ion-content>

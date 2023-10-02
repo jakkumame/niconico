@@ -1,4 +1,63 @@
-ion-button {
-  width: 60%;
-  margin: 5% auto auto auto;
+ion-content {
+  height: auto;
+
+  ion-button {
+    width: 60%;
+    margin: 5% auto 5% auto;
+  }
+
+  .checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  h6 {
+    width: 100%;
+    margin-left: 5%;
+  }
+
+  .checkbox-item {
+    flex: 1 0 calc(50% - 10px);
+    margin-right: 10px;
+    text-align: left;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+    ion-label {
+      margin-left: 5%;
+    }
+  }
+
+
+
+
+  ion-input, ion-textarea {
+    margin-bottom: 2cqh;
+  }
+}
+
+
+@media screen and (min-width: 576px){
+}
+
+@media screen and (min-width: 577px) and (max-width: 991px) {
+
+}
+
+@media screen and (min-width: 992px) {
+  .checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .checkbox-item {
+    flex: 1 0 calc(33.333% - 10px); // 3つのチェックボックスを1行に表示する場合
+    margin-right: 10px;
+
+    &:nth-child(3n) {
+      margin-right: 0; // 3つ目のチェックボックスの右マージンを削除
+    }
+  }
 }

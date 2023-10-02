@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/admin/event-list"></ion-back-button>
+      <ion-back-button defaultHref="/admin/article-list"></ion-back-button>
     </ion-buttons>
     <ion-title>記事の詳細</ion-title>
   </ion-toolbar>
@@ -65,7 +65,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button color="danger" (click)="deleteArticle()" expand="full" class="delete">投稿を削除</ion-button>
+  <ion-button color="danger" (click)="deleteArticle(article.articleId)" expand="full" class="delete">投稿を削除</ion-button>
   <ion-button color="success" *ngIf="isEditing" (click)="saveChanges()" expand="full" class="change">変更を保存</ion-button>
 
 

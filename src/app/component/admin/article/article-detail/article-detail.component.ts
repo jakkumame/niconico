@@ -38,7 +38,7 @@ export class ArticleDetailComponent implements OnInit {
     this.selectedImage = <File>event.target.files[0];
   }
 
-  async deleteArticle():Promise<void> {
+  async deleteArticle(id: string):Promise<void> {
     const alert = await this.alertController.create({
       header: '確認',
       message: `${this.article.title}を削除してもよろしですか`,
@@ -50,7 +50,7 @@ export class ArticleDetailComponent implements OnInit {
         {
           text: '削除する',
           handler: () => {
-            this.articleService.deleteArticle(this.articleID);
+            this.articleService.deleteArticle(id);
             this.goBack();
           }
         }
@@ -63,12 +63,12 @@ export class ArticleDetailComponent implements OnInit {
     this.isEditing = event.detail.value === 'true';
   }
 
-
   saveChanges() {
     if (this.selectedImage) {
       this.articleService.uploadImage(this.selectedImage).subscribe(url => {
         this.article.imageUrl = url;
         this.updateArticleData();
+        this.fetchArticles();
       });
     } else {
       this.updateArticleData();
@@ -97,7 +97,7 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.navCtrl.back();
+    this.navCtrl.navigateRoot('/admin/article-list');
   }
 }
 

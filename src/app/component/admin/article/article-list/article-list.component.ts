@@ -17,9 +17,28 @@ export class ArticleListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.articleService.getArticles().subscribe(data => {
-      this.articles = data;
+    this.articleService.getArticles().subscribe( data => {
+      const sortedArticles = data.sort((a, b) => {
+        const dateA = new Date(a.timestamp!);
+        const dateB = new Date(b.timestamp!);
+        return dateB.getTime() - dateA.getTime();
+      })
+      this.articles = sortedArticles;
+
     });
+  }
+
+  getTypeLabel(type: string): string {
+    switch (type) {
+      case 'report': return '開催報告';
+      case 'PR': return 'PR';
+      case 'volunteer': return 'ボランティア';
+      case 'support': return 'ご支援';
+      case 'information': return '情報発信';
+      case 'topic': return 'トピック';
+      case 'other': return 'そのほか';
+      default: return '不明なお問い合わせ（エラー）';
+    }
   }
 
 

@@ -16,6 +16,7 @@
   <ion-content class="ion-padding">
     <ion-button expand="full" [routerLink]="['/app-form']">こども食堂へ申し込む</ion-button>
     <app-footer  (menuCloseRequest)="closeMenu()"></app-footer>
+    <ion-button expand="full" [routerLink]="['/contact']" color="success">問い合わせ</ion-button>
   </ion-content>
 </ion-menu>
 <ion-header class="sm-header">
@@ -81,7 +82,7 @@
     <button [routerLink]="['/app-form']">申し込む</button>
   </section> -->
 
-  <section id="info">
+  <section id="info" style="padding-top: 5%;">
     <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">お知らせ</h2>
     <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">INFORMATION</h3>

@@ -12,14 +12,18 @@ export class SwiperComponent  implements OnInit {
 
   swiperModules = [IonicSlides];
 
-  constructor() {
+  constructor(
+  ) {}
+
+  ngOnInit() {
+
+
+
     this.slides = [
       {swiper: '../../assets/gallery(example).png'},
       {swiper: '../../assets/dining.svg'},
       {swiper: '../../assets/play-room.svg'},
     ];
   }
-
-  ngOnInit() {}
 
 }

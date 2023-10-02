@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, finalize, map } from 'rxjs';
 import { Article } from 'src/app/interface/article';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +17,18 @@ export class ArticleService {
     ) { }
 
   // 記事を追加するメソッド (Promiseを返す)
-  addArticle(data: any): Promise<void> {
-    return this.firestore.collection('articles').add(data).then(docRef => {
-      console.log('Document written with ID:', docRef.id);
-    }).catch(error => {
+  async addArticle(data: any): Promise<void> {
+    try {
+      const docRef = await this.firestore.collection('articles').add(data);
+      // 生成されたIDをarticleIdプロパティに追加
+      await this.firestore.collection('articles').doc(docRef.id).update({
+        articleId: docRef.id
+      });
+    } catch (error) {
       console.error('Error adding document:', error);
-    });
+    }
   }
+
 
   // articleIdからそのオブジェクトを取得するメソッド（Observableを返す）
   getArticleById(articleId: string):Observable<any>{
@@ -58,14 +65,11 @@ export class ArticleService {
   }
 
   uploadImage(image: File): Observable<string> {
-    const filePath = `articleImages/${new Date().getTime()}_${image.name}`;
-
+    const filePath = `articleImages/${uuidv4()}_${image.name}`;
     // Firebase Storageの参照を作成
     const fileRef = this.storage.ref(filePath);
-
     // 画像をFirebase Storageにアップロードするタスクを開始
     const task = this.storage.upload(filePath, image);
-
     // 新しいObservableを返す
     return new Observable(observer => {
       // アップロードタスクの変更を監視
