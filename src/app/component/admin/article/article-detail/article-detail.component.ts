@@ -1,3 +1,4 @@
+import { ArticleTypeService } from './../../../../service/article/article-type.service';
 import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -17,21 +18,12 @@ export class ArticleDetailComponent implements OnInit {
   isEditing: boolean = false;
   selectedImage: File | null = null;
 
-  typesData = [
-    { value: 'report', label: '開催報告' },
-    { value: 'PR', label: 'PR' },
-    { value: 'volunteer', label: 'ボランティア' },
-    { value: 'support', label: 'ご支援' },
-    { value: 'topic', label: 'トピック' },
-    { value: 'other', label: 'その他' }
-  ];
-
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
     private alertController: AlertController,
     private navCtrl: NavController,
-    private datePipe: DatePipe
+    private typeService: ArticleTypeService,
   ) {}
 
   ngOnInit() {
@@ -109,20 +101,11 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   getBackgroundColor(type: string): string {
-    switch(type) {
-      case 'report': return '#ffa680';
-      case 'PR': return '#335cff';
-      case 'volunteer': return '#00a900';
-      case 'support': return '#ec1800';
-      case 'topic': return '#8a008a';
-      case 'other': return '#28acff';
-      default: return 'black';
-    }
+    return this.typeService.getBackgroundColor(type);
   }
 
   getLabel(type: string): string {
-    const typeData = this.typesData.find(t => t.value === type);
-    return typeData ? typeData.label : type;
+    return this.typeService.getLabel(type);
   }
 
 

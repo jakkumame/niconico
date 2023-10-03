@@ -1,20 +1,24 @@
-<h2>神原にこにこkitchen</h2>
-<p></p>
-<h4>記事のジャンル</h4>
-<h4>開催場所</h4>
-<h4>掲載日</h4>
-<div>SNSへのリンク</div>
-
-
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>神原にこにこkitchen</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content>
   <div *ngIf="article">
+    <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
     <h2>{{ article.title }}</h2>
     <p>{{ article.content }}</p>
     <!-- その他の記事の詳細を表示 -->
   </div>
 </ion-content>
 
+<h2>神原にこにこkitchen</h2>
+<p></p>
+<h4>記事のジャンル</h4>
+<h4>開催場所</h4>
+<h4>掲載日</h4>
+<div>SNSへのリンク</div>
 <ion-button expand="full" [routerLink]="['/app-form']">こども食堂へ申し込む</ion-button>
 <ion-button expand="full" [routerLink]="['/contact']" color="success">問い合わせ</ion-button>

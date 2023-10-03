@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/interface/article';
+import { ArticleTypeService } from 'src/app/service/article/article-type.service';
 import { ArticleService } from 'src/app/service/article/article.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class ArticleContentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private typeService: ArticleTypeService,
+
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +27,14 @@ export class ArticleContentComponent implements OnInit {
         this.article = article;
       });
     }
+  }
+
+  getBackgroundColor(type: string): string {
+    return this.typeService.getBackgroundColor(type);
+  }
+
+  getLabel(type: string): string {
+    return this.typeService.getLabel(type);
   }
 
 }
