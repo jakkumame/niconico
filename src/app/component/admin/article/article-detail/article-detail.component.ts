@@ -2,11 +2,13 @@ import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from 'src/app/service/article/article.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.scss']
+  styleUrls: ['./article-detail.component.scss'],
+  providers: [ DatePipe ]
 })
 export class ArticleDetailComponent implements OnInit {
   article: any =  {};
@@ -29,6 +31,7 @@ export class ArticleDetailComponent implements OnInit {
     private articleService: ArticleService,
     private alertController: AlertController,
     private navCtrl: NavController,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -37,9 +40,9 @@ export class ArticleDetailComponent implements OnInit {
 
   fetchArticles(){
     this.articleID = this.route.snapshot.paramMap.get('articleId')!;
-    this.articleService.getArticleById(this.articleID).subscribe( data =>
-      this.article = data,
-    )
+    this.articleService.getArticleById(this.articleID).subscribe( data => {
+      this.article = data
+    })
   };
 
 
@@ -107,12 +110,12 @@ export class ArticleDetailComponent implements OnInit {
 
   getBackgroundColor(type: string): string {
     switch(type) {
-      case 'report': return '#ff9c6a';
-      case 'PR': return '#002feb';
+      case 'report': return '#ffa680';
+      case 'PR': return '#335cff';
       case 'volunteer': return '#00a900';
       case 'support': return '#ec1800';
       case 'topic': return '#8a008a';
-      case 'other': return '#009dff';
+      case 'other': return '#28acff';
       default: return 'black';
     }
   }

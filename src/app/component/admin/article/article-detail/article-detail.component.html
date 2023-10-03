@@ -31,12 +31,12 @@
           <ion-card-content>
             <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
             <div>
-              <ion-icon name="calendar-number-outline" size="large" color="primary"></ion-icon>
-              <h4>{{ article.date | date: 'yyyy年MM月dd日' }}</h4>
+              <ion-icon name="calendar-number-outline" size="large" color="tertiary"></ion-icon>
+              <h4 style="color: #5260ff;">{{ article.date | date: 'yyyy年MM月dd日' }}</h4>
             </div>
             <div>
               <ion-icon name="location-outline" size="large" color="danger"></ion-icon>
-              <h4>{{ article.place }}</h4>
+              <h4 style="color: #eb445a;">{{ article.place }}</h4>
             </div>
             <p>{{ article.content }}</p>
           </ion-card-content>
@@ -63,6 +63,12 @@
       </ion-item>
       <ion-item>
         <ion-input [(ngModel)]="article.subtitle" label="サブタイトル" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="article.date" type="date" label="当該日時" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="article.place" label="場所" labelPlacement="floating"></ion-input>
       </ion-item>
       <ion-item>
         <ion-textarea [(ngModel)]="article.content" rows="6" label="内容" labelPlacement="floating"></ion-textarea>
