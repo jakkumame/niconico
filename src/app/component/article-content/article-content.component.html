@@ -1,24 +1,72 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>神原にこにこkitchen</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title slot="start">神原にこにこkitchen</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button  fill="solid" [routerLink]="['/app-form']">
+        <ion-icon name="chevron-forward-sharp"></ion-icon>
+        申し込む
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button  fill="solid" [routerLink]="['/contact']">
+        <ion-icon name="chevron-forward-sharp"></ion-icon>
+        問い合わせ
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content>
-  <div *ngIf="article">
-    <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
-    <h2>{{ article.title }}</h2>
-    <p>{{ article.content }}</p>
-    <!-- その他の記事の詳細を表示 -->
+<ion-content  *ngIf="isReady">
+  <div class="anime" appViewportAnimation animationClass="animate__rotateIn" animationDelay="animate__delay-2s">
+    <div class="logo" >
+      <img src="../../../assets/にこにこロゴ.png" alt="logo">
+      <p>神原にこにこ<br>kitchen</p>
+    </div>
   </div>
+  <div *ngIf="article" class="article-wrapper">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" sizeLg="5" appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s">
+          <h6>{{ article.timestamp | date:'yyyy年MM月dd日' }}</h6>
+
+          <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
+
+          <h2>{{ article.title }}</h2>
+
+          <div class="date-container">
+            <ion-icon name="calendar-number-outline" color="tertiary" class="calendar-icon"></ion-icon>
+            <h4 style="color: #5260ff;">{{ article.date | date: 'yyyy年MM月dd日' }}</h4>
+          </div>
+
+          <div class="place-container">
+            <ion-icon name="location-outline" color="danger" class="pin-icon"></ion-icon>
+            <h4 style="color: #eb445a;">{{ article.place }}</h4>
+          </div>
+
+        </ion-col>
+        <ion-col size="12" sizeLg="7">
+          <div class="image-container-wrapper" appViewportAnimation animationClass="animate__fadeInRight" animationDelay="animate__delay-1s">
+            <div class="image-container">
+              <img src="{{ article.imageUrl }}" alt="article main image">
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="12" sizeLg="6">
+          <div class="content-container" appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-2s">
+            <p class="subtitle">{{ article.subtitle }}</p>
+            <p class="content">{{ article.content }}</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div>SNSへのリンク</div>
 </ion-content>
 
-<h2>神原にこにこkitchen</h2>
-<p></p>
-<h4>記事のジャンル</h4>
-<h4>開催場所</h4>
-<h4>掲載日</h4>
-<div>SNSへのリンク</div>
-<ion-button expand="full" [routerLink]="['/app-form']">こども食堂へ申し込む</ion-button>
-<ion-button expand="full" [routerLink]="['/contact']" color="success">問い合わせ</ion-button>

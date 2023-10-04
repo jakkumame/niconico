@@ -2,7 +2,19 @@
 <!-- lg以上のメニュ -->
 <ion-header [translucent]="true" class="toolbar">
   <ion-toolbar color="primary" class="toolbar-md">
-    <ion-title size="large">神原にこにこkitchen-lg</ion-title>
+    <ion-title slot="start">神原にこにこkitchen</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button  fill="solid" [routerLink]="['/app-form']">
+        <ion-icon name="chevron-forward-sharp"></ion-icon>
+        申し込む
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button  fill="solid" [routerLink]="['/contact']">
+        <ion-icon name="chevron-forward-sharp"></ion-icon>
+        問い合わせ
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

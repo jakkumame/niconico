@@ -1,0 +1,162 @@
+
+.logo {
+  display: none;
+}
+
+.article-wrapper {
+  padding: 5%;
+
+  h6 {
+    text-align: right;
+    font-size: small;
+    color: #6b6b6b;
+  }
+  ion-chip {
+    margin: 0 1% 0 1%;
+    padding: 0 10px 0 10px;
+    height: auto;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: source-han-sans-japanese, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    border-radius: 2px;
+  }
+  h2 {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin: 8% auto 8% auto;
+    --animate-delay: 0.7s;
+  }
+
+  .place-container, .date-container {
+    display: flex;
+    margin-bottom: 5%;
+    ion-icon {
+      font-size: 20px;
+      margin: auto 0 auto 0;
+    }
+    h4 {
+      font-size: 1.5rem;
+      margin: auto auto auto 3%;
+    }
+    --animate-delay: 1.3s;
+  }
+
+  .image-container-wrapper {
+    display: inline-block;
+    margin: 5% auto 5% auto;
+    .image-container {
+        padding: 10px;
+        border: 2px solid #a044136d;
+        display: block;
+        border-radius: 3px;
+    }
+
+    .image-container img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    --animate-delay: 1.7s;
+  }
+
+  .content-container {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .subtitle {
+      font-size: 1.7rem;
+      text-align: left;
+      margin: 0 auto 5% auto;
+      font-family: Inter;
+      font-weight: 800;
+      color: #ff9232;
+    }
+    .content {
+      font-family: Inter;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+  }
+  --animate-delay: 1s;
+}
+
+
+@media screen and (min-width: 992px) {
+  ion-header {
+    ion-buttons {
+      padding: auto;
+      margin: auto 10px auto 10px;
+      ion-icon {
+        margin: auto 3% auto 3%;
+      }
+    }
+  }
+  .anime {
+    position: absolute;
+    z-index: 100;
+    right: 8%;
+    top: 65%;
+    --animate-delay: 1.4s;
+    .logo {
+      width: 120px;
+      height: 120px;
+      background: #ffffff;
+      border-radius: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(4deg);
+      box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.1);
+
+      img {
+        display: block;
+        width: 75%;
+        margin: 0;
+      }
+      p {
+        font-size: 8px;
+        text-align: center;
+        line-height: 1.1;
+        color: #7d3315;
+        font-weight: 600;
+      }
+
+    }
+  }
+
+  ion-title {
+    margin-left: 2%;
+    text-align: left;
+  }
+
+
+  .article-wrapper {
+    padding-top: 2%;
+    h6 {
+      margin-right: 5%;
+    }
+    h2 {
+      font-size: 3rem;
+    margin: 10% auto 10% auto;
+
+    }
+    width: 80%;
+    margin: auto;
+    position: relative;
+    .content-container {
+      position: absolute;
+      width: 90%;
+      top: -230px;
+    }
+    .content {
+      font-size: 1.3rem;
+      font-family: Inter;
+      font-weight: 500;
+      color:#424242;
+    }
+  }
+}

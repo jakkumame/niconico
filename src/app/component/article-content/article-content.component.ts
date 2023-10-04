@@ -11,6 +11,7 @@ import { ArticleService } from 'src/app/service/article/article.service';
 })
 export class ArticleContentComponent implements OnInit {
   article: Article | null = null;
+  isReady = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class ArticleContentComponent implements OnInit {
       this.articleService.getArticleById(articleId).subscribe(article => {
         this.article = article;
       });
+      this.isReady = true;
     }
   }
 
