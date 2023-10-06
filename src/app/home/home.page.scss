@@ -68,7 +68,10 @@ footer {
 
 
 
-@media screen and (min-width: 576px){
+@media screen and (max-width: 576px){
+  #image {
+    height: 2000px;
+  }
 }
 
 @media screen and (min-width: 577px) and (max-width: 991px) {
@@ -82,6 +85,9 @@ footer {
 
   #top {
     height: 1300px;
+  }
+  #image {
+    height: 2500px;
   }
 }
 

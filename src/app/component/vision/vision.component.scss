@@ -45,12 +45,12 @@ div {
 }
 
 @media screen and (min-width: 577px) and (max-width: 991px) {
-  .column1 {
-    order: 2;
-  }
-  .column2 {
-    order: 1;
-  }
+  // .column1 {
+  //   order: 2;
+  // }
+  // .column2 {
+  //   order: 1;
+  // }
 
   .article-container {
     margin: 5% 0 5% 0;
@@ -68,6 +68,8 @@ div {
     font-weight: bold;
   }
 }
+
+
 
 @media screen and (min-width: 992px) {
   .column1 {

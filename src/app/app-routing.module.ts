@@ -14,6 +14,7 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  { path: '**', redirectTo: '/404' },
   {
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
@@ -33,6 +34,14 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin-home/admin-home.module').then( m => m.AdminHomePageModule)
+  },
+  {
+    path: '404',
+    loadChildren: () => import('./error404/error404.module').then( m => m.Error404PageModule)
+  },
+  {
+    path: '403',
+    loadChildren: () => import('./error403/error403.module').then( m => m.Error403PageModule)
   },
 ];
 
