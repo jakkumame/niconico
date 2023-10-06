@@ -64,8 +64,9 @@ export class ArticleService {
     });
   }
 
-  uploadImage(image: File): Observable<string> {
-    const filePath = `articleImages/${uuidv4()}_${image.name}`;
+  uploadImage(image: File, date?: string): Observable<string> {
+
+    const filePath = `articleImages/${date}_${image.name}`;
     // Firebase Storageの参照を作成
     const fileRef = this.storage.ref(filePath);
     // 画像をFirebase Storageにアップロードするタスクを開始

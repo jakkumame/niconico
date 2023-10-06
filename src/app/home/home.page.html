@@ -26,9 +26,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-button expand="full" [routerLink]="['/app-form']">こども食堂へ申し込む</ion-button>
+    <ion-button expand="full" [routerLink]="['/app-form']" class="ion-margin">こども食堂へ申し込む</ion-button>
+    <ion-button expand="full" [routerLink]="['/contact']" color="success" class="ion-margin">問い合わせ</ion-button>
     <app-footer  (menuCloseRequest)="closeMenu()"></app-footer>
-    <ion-button expand="full" [routerLink]="['/contact']" color="success">問い合わせ</ion-button>
   </ion-content>
 </ion-menu>
 <ion-header class="sm-header">
@@ -62,31 +62,31 @@
 
 <ion-content [fullscreen]="true">
   <!-- <section id="top">
-    <app-main></app-main>
-  </section>
+  <app-main></app-main>
+  </section> -->
 
-  <section id="image">
+  <!-- <section id="image">
     <app-image></app-image>
     <button [routerLink]="['/app-form']">申し込む</button>
-  </section>
+  </section> -->
 
-  <section id="vision">
+  <!-- <section id="vision">
     <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">実施内容</h2>
     <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">PROGRAM</h3>
     <app-vision></app-vision>
     <button [routerLink]="['/app-form']">申し込む</button>
-  </section>
+  </section> -->
 
-  <section id="place" >
+  <!-- <section id="place" >
     <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">施設紹介</h2>
     <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">USING PLACE</h3>
     <app-article-place></app-article-place>
     <button [routerLink]="['/app-form']">申し込む</button>
-  </section>
+  </section> -->
 
-  <section id="gallery">
+  <!-- <section id="gallery">
     <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">実際の様子</h2>
     <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">GALLERY</h3>
@@ -94,14 +94,17 @@
     <button [routerLink]="['/app-form']">申し込む</button>
   </section> -->
 
-  <section id="info" style="padding-top: 5%;">
+  <!-- <section id="info" style="padding-top: 5%;">
     <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">お知らせ</h2>
     <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
     <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">INFORMATION</h3>
     <app-info-board></app-info-board>
-  </section>
+  </section> -->
 
   <section id="support">
+    <h2 appViewportAnimation animationClass="animate__fadeInDown" animationDelay="animate__delay-1s">ご支援のお願い</h2>
+    <div appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s" class="custom-line"></div>
+    <h3 appViewportAnimation animationClass="animate__fadeInUp" animationDelay="animate__delay-1s">SUPPORT</h3>
     <app-support></app-support>
   </section>
 
@@ -111,10 +114,10 @@
     <app-google-map></app-google-map>
     <app-access-info></app-access-info>
 
-    <button>申し込む</button>
+    <button [routerLink]="['/app-form']">申し込む</button>
 
-    <h2 class="exterior">外観</h2>
-    <img src="../../assets/外観.svg" alt="神原にこにこkitchenの外観写真">
+    <!-- <h2 class="exterior">外観</h2>
+    <img src="../../assets/外観.svg" alt="神原にこにこkitchenの外観写真"> -->
   </section>
 
 

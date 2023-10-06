@@ -16,6 +16,7 @@ export class ArticleDetailComponent implements OnInit {
   originalArticle: any;
   articleID!: string;
   isEditing: boolean = false;
+  imageChanged: boolean = false;
   selectedImage: File | null = null;
 
   constructor(
@@ -69,7 +70,7 @@ export class ArticleDetailComponent implements OnInit {
 
   saveChanges() {
     if (this.selectedImage) {
-      this.articleService.uploadImage(this.selectedImage).subscribe(url => {
+      this.articleService.uploadImage(this.selectedImage, this.article.date).subscribe(url => {
         this.article.imageUrl = url;
         this.updateArticleData();
         this.fetchArticles();
@@ -93,6 +94,7 @@ export class ArticleDetailComponent implements OnInit {
           handler: () => {
             this.articleService.updateArticle(this.articleID, this.article);
             this.fetchArticles();
+            this.isEditing = false;
           }
         },
       ]

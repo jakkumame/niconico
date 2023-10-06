@@ -2,47 +2,84 @@
   height: 800px;
 
   ion-card {
-    width: 70%;
+    width: 80%;
     margin: auto;
     margin-top: 70px;
-    padding: 2rem;
-  }
+    h2 {
+      margin: 5% auto 5% auto;
+      font-size: 2.7rem;
+      font-family: Inter;
+      font-weight: 800;
+      line-height: 1.7;
+    }
+    .subtitle-container {
+      display: flex;
+      margin: 5% auto 5% auto;
+      h3 {
+        font-size: 1.7rem;
+        font-family: Inter;
+        font-weight: 700;
+        color: #ff9232;
+      }
+      .custom-line {
+        margin: auto 0 auto auto;
+        height: 0.6px;
+        background-color: #333;
+        width: 45%;
+      }
+    }
+    p {
+      width: 95%;
+      margin: 8% auto 8% auto;
+      line-height: 1.5;
+      font-family: Inter;
+      color:#424242;
+      ion-text {
+        b {
+          font-size: 1.6rem;
+          font-family: Inter;
+        }
+      }
+    }
 
-  img {
-    position: absolute;
-    transform: rotate(-65deg);
-    scale: 80%;
-  }
-
-  .support-top-img {
-    top: 10%;
-    left: 5%;
-    z-index: -1;
-  }
-  .support-bottom-img {
-    top: 70%;
-    left: 50%;
-  }
-  .margin {
-    padding: 60px;
   }
 }
 
+
+
 button {
-  display: block;
-  margin: auto;
-  width: 40%;
-  height: 35px;
   background-image: linear-gradient(to right, rgb(89, 225, 141), #0e8327); /* 左から右へのグラデーション */
-  // border: 2px solid white;
-  border-radius: 25px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s, background-color 0.2s;
+
 }
 
 button:hover {
   transform: scale(1.07);
   background-image: linear-gradient(to right, #59f17a, #16b338); /* 左から右へのグラデーション */
-  color: #fff;
+}
+
+@media screen and (max-width: 991px) {
+  .lg-container-wrapper {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .support-wrapper {
+    ion-card {
+      padding: 30px;
+      margin-left: 15%;
+      p {
+        line-height: 2;
+      }
+    }
+  }
+
+  .lg-container-wrapper {
+    .lg-container {
+      position: relative;
+      z-index: -10;
+
+    }
+  }
 }
 
