@@ -14,7 +14,6 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  { path: '**', redirectTo: '/404' },
   {
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
@@ -43,6 +42,7 @@ const routes: Routes = [
     path: '403',
     loadChildren: () => import('./error403/error403.module').then( m => m.Error403PageModule)
   },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
