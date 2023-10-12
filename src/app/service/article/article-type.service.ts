@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ArticleTypeService {
-
   private typesData = [
     { value: 'report', label: '開催報告', color: '#ff9365' },
     { value: 'PR', label: 'PR', color: '#335cff' },

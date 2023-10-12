@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, finalize, map } from 'rxjs';
+import { Observable, map, throwError } from 'rxjs';
+import { switchMap, last, catchError } from 'rxjs/operators';
 import { Article } from 'src/app/interface/article';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -64,30 +65,28 @@ export class ArticleService {
     });
   }
 
-  uploadImage(image: File, date?: string): Observable<string> {
 
-    const filePath = `articleImages/${date}_${image.name}`;
-    // Firebase Storageの参照を作成
+
+  uploadImage(image: File): Observable<string> {
+    // 現在の日付をyyyy-MM-dd形式で取得します。
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0]; // 'yyyy-MM-dd'形式に変換
+
+    const filePath = `articleImages/${formattedDate}_${image.name}`;
     const fileRef = this.storage.ref(filePath);
-    // 画像をFirebase Storageにアップロードするタスクを開始
     const task = this.storage.upload(filePath, image);
-    // 新しいObservableを返す
-    return new Observable(observer => {
-      // アップロードタスクの変更を監視
-      task.snapshotChanges().pipe(
-        // アップロードタスクが完了したときに実行
-        finalize(() => {
-          // アップロードが完了したら、画像のダウンロードURLを取得
-          fileRef.getDownloadURL().subscribe(url => {
-            // 取得したダウンロードURLをObservableに発行
-            observer.next(url);
-            // Observableの完了を通知
-            observer.complete();
-          });
-        })
-      ).subscribe();
-    });
+
+    // アップロードタスクの変更を監視し、最後のスナップショットを取得した後でダウンロードURLを取得
+    return task.snapshotChanges().pipe(
+      last(), // 最後のスナップショットを取得
+      switchMap(() => fileRef.getDownloadURL()), // ダウンロードURLを取得するObservableに切り替える
+      catchError(error => {
+        console.error('Upload failed:', error);
+        return throwError('画像のアップロードに失敗しました。もう一度お試しください。');
+      })
+    );
   }
+
 
 
 }

@@ -31,11 +31,14 @@
       <ion-item>
         <ion-textarea formControlName="content" row="6" label="内容" labelPlacement="floating" required></ion-textarea>
       </ion-item>
+
+
       <ion-item>
-        <ion-input type="file" (change)="onImageSelected($event)" label="掲載写真" labelPlacement="start" required></ion-input>
+        <input type="file" (change)="onImagePicked($event)"/>
       </ion-item>
-      <ion-img *ngIf="imageUrl" [src]="imageUrl" style="width: 100px; height: 100px;"></ion-img>
-      <ion-button expand="full" type="submit" [disabled]="!articleForm.valid" color="success">投稿</ion-button>
+      <ion-img *ngIf="imagePreview" [src]="imagePreview" style="width: 200px; height: 200px;"></ion-img>
+
+      <ion-button expand="full" type="submit" [disabled]="!articleForm.valid || isLoading" color="success">投稿</ion-button>
     </ion-list>
   </form>
 </ion-content>

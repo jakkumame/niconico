@@ -8,82 +8,109 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment (ionChange)="toggleEditMode($event)" value="default" [value]=" isEditing ? 'true' : 'false'">
-    <ion-segment-button value="false">
-      <ion-label>view</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="true">
-      <ion-label>edit</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <ion-segment (ionChange)="toggleEditMode($event)" value="default" [value]="isEditing ? 'true' : 'false'">
+      <ion-segment-button value="false">
+        <ion-label>view</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="true">
+        <ion-label>edit</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-  <!-- isEditing=falseの場合-->
-  <ion-card *ngIf="!isEditing" class="false">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" sizeLg="6" class="">
-          <ion-card-header>
-            <ion-card-subtitle>{{ article.subtitle }}</ion-card-subtitle>
-            <ion-card-title>{{ article.title }}</ion-card-title>
-            <h6>{{ article.timestamp | date:'yyyy年MM月dd日' }}</h6>
-          </ion-card-header>
-          <div class="custom-line"></div>
-          <ion-card-content>
-            <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
-            <div>
-              <ion-icon name="calendar-number-outline" size="large" color="tertiary"></ion-icon>
-              <h4 style="color: #5260ff;">{{ article.date | date: 'yyyy年MM月dd日' }}</h4>
-            </div>
-            <div>
-              <ion-icon name="location-outline" size="large" color="danger"></ion-icon>
-              <h4 style="color: #eb445a;">{{ article.place }}</h4>
-            </div>
-            <p>{{ article.content }}</p>
-          </ion-card-content>
-        </ion-col>
-        <ion-col size="12" sizeLg="6">
-          <div class="image-container">
-            <img src="{{ article.imageUrl }}" alt="article main image">
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+    <!-- isEditing=falseの場合-->
+    <div *ngIf="!isEditing">
+      <ion-card class="false ion-padding">
+        <h6>{{ articleForm.value.timestamp | date:'yyyy年MM月dd日' }}</h6>
+        <ion-card-header>
+          <ion-card-subtitle>{{ articleForm.value.subtitle }}</ion-card-subtitle>
+          <ion-card-title>{{ articleForm.value.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" style="height: 30px;">
+                <div *ngFor="let type of articleTypes" style="height: 30px;">
+                  <ion-chip *ngIf="selectedTypes.includes(type.value)" [ngStyle]="{'background-color': type.color}">
+                    {{ type.label }}
+                  </ion-chip>
+                </div>
+              </ion-col>
+              <ion-col size="12" class="article-image">
+                <div *ngIf="articleForm.value.imageUrl" class="image-container">
+                  <img [src]="articleForm.value.imageUrl" alt="Article image" style="display: block; width:80%; height:auto;">
+                </div>
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon name="calendar-number-outline" size="large" color="tertiary"></ion-icon>
+              </ion-col>
+              <ion-col size="10" sizeLg="4">
+                <h4 style="color: #5260ff;">{{ articleForm.value.date | date: 'yyyy年MM月dd日' }}</h4>
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon name="location-outline" size="large" color="danger"></ion-icon>
+              </ion-col>
+              <ion-col size="10" sizeLg="4">
+                <h4 style="color: #eb445a;">{{ articleForm.value.place }}</h4>
+              </ion-col>
+              <ion-col size="12">
+                <p>{{ articleForm.value.content }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
-  <!-- isEditing=true（編集モード）の場合-->
-  <ion-card *ngIf="isEditing" class="true">
-    <ion-card-header>
-      <ion-card-title>
-        <h2>EDIT MODE</h2>
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-input [(ngModel)]="article.title" label="タイトル" labelPlacement="floating"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="article.subtitle" label="サブタイトル" labelPlacement="floating"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="article.date" type="date" label="当該日時" labelPlacement="floating"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="article.place" label="場所" labelPlacement="floating"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-textarea [(ngModel)]="article.content" rows="6" label="内容" labelPlacement="floating"></ion-textarea>
-      </ion-item>
-      <ion-item *ngIf="article.imageUrl">
-        <img [src]="article.imageUrl" alt="掲載中の写真" style="width:80%; margin:auto;">
-      </ion-item>
-      <ion-item>
-        <ion-input type="file" (change)="onFileSelected($event)" label="写真の変更"></ion-input>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+    <!-- isEditing=true（編集モード）の場合-->
+    <div *ngIf="isEditing">
+      <ion-card class="true">
+        <ion-card-header>
+          <ion-card-title>
+            <h2 class="edit-mode">EDIT MODE</h2>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-input formControlName="title" placeholder="タイトル"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input formControlName="subtitle" placeholder="サブタイトル"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input formControlName="date" type="date" placeholder="当該日時"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input formControlName="place" placeholder="場所"></ion-input>
+          </ion-item>
+          <ion-list formArrayName="types">
+            <ion-list-header>
+              タイプ
+            </ion-list-header>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="10" sizeMd="6" *ngFor="let type of articleTypes; let i = index">
+                  <ion-item lines="none">
+                    <ion-checkbox [formControlName]="i">{{ type.label }}</ion-checkbox>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+          <ion-item>
+            <ion-textarea formControlName="content" rows="6" placeholder="内容" label="内容" labelPlacement="stacked"></ion-textarea>
+          </ion-item>
+          <ion-item *ngIf="articleForm.value.imageUrl">
+            <img [src]="articleForm.value.imageUrl" alt="掲載中の写真" style="width:80%; margin:auto;">
+          </ion-item>
+          <ion-item>
+            <ion-input type="file" (change)="onFileSelected($event)" placeholder="写真の変更"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
 
-  <ion-button color="danger" (click)="deleteArticle(article.articleId)" expand="full" class="delete">投稿を削除</ion-button>
-  <ion-button color="success" *ngIf="isEditing" (click)="saveChanges()" expand="full" class="change">変更を保存</ion-button>
-
-
+      <ion-button color="danger" (click)="deleteArticle(articleID)" expand="full" class="delete">投稿を削除</ion-button>
+      <ion-button color="success" type="submit" [disabled]="!articleForm.valid" expand="full" class="change">変更を保存</ion-button>
+    </div>
+  </form>
 </ion-content>

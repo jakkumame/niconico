@@ -8,7 +8,7 @@ ion-card {
   width: 85%;
   height: auto;
   margin: 5% auto;
-  h2 {
+  .edit-mode {
     color: blue;
     font-weight: bold;
   }
@@ -19,54 +19,29 @@ ion-card {
       margin: 1% auto 3% auto;
     }
   }
+  ion-list {
+    margin-left: 5%;
+    ion-list-header {
+      font-size: small;
+    }
+  }
 }
 
 .false {
-  ion-card-header {
-    width: 85%;
-    margin: 5% auto auto auto;
-    h6 {
-      text-align: right;
-    }
-    ion-card-title, ion-card-subtitle {
-      margin: 5%;
-    }
+  width: 90%;
+  * {
+    margin: 3% auto 3% auto;
   }
-  .custom-line {
-    margin: 15px auto 0 auto;
-    height: 1px; /* 直線の高さ */
-    background-color: #333; /* 直線の色 */
-    width: 85%;
+  h6 {
+    text-align: right;
+  }
+  ion-card-header {
+    text-align: center;
   }
   ion-card-content {
-    width: 85%;
-    padding: 0;
-    margin: 5% auto auto auto;
-    ion-chip {
-      margin: 5% 1% 5% 1%;
-      padding: 0 10px 0 10px;
-      color: #ffffff;
-      font-family: source-han-sans-japanese, sans-serif;
-      font-weight: 600;
-      font-style: normal;
-      border-radius: 2px;
+    h4 {
+      text-align: left;
     }
-
-    div {
-      display: flex;
-      margin-bottom: 5%;
-      h4 {
-        margin: auto auto auto 3%;
-        font-weight: 400;
-      }
-    }
-    p {
-      margin-bottom: 8%;
-    }
-  }
-  .image-container {
-    width: 80%;
-    margin: 5% auto 5% auto;
   }
 
 }
@@ -112,17 +87,11 @@ ion-button {
 
 
   .false {
-    ion-card-header {
-      ion-card-title {
-        order: 1;
-      }
-      ion-card-subtitle {
-        order: 2;
-      }
+    width: 50%;
+    .article-image {
+      order: 10;
     }
-    .image-container {
-      margin-top: 20%;
-    }
+
   }
 
   .true {
