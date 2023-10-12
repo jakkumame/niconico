@@ -15,9 +15,9 @@ import { LoadingService } from 'src/app/service/loading/loading.service';
 export class ArticleFormComponent {
 
   articleForm: FormGroup;
-  imageUrl: string = '../../../../../assets/にこにこロゴ.png'; // デフォルトの画像のパスをここに設定します。
-  image: File | null = null;
-  imagePreview: string | ArrayBuffer | null = null;
+  image: string = '../../../../../assets/にこにこロゴ.png'; // デフォルトの画像のパスをここに設定します。
+  selectedImage: File | null = null; // ユーザーによって選択された画像ファイルを保持します。
+  imagePreview: string | ArrayBuffer | null = null; // 選択された画像のプレビューを保持します。
 
   isLoading: boolean = false;
 
@@ -46,7 +46,7 @@ export class ArticleFormComponent {
       types: this.fb.array(this.articleTypes.map(() => false)), // 複数選択のための配列
       place: ['神原にこにこkitchen', Validators.required],
       content: ['', Validators.required],
-      image: [this.imageUrl, [Validators.required ]],
+      imageUrl: [this.image, [Validators.required]], // 'imageUrl' は画像のURLを保持します。
     });
   }
 
@@ -67,8 +67,8 @@ export class ArticleFormComponent {
           {
             text: '投稿する',
             handler: () => {
-              if (this.image) {
-                this.submitArticleAndUpload(this.image);
+              if (this.selectedImage) {
+                this.submitArticleAndUpload(this.selectedImage);
               } else {
                 this.submitArticle();
               }
@@ -80,27 +80,6 @@ export class ArticleFormComponent {
     }
   }
 
-
-  async confirmAlert() {
-    const alert = await this.alertCtrl.create({
-      header: '確認',
-      message: '投稿内容に間違いはありませんか？',
-      buttons: [
-        {
-          text: 'キャンセル',
-          role: 'cancel',
-        },
-        {
-          text: '投稿する',
-          handler: () => {
-            this.submitArticle();
-          }
-        },
-      ]
-    });
-    await alert.present();
-  }
-
   // 写真のアップロードと記事のデータを送信するメソッド
   submitArticleAndUpload(image: File) {
     this.loadingService.present('アップロード中...');
@@ -108,8 +87,8 @@ export class ArticleFormComponent {
     // 画像のアップロードとURLの取得
     this.articleService.uploadImage(image).subscribe({
       next: (imageUrl) => {
-        this.imageUrl = imageUrl;
-        this.articleForm.patchValue({ image: imageUrl });
+        this.image = imageUrl; // 取得したURLを 'image' に設定します。
+        this.articleForm.patchValue({ imageUrl: imageUrl }); // 'imageUrl' をフォームに設定します。
         this.loadingService.dismiss();
 
         // 画像のアップロードが完了したら、記事を送信
@@ -122,32 +101,35 @@ export class ArticleFormComponent {
     });
   }
 
-  // 記事のデータをアップロードするメソッド。imageUrlやtypeをフォームのデータとして組み込む
+  // 記事のデータをアップロードするメソッド。imageUrlをフォームのデータとして組み込む
   submitArticle() {
     this.loadingService.present('アップロード中...');
+
+    // selectedTypesが文字列の配列であることを確認し、ブール値をフィルタリングする
     const selectedTypes = this.articleTypes
       .filter((_, i) => this.typesFormArray.value[i])
-      .map(type => type.value);
+      .map(type => type.value)
+      .filter(type => typeof type === 'string');
+
     const formData: Article = {
       ...this.articleForm.value,
       types: selectedTypes,
-      imageUrl: this.imageUrl, // 画像のURLをフォームデータに含める
+      imageUrl: this.image, // 画像のURLをフォームデータに含める
       timestamp: new Date().toISOString(),
     };
     this.articleService.addArticle(formData);
     this.loadingService.dismiss();
     this.articleForm.reset();
-    this.image = null;
+    this.selectedImage = null;
     this.router.navigate(['/admin/article-list']);
   }
-
 
   // ユーザーが画像を選択したときに呼び出されるメソッド
   onImagePicked(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target && target.files && target.files.length) {
       const file = target.files[0];
-      this.image = file;
+      this.selectedImage = file; // 選択されたファイルを 'selectedImage' に保存します。
 
       // FileReaderを使用して、選択された画像のプレビューを生成
       const reader = new FileReader();
@@ -157,7 +139,4 @@ export class ArticleFormComponent {
       reader.readAsDataURL(file); // 画像ファイルをDataURLとして読み込む
     }
   }
-
-
-
 }

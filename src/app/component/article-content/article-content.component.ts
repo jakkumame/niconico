@@ -26,8 +26,9 @@ export class ArticleContentComponent implements OnInit {
       // articleIdに基づいて記事の詳細を取得
       this.articleService.getArticleById(articleId).subscribe(article => {
         this.article = article;
+        console.log('Article types:', this.article!.types);
+        this.isReady = true;
       });
-      this.isReady = true;
     }
   }
 
