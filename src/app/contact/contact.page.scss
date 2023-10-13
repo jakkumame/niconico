@@ -18,14 +18,14 @@ ion-card {
 
   }
 
-  .custom-line {
-    margin: 8% auto 4% auto;
-    height: 0.5px; /* 直線の高さ */
-    background-color: #555555; /* 直線の色 */
-    width: 85%;
-  }
 
   ion-card-content {
+    .custom-line {
+      margin: 8% auto 4% auto;
+      height: 0.5px; /* 直線の高さ */
+      background-color: #555555; /* 直線の色 */
+      width: 85%;
+    }
     width: 85%;
     margin: auto;
     .form-group {
@@ -104,7 +104,10 @@ ion-card {
         font-size: 2rem;
       }
     }
-
+    .custom-line {
+      height: 0.7px; /* 直線の高さ */
+      width: 100%;
+    }
 
   }
 }
@@ -112,6 +115,10 @@ ion-card {
 @media screen and (min-width: 992px) {
   ion-card {
     ion-card-content {
+      .custom-line {
+        height: 0.6px; /* 直線の高さ */
+        width: 95%;
+      }
       .form-group {
         margin-top: 5%;
         input {

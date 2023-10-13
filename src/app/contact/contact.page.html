@@ -11,8 +11,9 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-card-header>
-    <div class="custom-line"></div>
     <ion-card-content>
+      <p style="width: 90%; margin: auto;">下記の入力項目をできるだけ詳しくご記入ください。後日、担当者からご返信、ご連絡させていただきます。</p>
+      <div class="custom-line"></div>
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
 
         <div class="form-group">
