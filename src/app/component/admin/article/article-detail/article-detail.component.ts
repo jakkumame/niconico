@@ -194,43 +194,6 @@ export class ArticleDetailComponent implements OnInit {
     }
   }
 
-  // 記事の削除
-  async deleteArticle(id: string): Promise<void> {
-    console.log(`Attempting to delete article with id: ${id}`);
-    const alert = await this.alertCtrl.create({
-      header: '確認',
-      message: `${this.articleForm.value.title}を削除してもよろしいですか？`, // フォームからタイトルを取得
-      buttons: [
-        {
-          text: 'キャンセル',
-          role: 'cancel',
-        },
-        {
-          text: '削除する',
-          handler: async () => { // このハンドラを非同期にします
-            const loading = await this.loadingCtrl.create({
-              message: '削除中...', // ここに表示したいメッセージを設定します
-            });
-            await loading.present();
-
-            try {
-              await this.articleService.deleteArticle(id);
-              await loading.dismiss(); // 非同期処理が成功したら、ローディングを閉じます
-              this.goBack(); // 削除後、前のページに戻る
-            } catch (error) {
-              await loading.dismiss(); // エラーが発生した場合も、ローディングを閉じます
-              console.error('Error deleting article:', error);
-              // エラーが発生した場合、ユーザーにアラートを表示
-              await this.presentAlert('エラー', '記事の削除中にエラーが発生しました。', [{ text: 'OK' }]);
-            }
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-
   // 前のページに戻る
   goBack(): void {
     this.navCtrl.navigateRoot('/admin/article-list');

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Article } from 'src/app/interface/article';
-import { ErrorAlertService } from 'src/app/service/alert/error-alert.service';
+import { AlertService } from 'src/app/service/alert/alert.service';
 import { ArticleService } from 'src/app/service/article/article.service';
 import { LoadingService } from 'src/app/service/loading/loading.service';
 
@@ -36,7 +36,7 @@ export class ArticleFormComponent {
     private articleService: ArticleService,
     private router: Router,
     private alertCtrl: AlertController,
-    private errorAlertService: ErrorAlertService,
+    private alertService: AlertService,
     private loadingService: LoadingService,
   ) {
     this.articleForm = this.fb.group({
@@ -96,7 +96,7 @@ export class ArticleFormComponent {
       },
       error: (error) => {
         this.loadingService.dismiss();
-        this.errorAlertService.showErrorAlert(error);
+        this.alertService.showErrorAlert(error);
       },
     });
   }
