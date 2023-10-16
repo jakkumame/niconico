@@ -1,38 +1,11 @@
+
 {
   "rules": {
-    ".read": "auth != null",
-    "inquiries": {
-      "$inquiry_id": {
-        ".validate": "newData.hasChildren(['name', 'age', 'inquiryType', 'tel', 'email', 'address', 'notice', 'privacyPolicy'])",
-        "name": {
-          ".validate": "newData.isString()"
-        },
-        "age": {
-          ".validate": "newData.isNumber() && newData.val() >= 0"
-        },
-        "inquiryType": {
-          ".validate": "newData.isString()"
-        },
-        "tel": {
-          ".validate": "newData.isString()"
-        },
-        "email": {
-          ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)"
-        },
-        "address": {
-          ".validate": "newData.isString()"
-        },
-        "notice": {},
-        "privacyPolicy": {
-          ".validate": "newData.isBoolean() && newData.val() == true"
-        },
-        "$other": {
-          ".validate": "false"
-        }
+    "some_path": {
+      "$uid": {
+        ".read": "auth !== null && auth.uid === $uid",
+        ".write": "auth !== null && auth.uid === $uid"
       }
-    },
-    "$other": {
-      ".write": "false"
     }
   }
 }

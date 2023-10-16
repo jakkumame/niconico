@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="articleForm" (ngSubmit)="setImageURL()">
     <ion-segment (ionChange)="toggleEditMode($event)" value="default" [value]="isEditing ? 'true' : 'false'">
       <ion-segment-button value="false">
         <ion-label>view</ion-label>
@@ -31,9 +31,9 @@
             <ion-row>
               <ion-col size="12" style="height: 30px;">
                 <div *ngFor="let type of articleTypes" style="height: 30px;">
-                  <ion-chip *ngIf="selectedTypes.includes(type.value)" [ngStyle]="{'background-color': type.color}">
+                  <!-- <ion-chip *ngIf="selectedTypes.includes(type.value)" [ngStyle]="{'background-color': type.color}">
                     {{ type.label }}
-                  </ion-chip>
+                  </ion-chip> -->
                 </div>
               </ion-col>
               <ion-col size="12" class="article-image">
@@ -71,45 +71,46 @@
           </ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-item>
-            <ion-input formControlName="title" placeholder="タイトル"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input formControlName="subtitle" placeholder="サブタイトル"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input formControlName="date" type="date" placeholder="当該日時"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input formControlName="place" placeholder="場所"></ion-input>
-          </ion-item>
-          <ion-list formArrayName="types">
-            <ion-list-header>
-              タイプ
-            </ion-list-header>
-            <ion-grid>
-              <ion-row>
-                <ion-col size="10" sizeMd="6" *ngFor="let type of articleTypes; let i = index">
-                  <ion-item lines="none">
-                    <ion-checkbox [formControlName]="i">{{ type.label }}</ion-checkbox>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-list>
-          <ion-item>
-            <ion-textarea formControlName="content" rows="6" placeholder="内容" label="内容" labelPlacement="stacked"></ion-textarea>
-          </ion-item>
-          <ion-item *ngIf="articleForm.value.imageUrl">
-            <img [src]="articleForm.value.imageUrl" alt="掲載中の写真" style="width:80%; margin:auto;">
-          </ion-item>
-          <ion-item>
-            <ion-input type="file" (change)="onFileSelected($event)" placeholder="写真の変更"></ion-input>
-          </ion-item>
+          <form [formGroup]="articleForm" (ngSubmit)="submitAlert()">
+            <ion-item>
+              <ion-input label="タイトル" formControlName="title" type="text" labelPlacement="stacked"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input label="サブタイトル" formControlName="subtitle" type="text" labelPlacement="stacked"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input label="日付" formControlName="date" type="date" labelPlacement="stacked"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input label="場所" formControlName="place" type="text" labelPlacement="stacked"></ion-input>
+            </ion-item>
+
+            <div formArrayName="types">
+              <ion-item *ngFor="let type of allArticleTypes; let i = index" slot="start" lines="none">
+                <ion-checkbox [formControlName]="i" class="custom-textarea">{{type}}</ion-checkbox>
+              </ion-item>
+            </div>
+
+
+            <ion-item class="checkbox-container">
+              <ion-textarea label="内容" row="6" formControlName="content" labelPlacement="stacked"></ion-textarea>
+            </ion-item>
+
+            <!-- 画像プレビューと変更 -->
+            <div *ngIf="articleForm.get('imageUrl')?.value" class="preview-container">
+              <img [src]="articleForm.get('imageUrl')?.value" alt="記事の画像" class="preview">
+              <input type="file" #imageInput (change)="onImageChange($event)" style="display: none" /> <!-- 隠しファイル入力 -->
+              <ion-button type="button" expand="full" (click)="imageInput.click()" class="upload">画像を変更</ion-button> <!-- imageInputのclickメソッドを呼び出す -->
+            </div>
+
+            <ion-button color="success" type="submit" [disabled]="!articleForm.valid" expand="full" class="change ion-margin">更新する</ion-button>
+          </form>
         </ion-card-content>
       </ion-card>
 
-      <ion-button color="success" type="submit" [disabled]="!articleForm.valid" expand="full" class="change">変更を保存</ion-button>
     </div>
   </form>
 </ion-content>

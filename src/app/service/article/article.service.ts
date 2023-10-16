@@ -48,8 +48,8 @@ export class ArticleService {
   }
 
   // 記事を更新するメソッド (Promiseを返す)
-  updateArticle(id: string, data: any): Promise<void> {
-    return this.firestore.collection('articles').doc(id).update(data).then(() => {
+  updateArticle(articleId: string, data: Article): Promise<void> {
+    return this.firestore.collection('articles').doc(articleId).update(data).then(() => {
       console.log('Document successfully updated!');
     }).catch(error => {
       console.error('Error updating document:', error);
@@ -57,8 +57,8 @@ export class ArticleService {
   }
 
   // 記事を削除するメソッド (Promiseを返す)
-  deleteArticle(id: string): Promise<void> {
-    return this.firestore.collection('articles').doc(id).delete().then(() => {
+  deleteArticle(articleId: string): Promise<void> {
+    return this.firestore.collection('articles').doc(articleId).delete().then(() => {
       console.log('Document successfully deleted!');
     }).catch(error => {
       console.error('Error deleting document:', error);

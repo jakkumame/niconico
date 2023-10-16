@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -18,17 +18,18 @@ export class ArticleFormComponent {
   image: string = '../../../../../assets/にこにこロゴ.png'; // デフォルトの画像のパスをここに設定します。
   selectedImage: File | null = null; // ユーザーによって選択された画像ファイルを保持します。
   imagePreview: string | ArrayBuffer | null = null; // 選択された画像のプレビューを保持します。
+  @ViewChild('imageInput') imageInput!: ElementRef;
 
   isLoading: boolean = false;
 
   // 記事のタイプを配列として定義
   articleTypes = [
-    { value: 'report', label: '開催報告' },
+    { value: '開催報告', label: '開催報告' },
     { value: 'PR', label: 'PR' },
-    { value: 'volunteer', label: 'ボランティア' },
-    { value: 'support', label: '寄付や支援' },
-    { value: 'topic', label: 'トピック' },
-    { value: 'other', label: 'その他' }
+    { value: 'ボランティア', label: 'ボランティア' },
+    { value: '寄付や支援', label: '寄付や支援' },
+    { value: 'トピック', label: 'トピック' },
+    { value: 'その他', label: 'その他' }
   ];
 
   constructor(

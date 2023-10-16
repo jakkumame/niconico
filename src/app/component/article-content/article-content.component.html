@@ -42,8 +42,7 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content  *ngIf="isReady">
+<ion-content *ngIf="isReady">
   <div class="anime" appViewportAnimation animationClass="animate__rotateIn" animationDelay="animate__delay-2s">
     <div class="logo" >
       <img src="../../../assets/にこにこロゴ.png" alt="logo">
@@ -56,7 +55,8 @@
         <ion-col size="12" sizeLg="5" appViewportAnimation animationClass="animate__fadeIn" animationDelay="animate__delay-1s">
           <h6>{{ article.timestamp | date:'yyyy年MM月dd日' }}</h6>
 
-          <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ getLabel(type) }}</ion-chip>
+          <!-- getLabel(type) の代わりに type を直接表示 -->
+          <ion-chip *ngFor="let type of article.types" [ngStyle]="{'background-color': getBackgroundColor(type)}">{{ type }}</ion-chip>
 
           <h2>{{ article.title }}</h2>
 
@@ -88,4 +88,3 @@
     </ion-grid>
   </div>
 </ion-content>
-

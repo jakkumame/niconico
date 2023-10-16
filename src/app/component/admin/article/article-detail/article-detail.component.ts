@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { ArticleService } from 'src/app/service/article/article.service';
-import { ArticleTypeService } from './../../../../service/article/article-type.service';
+import { Article } from 'src/app/interface/article';
+import { LoadingService } from 'src/app/service/loading/loading.service';
+import { AlertService } from 'src/app/service/alert/alert.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-article-detail',
@@ -11,15 +14,23 @@ import { ArticleTypeService } from './../../../../service/article/article-type.s
   styleUrls: ['./article-detail.component.scss'],
 })
 export class ArticleDetailComponent implements OnInit {
-  articleForm: FormGroup;
+  articleForm!: FormGroup;
+  article!: Article;  // 編集する記事のデータ
   articleID!: string;
+  articleTypes: string[] = [];
+  // UI用の定義
+  allArticleTypes: string[] = ['開催報告', 'PR', 'ボランティア', '寄付や支援', 'トピック', 'その他'];
+
+
+  imageChanged: boolean = false;  // 画像が変更されたかを追跡するフラグ
+  newImageFile!: File;  // 新しい画像ファイルを保持
+
+
   isEditing: boolean = false;
-  articleTypes: any[] = [];
-  selectedImage: File | null = null;
-  selectedTypes: string[] = [];
 
   // 定数の定義
   readonly EDIT_MODE = 'true';
+  readonly PREVIEW_MODE = 'false';
 
   constructor(
     private fb: FormBuilder,
@@ -27,62 +38,193 @@ export class ArticleDetailComponent implements OnInit {
     private articleService: ArticleService,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
-    private typeService: ArticleTypeService,
-    private loadingCtrl: LoadingController,
+    private loadingService: LoadingService,
+    private alertService: AlertService,
   ) {
-    // FormGroupの初期化
     this.articleForm = this.fb.group({
       title: [''],
       subtitle: [''],
       date: [''],
       place: [''],
-      types: this.fb.array([]),
+      types: this.fb.array(this.articleTypes.map(() => new FormControl(false))), // チェックボックス用
       content: [''],
       imageUrl: [''],
-      timestamp: ['']
     });
   }
 
   ngOnInit() {
-    // 記事のIDを取得
+    // 固定の記事タイプを設定。UIとの齟齬を確認しておく
+    this.articleTypes = ['開催報告', 'PR', 'ボランティア', '寄付や支援', 'トピック', 'その他'];
+
+    // URLからarticleIdを取得
     const articleId = this.route.snapshot.paramMap.get('articleId');
-    this.articleID = articleId!;
     if (articleId) {
-      this.loadArticle(articleId);
+      this.articleID = articleId;
+      this.getArticle(articleId);
     }
   }
 
-  loadArticle(articleId: string) {
-    // 記事データを取得してフォームにセット
-    this.articleService.getArticleById(articleId).subscribe(article => {
-      this.articleForm.patchValue(article);
-      this.selectedTypes = article.types; // 選択されたタイプを保存
-      this.initializeArticleTypes(article.types);
+  // 既存の記事を取得,再取得時のためメソッド化
+  async getArticle(id: string) {
+    try {
+      this.loadingService.present('読み込み中...');
+      this.article = await firstValueFrom(this.articleService.getArticleById(id));
+      this.setFormValues(this.article);
+    } catch (error) {
+      console.error('Error fetching article:', error);
+    } finally {
+      this.loadingService.dismiss();
+    }
+  }
+
+
+  // フォームに記事データをセット
+  setFormValues(article: Article) {
+    // チェックボックス用のデータを処理
+    const typesControls = this.articleTypes.map(type => this.article.types.includes(type));
+    this.articleForm.setControl('types', this.fb.array(typesControls.map(item => new FormControl(item))));
+
+    this.articleForm.patchValue({
+      title: article.title,
+      subtitle: article.subtitle,
+      date: article.date,
+      place: article.place,
+      content: article.content,
+      imageUrl: article.imageUrl,
     });
   }
 
 
-  // ファイル選択イベントのハンドラ
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-      this.selectedImage = event.target.files[0];
+
+  // 画像ファイルが変更されたときのイベントハンドラ
+  onImageChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length) {
+      this.newImageFile = input.files[0]; // 新しい画像ファイルを保持
+      this.imageChanged = true; // 画像が変更されたことを示すフラグをセット
+
+      // ファイルリーダーを使用してローカルで画像をプレビュー
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.articleForm.patchValue({
+          imageUrl: reader.result // 画像のプレビュー用のURL
+        });
+      };
+      reader.readAsDataURL(this.newImageFile);
     }
   }
 
-  // 記事のタイプのチェックボックスを初期化
-  initializeArticleTypes(selectedTypes: string[]) {
-    this.articleTypes = this.typeService.getTypesData();
-    const formArray = this.articleForm.get('types') as FormArray;
 
-    this.articleTypes.forEach(type => {
-      formArray.push(this.fb.control(selectedTypes.includes(type.value)));
-    });
+// 画像のURLを設定
+async setImageURL() {
+  if (this.imageChanged) { // 画像が変更された場合のみ処理
+    try {
+      const url = await this.articleService.uploadImage(this.newImageFile).toPromise();
+      this.articleForm.patchValue({ imageUrl: url }); // リアルなURLで更新
+    } catch (error) {
+      console.error('set imageUrl error', error);
+      this.alertService.showErrorAlert('写真のURLの取得に失敗しました。');
+    }
+  } else {
+    this.alertService.showErrorAlert('画像が変更されていません。');
   }
+}
+
+async submitAlert() {
+  const alert = await this.alertCtrl.create({
+    header: '確認',
+    message: '変更を保存してもよろしいですか？',
+    buttons: [
+      {
+        text: 'キャンセル',
+        role: 'cancel'
+      },
+      {
+        text: '保存する',
+        handler: () => {
+          this.submit();
+          this.isEditing = false;
+        }
+      },
+    ]
+  })
+  await alert.present();
+}
+
+
+// // フォームの送信
+// async submit() {
+//   // フォームからデータを取得
+//   const formValue = this.articleForm.value;
+
+//   // チェックボックスのデータを変換
+//   const selectedTypes = (this.articleForm.get('types') as FormArray).controls
+//     .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
+//     .filter(v => v !== null);
+
+//   // setImageURLが成功するまで待機し、エラーがあれば処理を中断
+//   try {
+//     await this.setImageURL(); // ここでアップロードとURLの取得を待機
+//   } catch (error) {
+//     return; // エラーがあれば、ここでsubmit処理を終了
+//   }
+
+//   const newArticleData = {
+//     ...formValue,
+//     types: selectedTypes,
+//     timestamp: new Date().toISOString(),
+//   };
+//   // 記事を更新
+//   this.articleService.updateArticle(this.articleID, newArticleData);
+//   }
+
+
+  async submit() {
+    try {
+      // ローディングインジケータ表示
+      await this.loadingService.present('送信中...');
+
+      // フォームからデータを取得
+      const formValue = this.articleForm.value;
+
+      // チェックボックスのデータを変換
+      const selectedTypes = (this.articleForm.get('types') as FormArray).controls
+        .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
+        .filter(v => v !== null);
+
+      // setImageURLが成功するまで待機し、エラーがあれば処理を中断
+      await this.setImageURL(); // ここでアップロードとURLの取得を待機
+
+      const newArticleData = {
+        ...formValue,
+        types: selectedTypes,
+        timestamp: new Date().toISOString(),
+      };
+
+      // 記事を更新
+      await this.articleService.updateArticle(this.articleID, newArticleData);
+
+      // 成功アラートを表示
+      await this.alertService.showCompletedAlert('記事が更新されました。');
+
+    } catch (error) {
+      // エラーアラートを表示
+      await this.alertService.showErrorAlert('更新に失敗しました。');
+    } finally {
+      // ローディングインジケータを非表示
+      await this.loadingService.dismiss();
+    }
+  }
+
+
+
+
+
 
   // モードの切り替え。変更があれば、アラート表示
   async toggleEditMode(event: any) {
     if (this.isEditing && this.articleForm.dirty) {
-      await this.presentUnsavedChangesAlert();
+      await this.changeModeAlert();
     } else {
       // 定数を使用してモードを切り替える
       this.isEditing = event.detail.value === this.EDIT_MODE;
@@ -90,7 +232,7 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   // 未保存の変更に対するアラートを表示
-  async presentUnsavedChangesAlert() {
+  async changeModeAlert() {
     const alert = await this.alertCtrl.create({
       header: '変更を保存しますか？',
       message: '編集中の変更内容が保存されていません。保存しますか？',
@@ -105,7 +247,7 @@ export class ArticleDetailComponent implements OnInit {
         {
           text: '保存',
           handler: () => {
-            this.saveChanges();
+            this.submit();
             this.isEditing = false;
           }
         }
@@ -113,85 +255,6 @@ export class ArticleDetailComponent implements OnInit {
     });
 
     await alert.present();
-  }
-
-  // フォームの送信処理
-  async onSubmit() {
-    if (!this.articleForm.valid) {
-      // バリデーションエラーを処理する
-      return;
-    }
-
-    let imageUrl = await this.handleImageUpload();
-
-    const finalArticle = this.constructArticleObject(imageUrl);
-
-    // 記事の更新または作成処理...
-  }
-
-  async handleImageUpload(): Promise<string> {
-    if (!this.selectedImage) {
-      return this.articleForm.value.imageUrl; // 既存の画像URLを返す
-    }
-
-    return await this.uploadImageAndGetUrl(this.selectedImage);
-  }
-
-  constructArticleObject(imageUrl: string) {
-    const selectedTypes = this.getSelectedTypes();
-
-    return {
-      ...this.articleForm.value,
-      imageUrl, // 新しい画像URLを使用
-      types: selectedTypes
-    };
-  }
-
-  getSelectedTypes(): string[] {
-    return this.articleForm.value.types
-      .map((checked: boolean, i: number) => checked ? this.articleTypes[i].value : null)
-      .filter((v: null | string) => v !== null);
-  }
-
-
-  // 画像をアップロードし、ダウンロードURLを取得する関数
-  async uploadImageAndGetUrl(image: File): Promise<string> {
-    try {
-      const imageUrlObservable = this.articleService.uploadImage(image);
-      const imageUrl = await imageUrlObservable.toPromise();
-      return imageUrl ?? '';
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      await this.presentAlert('エラー', '画像のアップロード中に問題が発生しました。', [{ text: 'OK' }]);
-      return '';
-    }
-  }
-
-  // アラートの表示をヘルパーメソッドとして抽出
-  async presentAlert(header: string, message: string, buttons: any[]) {
-    const alert = await this.alertCtrl.create({ header, message, buttons });
-    await alert.present();
-  }
-
-  // 記事の変更を保存
-  async saveChanges() {
-    if (this.articleForm.valid) {
-      const updatedArticle = this.articleForm.value;
-
-      try {
-        // updateArticleメソッドの完了を待つ
-        await this.articleService.updateArticle(this.articleID, updatedArticle);
-        this.loadArticle(this.articleID);
-        this.isEditing = false;
-      } catch (error) {
-        console.error('Error updating article:', error);
-        // エラーが発生した場合、ユーザーにアラートを表示
-        await this.presentAlert('エラー', '記事の変更を保存中にエラーが発生しました。', [{ text: 'OK' }]);
-      }
-    } else {
-      // フォームが無効な場合のエラー処理
-      await this.presentAlert('エラー', '入力項目に無効な値があります。', [{ text: 'OK' }]);
-    }
   }
 
   // 前のページに戻る

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/interface/article';
-import { ArticleTypeService } from 'src/app/service/article/article-type.service';
 import { ArticleService } from 'src/app/service/article/article.service';
 
 @Component({
@@ -13,31 +12,41 @@ export class ArticleContentComponent implements OnInit {
   article: Article | null = null;
   isReady = false;
 
+  // 'label'が削除され、各タイプはユニークな'value'によって識別されます
+  private typesData = [
+    { type: '開催報告', color: '#ff9365' },
+    { type: 'PR', color: '#335cff' },
+    { type: 'ボランティア', color: '#00a900' },
+    { type: 'ご支援', color: '#ec1800' },
+    { type: 'トピック', color: '#8a008a' },
+    { type: 'その他', color: '#28acff' }
+  ];
+
   constructor(
     private route: ActivatedRoute,
-    private articleService: ArticleService,
-    private typeService: ArticleTypeService,
-
+    private articleService: ArticleService
   ) {}
 
   ngOnInit(): void {
     const articleId = this.route.snapshot.paramMap.get('id');
     if (articleId) {
-      // articleIdに基づいて記事の詳細を取得
       this.articleService.getArticleById(articleId).subscribe(article => {
         this.article = article;
-        console.log('Article types:', this.article!.types);
+        console.log('記事のタイプ:', this.article!.types);
         this.isReady = true;
       });
     }
   }
 
+  getTypesData() {
+    return this.typesData;
+  }
+
   getBackgroundColor(type: string): string {
-    return this.typeService.getBackgroundColor(type);
+    // 'type'に基づいて一致させています（以前は'label'でした）
+    const typeData = this.typesData.find(t => t.type === type);
+    return typeData ? typeData.color : 'black';
   }
 
-  getLabel(type: string): string {
-    return this.typeService.getLabel(type);
-  }
-
+  // 'type'を直接使用しているため、getLabelメソッドは必要ありません
 }
