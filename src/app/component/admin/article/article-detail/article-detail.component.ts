@@ -1,3 +1,4 @@
+import { UploadImageService } from './../../../../service/upload/upload-image.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -40,6 +41,7 @@ export class ArticleDetailComponent implements OnInit {
     private navCtrl: NavController,
     private loadingService: LoadingService,
     private alertService: AlertService,
+    private uploadService: UploadImageService
   ) {
     this.articleForm = this.fb.group({
       title: [''],
@@ -119,16 +121,19 @@ export class ArticleDetailComponent implements OnInit {
 async setImageURL() {
   if (this.imageChanged) { // 画像が変更された場合のみ処理
     try {
-      const url = await this.articleService.uploadImage(this.newImageFile).toPromise();
+      // `await`を使用して、プロミスが解決されるまで待機します
+      const url = await this.uploadService.uploadImage(this.newImageFile);
       this.articleForm.patchValue({ imageUrl: url }); // リアルなURLで更新
     } catch (error) {
-      console.error('set imageUrl error', error);
+      console.error('Error setting image URL:', error);
       this.alertService.showErrorAlert('写真のURLの取得に失敗しました。');
     }
   } else {
     this.alertService.showErrorAlert('画像が変更されていません。');
   }
 }
+
+
 
 async submitAlert() {
   const alert = await this.alertCtrl.create({
@@ -152,69 +157,69 @@ async submitAlert() {
 }
 
 
-// // フォームの送信
-// async submit() {
-//   // フォームからデータを取得
-//   const formValue = this.articleForm.value;
+// フォームの送信
+async submit() {
+  // フォームからデータを取得
+  const formValue = this.articleForm.value;
 
-//   // チェックボックスのデータを変換
-//   const selectedTypes = (this.articleForm.get('types') as FormArray).controls
-//     .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
-//     .filter(v => v !== null);
+  // チェックボックスのデータを変換
+  const selectedTypes = (this.articleForm.get('types') as FormArray).controls
+    .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
+    .filter(v => v !== null);
 
-//   // setImageURLが成功するまで待機し、エラーがあれば処理を中断
-//   try {
-//     await this.setImageURL(); // ここでアップロードとURLの取得を待機
-//   } catch (error) {
-//     return; // エラーがあれば、ここでsubmit処理を終了
-//   }
-
-//   const newArticleData = {
-//     ...formValue,
-//     types: selectedTypes,
-//     timestamp: new Date().toISOString(),
-//   };
-//   // 記事を更新
-//   this.articleService.updateArticle(this.articleID, newArticleData);
-//   }
-
-
-  async submit() {
-    try {
-      // ローディングインジケータ表示
-      await this.loadingService.present('送信中...');
-
-      // フォームからデータを取得
-      const formValue = this.articleForm.value;
-
-      // チェックボックスのデータを変換
-      const selectedTypes = (this.articleForm.get('types') as FormArray).controls
-        .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
-        .filter(v => v !== null);
-
-      // setImageURLが成功するまで待機し、エラーがあれば処理を中断
-      await this.setImageURL(); // ここでアップロードとURLの取得を待機
-
-      const newArticleData = {
-        ...formValue,
-        types: selectedTypes,
-        timestamp: new Date().toISOString(),
-      };
-
-      // 記事を更新
-      await this.articleService.updateArticle(this.articleID, newArticleData);
-
-      // 成功アラートを表示
-      await this.alertService.showCompletedAlert('記事が更新されました。');
-
-    } catch (error) {
-      // エラーアラートを表示
-      await this.alertService.showErrorAlert('更新に失敗しました。');
-    } finally {
-      // ローディングインジケータを非表示
-      await this.loadingService.dismiss();
-    }
+  // setImageURLが成功するまで待機し、エラーがあれば処理を中断
+  try {
+    await this.setImageURL(); // ここでアップロードとURLの取得を待機
+  } catch (error) {
+    return; // エラーがあれば、ここでsubmit処理を終了
   }
+
+  const newArticleData = {
+    ...formValue,
+    types: selectedTypes,
+    timestamp: new Date().toISOString(),
+  };
+  // 記事を更新
+  this.articleService.updateArticle(this.articleID, newArticleData);
+  }
+
+
+  // async submit() {
+  //   try {
+  //     // ローディングインジケータ表示
+  //     await this.loadingService.present('送信中...');
+
+  //     // フォームからデータを取得
+  //     const formValue = this.articleForm.value;
+
+  //     // チェックボックスのデータを変換
+  //     const selectedTypes = (this.articleForm.get('types') as FormArray).controls
+  //       .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
+  //       .filter(v => v !== null);
+
+  //     // setImageURLが成功するまで待機し、エラーがあれば処理を中断
+  //     await this.setImageURL(); // ここでアップロードとURLの取得を待機
+
+  //     const newArticleData = {
+  //       ...formValue,
+  //       types: selectedTypes,
+  //       timestamp: new Date().toISOString(),
+  //     };
+
+  //     // 記事を更新
+  //     await this.articleService.updateArticle(this.articleID, newArticleData);
+
+  //     // 成功アラートを表示
+  //     await this.alertService.showCompletedAlert('記事が更新されました。');
+
+  //   } catch (error) {
+  //     // エラーアラートを表示
+  //     await this.alertService.showErrorAlert('更新に失敗しました。');
+  //   } finally {
+  //     // ローディングインジケータを非表示
+  //     await this.loadingService.dismiss();
+  //   }
+  // }
 
 
 
