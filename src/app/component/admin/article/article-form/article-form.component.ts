@@ -6,6 +6,7 @@ import { Article } from 'src/app/interface/article';
 import { AlertService } from 'src/app/service/alert/alert.service';
 import { ArticleService } from 'src/app/service/article/article.service';
 import { LoadingService } from 'src/app/service/loading/loading.service';
+import { UploadImageService } from 'src/app/service/upload/upload-image.service';
 
 @Component({
   selector: 'app-article-form',
@@ -15,7 +16,7 @@ import { LoadingService } from 'src/app/service/loading/loading.service';
 export class ArticleFormComponent {
 
   articleForm: FormGroup;
-  image: string = '../../../../../assets/にこにこロゴ.png'; // デフォルトの画像のパスをここに設定します。
+  image: string = '../../../../../assets/にこにこロゴ.png'; // 画像のパスをここに設定します。
   selectedImage: File | null = null; // ユーザーによって選択された画像ファイルを保持します。
   imagePreview: string | ArrayBuffer | null = null; // 選択された画像のプレビューを保持します。
   @ViewChild('imageInput') imageInput!: ElementRef;
@@ -39,6 +40,7 @@ export class ArticleFormComponent {
     private alertCtrl: AlertController,
     private alertService: AlertService,
     private loadingService: LoadingService,
+    private uploadService: UploadImageService
   ) {
     this.articleForm = this.fb.group({
       title: ['', Validators.required],
@@ -82,25 +84,23 @@ export class ArticleFormComponent {
   }
 
   // 写真のアップロードと記事のデータを送信するメソッド
-  submitArticleAndUpload(image: File) {
+  async submitArticleAndUpload(image: File) {
     this.loadingService.present('アップロード中...');
 
-    // 画像のアップロードとURLの取得
-    this.articleService.uploadImage(image).subscribe({
-      next: (imageUrl) => {
-        this.image = imageUrl; // 取得したURLを 'image' に設定します。
-        this.articleForm.patchValue({ imageUrl: imageUrl }); // 'imageUrl' をフォームに設定します。
-        this.loadingService.dismiss();
+    try {
+      const imageUrl = await this.uploadService.uploadImage(image);
+      this.image = imageUrl; // 取得したURLを 'image' に設定します。
+      this.articleForm.patchValue({ imageUrl: imageUrl }); // 'imageUrl' をフォームに設定します。
 
-        // 画像のアップロードが完了したら、記事を送信
-        this.submitArticle();
-      },
-      error: (error) => {
-        this.loadingService.dismiss();
-        this.alertService.showErrorAlert(error);
-      },
-    });
+      // 画像のアップロードが完了したら、記事を送信
+      this.submitArticle();
+    } catch (error) {
+      this.alertService.showErrorAlert(`下記のエラーが発生しています。${error}`);
+    } finally {
+      this.loadingService.dismiss();
+    }
   }
+
 
   // 記事のデータをアップロードするメソッド。imageUrlをフォームのデータとして組み込む
   submitArticle() {
