@@ -184,43 +184,6 @@ async submit() {
   }
 
 
-  // async submit() {
-  //   try {
-  //     // ローディングインジケータ表示
-  //     await this.loadingService.present('送信中...');
-
-  //     // フォームからデータを取得
-  //     const formValue = this.articleForm.value;
-
-  //     // チェックボックスのデータを変換
-  //     const selectedTypes = (this.articleForm.get('types') as FormArray).controls
-  //       .map((ctrl, i) => ctrl.value ? this.articleTypes[i] : null)
-  //       .filter(v => v !== null);
-
-  //     // setImageURLが成功するまで待機し、エラーがあれば処理を中断
-  //     await this.setImageURL(); // ここでアップロードとURLの取得を待機
-
-  //     const newArticleData = {
-  //       ...formValue,
-  //       types: selectedTypes,
-  //       timestamp: new Date().toISOString(),
-  //     };
-
-  //     // 記事を更新
-  //     await this.articleService.updateArticle(this.articleID, newArticleData);
-
-  //     // 成功アラートを表示
-  //     await this.alertService.showCompletedAlert('記事が更新されました。');
-
-  //   } catch (error) {
-  //     // エラーアラートを表示
-  //     await this.alertService.showErrorAlert('更新に失敗しました。');
-  //   } finally {
-  //     // ローディングインジケータを非表示
-  //     await this.loadingService.dismiss();
-  //   }
-  // }
-
 
 
 

@@ -12,7 +12,6 @@ export class ArticleContentComponent implements OnInit {
   article: Article | null = null;
   isReady = false;
 
-  // 'label'が削除され、各タイプはユニークな'value'によって識別されます
   private typesData = [
     { type: '開催報告', color: '#ff9365' },
     { type: 'PR', color: '#335cff' },
@@ -33,6 +32,7 @@ export class ArticleContentComponent implements OnInit {
       this.articleService.getArticleById(articleId).subscribe(article => {
         this.article = article;
         console.log('記事のタイプ:', this.article!.types);
+        console.log(this.article?.imageUrl);
         this.isReady = true;
       });
     }

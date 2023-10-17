@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable, of } from 'rxjs';
 import { catchError, last } from 'rxjs/operators';
-import { v4 as uuidv4 } from 'uuid';
-import { LoadingService } from '../loading/loading.service'; // 適切なパスを確認してください
-import { AlertService } from '../alert/alert.service'; // 適切なパスを確認してください
+import { LoadingService } from '../loading/loading.service';
+import { AlertService } from '../alert/alert.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +11,12 @@ import { AlertService } from '../alert/alert.service'; // 適切なパスを確�
 export class UploadImageService {
   constructor(
     private storage: AngularFireStorage,
+    private afAuth: AngularFireAuth,
     private loadingService: LoadingService,
     private alertService: AlertService
   ) {}
 
-  // 画像をアップロードするメインの関数
+  // 画像をアップロードするメインのトリガー関数
   async uploadImage(image: File): Promise<string> {
     if (!this.validateFile(image)) {
       this.alertService.showErrorAlert('ファイルの形式が不正、またはサイズが大きすぎます。');
@@ -36,15 +36,16 @@ export class UploadImageService {
       });
   }
 
+  // アップロード準備（パス、ファイルパスをセット）関数
   private async uploadToStorage(image: File): Promise<string> {
-    const filePath = this.generateFilePath(image);
+    const filePath = await this.generateFilePath(image);
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, image);
 
     await task.snapshotChanges().pipe(
       last(),
       catchError(error => {
-        this.handleUploadError(error);
+        this.alertService.showErrorAlert(`${error}`);
         return Promise.reject('');
       })
     ).toPromise();
@@ -57,7 +58,7 @@ export class UploadImageService {
   // ファイルのバリデーションを行う関数
   private validateFile(image: File): boolean {
     const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    const maxFileSize = 5 * 1024 * 1024; // 例: 5MB
+    const maxFileSize = 10 * 1024 * 1024; //  5MB
 
     if (!validFileTypes.includes(image.type) || image.size > maxFileSize) {
       return false;
@@ -67,16 +68,13 @@ export class UploadImageService {
   }
 
   // ファイルパスを生成する関数
-  private generateFilePath(image: File): string {
+  private async generateFilePath(image: File): Promise<string> {
+    const user = await this.afAuth.currentUser; // awaitを使用して現在のユーザーを取得
+    const userId = user ? user.uid : "anonymous"; // ユーザーがログインしていない場合は "anonymous" を使用
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0]; // 'yyyy-MM-dd'形式
-    return `articleImages/${formattedDate}_${image.name}`;
+    return `articleImages/${userId}/${formattedDate}_${image.name}`; // ユーザーIDをパスに含める
   }
 
-  // アップロードエラーを処理する関数
-  private handleUploadError(error: any): Observable<string> {
-    console.error('Upload failed:', error);
-    this.alertService.showErrorAlert('画像のアップロードに失敗しました。もう一度お試しください。');
-    return of('');
-  }
+
 }

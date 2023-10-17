@@ -67,26 +67,4 @@ export class ArticleService {
 
 
 
-  uploadImage(image: File): Observable<string> {
-    // 現在の日付をyyyy-MM-dd形式で取得します。
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split('T')[0]; // 'yyyy-MM-dd'形式に変換
-
-    const filePath = `articleImages/${formattedDate}_${image.name}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, image);
-
-    // アップロードタスクの変更を監視し、最後のスナップショットを取得した後でダウンロードURLを取得
-    return task.snapshotChanges().pipe(
-      last(), // 最後のスナップショットを取得
-      switchMap(() => fileRef.getDownloadURL()), // ダウンロードURLを取得するObservableに切り替える
-      catchError(error => {
-        console.error('Upload failed:', error);
-        return throwError('画像のアップロードに失敗しました。もう一度お試しください。');
-      })
-    );
-  }
-
-
-
 }
