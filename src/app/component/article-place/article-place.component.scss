@@ -4,6 +4,7 @@ div {
 
 ion-card {
   width: 85%;
+  height: 690px;
   margin: auto;
   margin-top: 60px;
   margin-bottom: 60px;
@@ -13,7 +14,7 @@ ion-card {
   .mask {
     position: absolute;
     width: 100%;
-    top: 0; /* 画像の上端を中央に配置 */
+    top: -10px; /* 画像の上端を中央に配置 */
     left: 0; /* 画像の左端を中央に配置 */
     z-index: 2;
   }
@@ -27,6 +28,7 @@ ion-card {
     position: relative;
     width: 80%;
     margin: auto;
+    margin-top: 40px;
     text-align: center;
     flex-shrink: 0;
     z-index: 3;
